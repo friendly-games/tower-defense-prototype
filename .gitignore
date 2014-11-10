@@ -1,0 +1,7 @@
+.hg/
+Temp/*
+*.suo
+obj/*
+Library/*
+*.user
+.hgignore
