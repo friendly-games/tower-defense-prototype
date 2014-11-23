@@ -28,14 +28,14 @@ namespace NineByteGames.TowerDefense
     /// <returns> A GridCoordinate. </returns>
     public static GridCoordinate FromVector3(Vector3 location)
     {
-      return new GridCoordinate(Mathf.FloorToInt(location.x), Mathf.FloorToInt(location.z));
+      return new GridCoordinate(Mathf.FloorToInt(location.x), Mathf.FloorToInt(location.y));
     }
 
     /// <summary> Converts the coordinate into a vector3. </summary>
     /// <returns> This coordinate as a Vector3. </returns>
     public Vector3 ToVector3()
     {
-      return new Vector3(X + 0.5f, 0, Z + 0.5f);
+      return new Vector3(X + 0.5f, Z + 0.5f, 0);
     }
 
     /// <inheritdoc />

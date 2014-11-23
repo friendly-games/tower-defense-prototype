@@ -12,6 +12,9 @@ namespace NineByteGames.TowerDefense.Behaviors
     /// <summary> The layer on which projectiles should be created. </summary>
     public Layer ProjectileLayer;
 
+    /// <summary> The object to generate when a bullet is fired. </summary>
+    public GameObject BulletProjectile;
+
     /// <summary> How fast the player moves </summary>
     public float PlayerSpeed = 2.25f;
 
@@ -41,9 +44,8 @@ namespace NineByteGames.TowerDefense.Behaviors
 
       if (Input.GetMouseButton(0) && _weaponRecharge.Trigger())
       {
-        GameObject bullet = GameObject.Find("Bullet");
-        var behavior = bullet.GetComponent<ProjectileBehavior>();
-        behavior.CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
+        BulletProjectile.GetComponent<ProjectileBehavior>()
+                        .CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
       }
       else if (Input.GetMouseButton(1) && _weaponRecharge.Trigger())
       {
@@ -93,6 +95,8 @@ namespace NineByteGames.TowerDefense.Behaviors
         desiredVelocity = desiredVelocity.normalized;
         _transform.position += desiredVelocity * Time.deltaTime * PlayerSpeed;
       }
+
+      _transform.rigidbody2D.velocity = new Vector2();
     }
 
     private void TrackMouse()

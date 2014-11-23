@@ -38,7 +38,7 @@ namespace NineByteGames.TowerDefense
     /// <summary> Create a copy of an object. </summary>
     /// <param name="instance"> The object to clone. </param>
     /// <returns> The new copy of the object. </returns>
-    public static T Replicate<T>(this T instance)
+    public static T Clone<T>(this T instance)
       where T : Object
     {
       return (T) Object.Instantiate(instance);
@@ -50,7 +50,7 @@ namespace NineByteGames.TowerDefense
     /// <param name="position"> The position of where the new object should be placed. </param>
     /// <param name="rotation"> The rotation of the new object. </param>
     /// <returns> The new copy of the object. </returns>
-    public static T Replicate<T>(this T instance, Vector3 position, Quaternion rotation)
+    public static T Clone<T>(this T instance, Vector3 position, Quaternion rotation)
       where T : Object
     {
       return (T) Object.Instantiate(instance, position, rotation);
@@ -138,7 +138,7 @@ namespace NineByteGames.TowerDefense
     ///  Get the component of the specified type from the game object, without attempting to go
     ///  through the parent component.
     /// </summary>
-    private static T RetrieveOwnObject<T>(this GameObject gameObject)
+    public static T RetrieveOwnObject<T>(this GameObject gameObject)
       where T : class
     {
       return gameObject.GetComponent(typeof(T)) as T;

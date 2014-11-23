@@ -17,6 +17,9 @@
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
     <CompilerResponseFile>
     </CompilerResponseFile>
+    <UnityProjectType>Game:1</UnityProjectType>
+    <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
+    <UnityVersion>4.5.4f1</UnityVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,23 +60,21 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\HealthBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\IReadable.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\IUpdatable.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\TestBehavior.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\RadiusBasedTargeter.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\AdvancedCoroutine.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\ProjectileCreatorBehavior.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\EnumerableExtensions.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\MathUtils.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PayloadBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PlayerInput.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\ProjectileBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\TestBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\ProjectileCreatorBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\RadiusBasedTargeter.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Grid.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Validation\GridBased.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\GridCoordinate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\GridData.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\Damage.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\Healing.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\SignalIndicators.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AttachedBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\ChildBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\ChildListenerRegistry.cs" />
@@ -87,8 +88,14 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\AdvancedCoroutine.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\EnumerableExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\Lazy.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\MathUtils.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\RateLimiter.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Scaling.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Terrain.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\TerrainManager.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Assertions.cs" />
@@ -125,6 +132,9 @@
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunner.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\TestRunnerCallbackList.cs" />
     <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestingAssets\CallTesting.cs" />
+    <Compile Include="Assets\ValidateEditFunctionality.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Assets\UnityTestTools\changelog.txt" />
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
   </ItemGroup>
