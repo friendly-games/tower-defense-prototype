@@ -12,11 +12,14 @@ namespace NineByteGames.TowerDefense.Signals
   public abstract class AttachedBehavior : MonoBehaviour
   {
     /// <summary> The owner of the component. </summary>
-    public GameObject Owner { get; private set; }
+    public GameObject Owner
+    {
+      get { return gameObject; }
+    }
 
     public virtual void Start()
     {
-      Owner = gameObject;
+
     }
 
     public void DestroyOwner()

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
   /// <summary> Move towards the current object. </summary>
-  internal class MoveTowardsTrackedItemBehavior : ChildBehavior
+  internal class MoveTowardsTargetBehavior : ChildBehavior
   {
     private EntityTrackerBehavior _tracker;
 
