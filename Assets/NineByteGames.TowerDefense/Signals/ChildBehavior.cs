@@ -20,8 +20,6 @@ namespace NineByteGames.TowerDefense.Signals
       if (RootBehavior.Broadcaster == null)
         throw new Exception("RootBehavior.Broadcaster is null");
 
-      Debug.Log(string.Format("Setup Root for {0}.", this.name));
-
       RootBehavior.Broadcaster.Register(this);
     }
 

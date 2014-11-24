@@ -22,6 +22,7 @@ namespace NineByteGames.TowerDefense.Validation
       }
     }
 
+    /// <summary> Validate the parent is set correctly. </summary>
     public override void ValidateInEditor()
     {
       base.ValidateInEditor();

@@ -24,17 +24,37 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       _currentTargets = new LinkedList<GameObject>();
     }
 
-    public void OnTriggerStay2D(Collider2D other)
+    public void OnTriggerEnter2D(Collider2D other)
     {
       if (!Layer.FromLayerId(other.gameObject.layer).IsIn(CollisionLayer))
         return;
 
-      // add it to the current list of items in the trigger area
       _currentTargets.AddLast(other.gameObject);
     }
 
-    public void FixedUpdate()
+    public void OnTriggerExit2D(Collider2D other)
     {
+      if (!Layer.FromLayerId(other.gameObject.layer).IsIn(CollisionLayer))
+        return;
+
+      _currentTargets.Remove(other.gameObject);
+    }
+
+    public void Update()
+    {
+      // remove nodes that have died
+      var node = _currentTargets.First;
+
+      while (node != null)
+      {
+        var next = node.Next;
+        if (node.Value.IsDead())
+        {
+          _currentTargets.Remove(node);
+        }
+        node = next;
+      }
+
       // if we have no targets, do a quick exit
       if (_currentTargets.Count == 0)
       {
@@ -50,16 +70,14 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
       var myPosition = RootBehavior.transform.position;
 
-      var currentCloset = _currentTargets.MinBy(other => (myPosition - other.transform.position).sqrMagnitude);
+      var currentCloset = _currentTargets
+        .MinBy(other => (myPosition - other.transform.position).sqrMagnitude);
 
       if (currentCloset != _lastTarget)
       {
         _lastTarget = currentCloset;
         Send(new TargetAquiredSignal(currentCloset));
       }
-
-      // make sure that during the next iteration, OnTriggerStay2D adds to an empty list
-      _currentTargets.Clear();
     }
   }
 }

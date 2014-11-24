@@ -15,6 +15,9 @@ namespace NineByteGames.TowerDefense.Behaviors
     /// <summary> The object to generate when a bullet is fired. </summary>
     public GameObject BulletProjectile;
 
+    /// <summary> The object that should be created when right clicking. </summary>
+    public GameObject EnemyCreator;
+
     /// <summary> How fast the player moves </summary>
     public float PlayerSpeed = 2.25f;
 
@@ -49,9 +52,8 @@ namespace NineByteGames.TowerDefense.Behaviors
       }
       else if (Input.GetMouseButton(1) && _weaponRecharge.Trigger())
       {
-        GameObject bullet = GameObject.Find("HealPill");
-        var behavior = bullet.GetComponent<ProjectileBehavior>();
-        behavior.CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
+        EnemyCreator.Clone(Owner.transform.position + Owner.transform.up * 3, Quaternion.identity);
+        EnemyCreator.GetComponent<EntityTrackerBehavior>().Target = gameObject;
       }
     }
 
