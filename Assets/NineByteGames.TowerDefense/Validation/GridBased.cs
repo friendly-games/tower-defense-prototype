@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Validation

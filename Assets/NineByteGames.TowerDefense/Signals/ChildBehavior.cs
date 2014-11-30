@@ -1,16 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Behaviors;
-using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Signals
 {
   /// <summary> A behavior that acts as a child of a RootBehavior.</summary>
   public abstract class ChildBehavior : AttachedBehavior, IChildBehavior, ISignalListener
   {
+    /// <summary>
+    ///  The behavior through which all messages are sent and listeners are registered for.
+    /// </summary>
     public RootBehavior RootBehavior { get; private set; }
 
+    /// <summary> Find the root behavior. </summary>
+    public override void Start()
+    {
+      base.Start();
+      SetupRoot();
+    }
+
+    /// <summary> Find the root behavior who "owns" this child. </summary>
     private void SetupRoot()
     {
       RootBehavior = gameObject.RetrieveInHierarchy<RootBehavior>();
@@ -21,12 +30,6 @@ namespace NineByteGames.TowerDefense.Signals
         throw new Exception("RootBehavior.Broadcaster is null");
 
       RootBehavior.Broadcaster.Register(this);
-    }
-
-    public override void Start()
-    {
-      base.Start();
-      SetupRoot();
     }
 
     public void OnDestroy()
