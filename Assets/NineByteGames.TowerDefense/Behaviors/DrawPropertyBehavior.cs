@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Signals;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace NineByteGames.TowerDefense.Behaviors
 {
-  [RequireComponent(typeof(GUIText))]
+  /// <summary> A draw property behavior. </summary>
+  [RequireComponent(typeof(Text))]
   internal class DrawPropertyBehavior : AttachedBehavior
   {
-    private GUIText _guiText;
+    private Text _displayText;
 
     public override void Start()
     {
       base.Start();
 
-      _guiText = GetComponent<GUIText>();
+      _displayText = GetComponent<Text>();
     }
 
     public void OnGUI()
@@ -23,22 +25,30 @@ namespace NineByteGames.TowerDefense.Behaviors
       var builder = new ReadableText();
       var current = GameObject.Find("Player").GetComponent<PlayerInput>().CurrentObject;
 
-      if (current == null)
-      {
-        //_guiText.text = "";
-      }
-      else
+      if (current != null)
       {
         builder.AddProperty("Name", current.name);
 
-        var readables = current.GetComponentsInChildren(typeof(IReadable)).Cast<IReadable>().ToArray();
+        var readables = current.GetComponentsInChildren(typeof(IReadable))
+                               .Cast<IReadable>()
+                               .ToArray();
 
         foreach (var readable in readables)
         {
           readable.AddText(builder);
         }
 
-        _guiText.text = builder.ToString();
+        var newText = builder.ToString();
+        var existingText = _displayText.text;
+
+        if (newText != existingText)
+        {
+          _displayText.text = newText;
+        }
+      }
+      else
+      {
+        //
       }
     }
   }
