@@ -7,16 +7,14 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{58E121D6-F50C-010B-5579-601AE8A9E798}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>4.6.0f3</UnityVersion>
@@ -57,27 +55,33 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\NineByteGames.TowerDefense\Annotations.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DrawPropertyBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DropItemOnDealthBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\EntityTrackerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\GlobalsBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\HealthBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\IReadable.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\IUpdatable.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\MoneyCollector.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\NoMessagesBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PayloadBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PlayerInput.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\ProjectileBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Spawner.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\TestBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\AccelerateTowardsTargetBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\CollectItemByMovingBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\MoveTowardsTargetBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\ProjectileCreatorBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\RadiusBasedTargeter.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\RotateTowardsTargetBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\DrawPlayerInfoBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\DrawPropertyBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TerrainManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TileTemplate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\Damage.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\Healing.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Messages\MoneyTransfer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\SignalIndicators.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />
@@ -91,6 +95,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\RootBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\Signal.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalBroadcaster.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalListenerResult.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />

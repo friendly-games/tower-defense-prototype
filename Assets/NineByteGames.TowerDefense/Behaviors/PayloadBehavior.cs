@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using NineByteGames.TowerDefense.Messages;
 using NineByteGames.TowerDefense.Signals;
 using UnityEngine;
@@ -22,10 +21,8 @@ namespace NineByteGames.TowerDefense.Behaviors
       Money,
     }
 
-    public override void Start()
+    public void Start()
     {
-      base.Start();
-
       _payload = this;
     }
 
@@ -41,6 +38,10 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     private void HandleCollision(GameObject otherObject)
     {
+      // make sure that we should be sending messages to it
+      if (otherObject.GetComponent<NoMessagesBehavior>() != null)
+        return;
+
       switch (_payload.Type)
       {
         case PayloadType.GeneralDamage:
@@ -54,6 +55,14 @@ namespace NineByteGames.TowerDefense.Behaviors
           otherObject.SendSignal(healing);
 
           if (healing.Remaining <= 0)
+          {
+            DestroyOwner();
+          }
+          break;
+
+        case PayloadType.Money:
+          bool wasHandled = otherObject.SendSignal(new MoneyTransfer((int) _payload.Amount));
+          if (wasHandled)
           {
             DestroyOwner();
           }

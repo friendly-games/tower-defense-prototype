@@ -13,13 +13,13 @@ namespace NineByteGames.TowerDefense.Behaviors
     public GameObject ItemToDropOnDeath;
 
     [SignalPriority(SignalPriorities.High)]
-    bool ISignalListener<SignalIndicators.DeathIndicator>.Handle(SignalIndicators.DeathIndicator health)
+    SignalListenerResult ISignalListener<SignalIndicators.DeathIndicator>.Handle(SignalIndicators.DeathIndicator health)
     {
       const float range = 0.5f;
       var offset = new Vector3(Random.Range(-range, range), Random.Range(-range, range), Random.Range(-range, range));
       ItemToDropOnDeath.Clone(transform.position + offset, transform.rotation);
 
-      return false;
+      return SignalListenerResult.Continue;
     }
   }
 }

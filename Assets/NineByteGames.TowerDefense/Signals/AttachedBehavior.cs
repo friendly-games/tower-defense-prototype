@@ -17,11 +17,6 @@ namespace NineByteGames.TowerDefense.Signals
       get { return gameObject; }
     }
 
-    public virtual void Start()
-    {
-
-    }
-
     public void DestroyOwner()
     {
       Destroy(Owner);

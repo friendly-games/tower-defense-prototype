@@ -23,10 +23,8 @@ namespace NineByteGames.TowerDefense.Behaviors
     public float Period = 1;
 
     /// <inheritdoc />
-    public override void Start()
+    public void Start()
     {
-      base.Start();
-
       _transform = transform;
 
       CreateCoroutine(Trigger());

@@ -13,10 +13,10 @@ namespace NineByteGames.TowerDefense.Behaviors
     /// <summary> The object that will be tracked. </summary>
     public GameObject Target;
 
-    bool ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
+    SignalListenerResult ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
     {
       Target = message.Target;
-      return false;
+      return SignalListenerResult.Continue;
     }
   }
 }

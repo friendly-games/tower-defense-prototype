@@ -11,18 +11,8 @@ namespace NineByteGames.TowerDefense.Behaviors
   [RequireComponent(typeof(Rigidbody2D))]
   public class ProjectileBehavior : AttachedBehavior
   {
-    [Serializable]
-    public struct AllProperties
-    {
-      public float InitialSpeed;
-      public float TimeToLive;
-    }
-
-    public AllProperties Properties = new AllProperties()
-                                      {
-                                        InitialSpeed = 15,
-                                        TimeToLive = 5,
-                                      };
+    public float InitialSpeed = 15;
+    public float TimeToLive = 5;
 
     private Transform _transform;
     private Rigidbody2D _body;
@@ -33,13 +23,11 @@ namespace NineByteGames.TowerDefense.Behaviors
       _body = GetComponent<Rigidbody2D>();
     }
 
-    public override void Start()
+    public void Start()
     {
-      base.Start();
-
       if (name != "Bullet")
       {
-        DestroyOwner(Properties.TimeToLive);
+        DestroyOwner(TimeToLive);
       }
     }
 
@@ -51,7 +39,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     private void Initialize(Transform transform, Layer layer)
     {
-      _body.velocity = transform.up * Properties.InitialSpeed;
+      _body.velocity = transform.up * InitialSpeed;
       _transform.position = transform.position + transform.up;
       gameObject.layer = layer.LayerId;
     }

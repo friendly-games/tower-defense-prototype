@@ -11,10 +11,13 @@ namespace NineByteGames.TowerDefense.Behaviors
     [Tooltip("The parent to assign to new terrain tiles")]
     public GameObject TerrainParent;
 
+    [Tooltip("The Global UI object that should be activated on start")]
+    public GameObject GlobalUI;
+
     /// <summary> Initializes all of the managers. </summary>
     public void Start()
     {
-
+      GlobalUI.SetActive(true);
     }
   }
 }

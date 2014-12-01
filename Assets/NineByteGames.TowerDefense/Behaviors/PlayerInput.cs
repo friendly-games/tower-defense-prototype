@@ -57,10 +57,8 @@ namespace NineByteGames.TowerDefense.Behaviors
       }
     }
 
-    public override void Start()
+    public void Start()
     {
-      base.Start();
-
       _physics = Owner.GetComponent<Collider2D>();
       _transform = Owner.GetComponent<Transform>();
 

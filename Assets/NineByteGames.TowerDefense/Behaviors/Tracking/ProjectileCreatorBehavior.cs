@@ -44,7 +44,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       }
     }
 
-    bool ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal targetAquired)
+    SignalListenerResult ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal targetAquired)
     {
       var shouldFire = !targetAquired.TargetWasLost;
 
@@ -64,7 +64,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
         }
       }
 
-      return false;
+      return SignalListenerResult.Continue;
     }
   }
 }

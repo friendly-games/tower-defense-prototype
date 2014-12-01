@@ -12,10 +12,8 @@ namespace NineByteGames.TowerDefense.Behaviors
   {
     private EntityTrackerBehavior _tracking;
 
-    public override void Start()
+    public void Start()
     {
-      base.Start();
-
       _tracking = GetComponent<EntityTrackerBehavior>();
     }
 

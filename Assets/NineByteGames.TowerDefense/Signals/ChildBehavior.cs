@@ -13,9 +13,8 @@ namespace NineByteGames.TowerDefense.Signals
     public RootBehavior RootBehavior { get; private set; }
 
     /// <summary> Find the root behavior. </summary>
-    public override void Start()
+    public virtual void Start()
     {
-      base.Start();
       SetupRoot();
     }
 

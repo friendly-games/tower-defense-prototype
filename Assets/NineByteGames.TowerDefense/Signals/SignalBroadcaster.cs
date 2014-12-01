@@ -69,7 +69,7 @@ namespace NineByteGames.TowerDefense.Signals
       {
         var result = ((ISignalListener<T>) child.SignalListener).Handle(data);
 
-        if (result)
+        if (result == SignalListenerResult.StopProcessing)
         {
           // stop processing then
           return true;

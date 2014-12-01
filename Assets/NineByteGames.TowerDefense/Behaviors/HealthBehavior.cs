@@ -19,7 +19,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
-    public bool Handle(Damage damage)
+    public SignalListenerResult Handle(Damage damage)
     {
       Health -= damage.DamageAmount;
 
@@ -28,27 +28,27 @@ namespace NineByteGames.TowerDefense.Behaviors
         RootBehavior.Broadcaster.Send(SignalIndicators.Death);
       }
 
-      return true;
+      return SignalListenerResult.StopProcessing;
     }
 
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
-    public bool Handle(SignalIndicators.DeathIndicator health)
+    public SignalListenerResult Handle(SignalIndicators.DeathIndicator health)
     {
       DestroyOwner();
-      return true;
+      return SignalListenerResult.Continue;
     }
 
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
-    public bool Handle(Healing health)
+    public SignalListenerResult Handle(Healing health)
     {
       float amountToHeal = Math.Min(health.Remaining, MaxHealth - Health);
       health.Take(amountToHeal);
 
       Health += amountToHeal;
 
-      return true;
+      return SignalListenerResult.Continue;
     }
 
     void IReadable.AddText(ReadableText builder)
