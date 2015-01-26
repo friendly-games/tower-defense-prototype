@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.AI;
+using NineByteGames.TowerDefense.ScriptableObjects;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
@@ -23,10 +24,13 @@ namespace NineByteGames.TowerDefense.Behaviors
     [Tooltip("How Often (in seconds) the object should be cloned")]
     public float Period = 1;
 
+    private EnemyManager _enemyManager;
+
     /// <inheritdoc />
     public void Start()
     {
       _transform = transform;
+      _enemyManager = GameObject.Find("Enemies").GetComponent<EnemyManagerBehavior>().EnemyManager;
 
       CreateCoroutine(Trigger());
     }
@@ -36,13 +40,9 @@ namespace NineByteGames.TowerDefense.Behaviors
     {
       while (true)
       {
-        var cloned = Template.Template.Clone(_transform.position,
-                                             Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+        var randomDirection = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360));
 
-        if (Parent != null)
-        {
-          cloned.SetParent(Parent);
-        }
+        var cloned = _enemyManager.Create(Template, _transform.position, randomDirection);
 
         var tracker = cloned.GetComponentInChildren<EntityTrackerBehavior>();
         if (tracker != null)

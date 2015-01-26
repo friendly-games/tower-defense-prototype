@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.AI
+namespace NineByteGames.TowerDefense.ScriptableObjects
 {
   /// <summary> A prefab for an enemy. </summary>
   public class EnemyPrefab : ScriptableObject

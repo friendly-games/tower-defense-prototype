@@ -2,29 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Signals;
-using UnityEngine;
 
 namespace NineByteGames.TowerDefense.AI
 {
   /// <summary> Manages all of the enemies that currently exist in the world. </summary>
   internal class EnemyManagerBehavior : AttachedBehavior
   {
-    private HashSet<GameObject> _enemies;
+    private EnemyManager _manager;
 
     public void Start()
     {
-      _enemies = new HashSet<GameObject>();
+      _manager = new EnemyManager(Owner);
     }
 
-    public bool CanCreate(EnemyPrefab prefab)
+    /// <summary> The actual enemy manager. </summary>
+    public EnemyManager EnemyManager
     {
-      return true;
-    }
-
-    public GameObject Create(GameObject enemyPrefab)
-    {
-      var newEmemy = enemyPrefab.Clone();
-      return newEmemy;
+      get { return _manager; }
     }
   }
 }
