@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Behaviors.Tracking;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 

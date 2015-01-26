@@ -95,6 +95,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\Extensions\ScriptableObjectFactory.cs" />
+    <Compile Include="Assets\Editor\Extensions\ScriptableObjectWindow.cs" />
     <Compile Include="Assets\Editor\LayerDrawer.cs" />
     <Compile Include="Assets\Editor\ValidateGridPositions.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />

@@ -54,6 +54,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManagerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Annotations.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DropItemOnDealthBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\EntityTrackerBehavior.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PayloadBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PlayerInput.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\ProjectileBehavior.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Spawner.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\SpawnerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\TestBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\AccelerateTowardsTargetBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\CollectItemByMovingBehavior.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\MoneyTransfer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\SignalIndicators.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AttachedBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\ChildBehavior.cs" />

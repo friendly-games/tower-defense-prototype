@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.AI;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
@@ -9,12 +10,12 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors
 {
   /// <summary> Spawns items at a designed rate. </summary>
-  public class Spawner : AttachedBehavior
+  public class SpawnerBehavior : AttachedBehavior
   {
     private Transform _transform;
 
     [Tooltip("The game object that should be cloned on each timer tick")]
-    public GameObject Template;
+    public EnemyPrefab Template;
 
     [Tooltip("The parent of game objects created with this spawner")]
     public GameObject Parent;
@@ -35,7 +36,8 @@ namespace NineByteGames.TowerDefense.Behaviors
     {
       while (true)
       {
-        var cloned = Template.Clone(_transform.position, Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
+        var cloned = Template.Template.Clone(_transform.position,
+                                             Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360)));
 
         if (Parent != null)
         {

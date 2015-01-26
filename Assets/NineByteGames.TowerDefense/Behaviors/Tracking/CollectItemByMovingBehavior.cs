@@ -6,11 +6,23 @@ using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
+  /// <summary> A behavior, that when attached, target objects towards itself. </summary>
+  [RequireComponent(typeof(Collider2D))]
   internal class CollectItemByMovingBehavior : AttachedBehavior
   {
+    [Tooltip("The object that the items should follow when enter the given radius")]
     public GameObject ObjectToTrack;
+
+    [Tooltip("THe layer from which items should be collected")]
     public Layer LayerToCollect;
-    public float MaxDistance = 10.0f;
+
+    public void Start()
+    {
+      if (ObjectToTrack != null)
+      {
+        ObjectToTrack = Owner;
+      }
+    }
 
     public void OnTriggerEnter2D(Collider2D other)
     {
@@ -22,16 +34,16 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       StartTracking(coll.gameObject);
     }
 
-    private void StartTracking(GameObject gameObject)
+    private void StartTracking(GameObject target)
     {
-      if (LayerToCollect.LayerId != gameObject.layer)
+      if (LayerToCollect.LayerId != target.layer)
         return;
 
-      var accelerate = gameObject.gameObject.GetComponent<AccelerateTowardsTargetBehavior>();
+      var accelerate = target.GetComponent<AccelerateTowardsTargetBehavior>();
 
       if (accelerate == null)
       {
-        accelerate = gameObject.gameObject.AddComponent<AccelerateTowardsTargetBehavior>();
+        accelerate = target.AddComponent<AccelerateTowardsTargetBehavior>();
         accelerate.StartTracking(this.gameObject.GetParent());
       }
     }

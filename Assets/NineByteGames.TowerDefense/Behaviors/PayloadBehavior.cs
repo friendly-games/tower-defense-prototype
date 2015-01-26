@@ -12,18 +12,12 @@ namespace NineByteGames.TowerDefense.Behaviors
   {
     public PayloadType Type;
     public float Amount;
-    private PayloadBehavior _payload;
 
     public enum PayloadType
     {
       Health,
       GeneralDamage,
       Money,
-    }
-
-    public void Start()
-    {
-      _payload = this;
     }
 
     public void OnCollisionEnter2D(Collision2D colidee)
@@ -42,16 +36,15 @@ namespace NineByteGames.TowerDefense.Behaviors
       if (otherObject.GetComponent<NoMessagesBehavior>() != null)
         return;
 
-      switch (_payload.Type)
+      switch (Type)
       {
         case PayloadType.GeneralDamage:
-          otherObject.SendSignal(new Damage(_payload.Amount));
+          otherObject.SendSignal(new Damage(Amount));
           DestroyOwner();
           break;
 
         case PayloadType.Health:
-
-          var healing = new Healing(_payload.Amount);
+          var healing = new Healing(Amount);
           otherObject.SendSignal(healing);
 
           if (healing.Remaining <= 0)
@@ -61,7 +54,7 @@ namespace NineByteGames.TowerDefense.Behaviors
           break;
 
         case PayloadType.Money:
-          bool wasHandled = otherObject.SendSignal(new MoneyTransfer((int) _payload.Amount));
+          bool wasHandled = otherObject.SendSignal(new MoneyTransfer((int) Amount));
           if (wasHandled)
           {
             DestroyOwner();
