@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Services;
+using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -18,7 +19,7 @@ namespace NineByteGames.TowerDefense.Behaviors.World
 
     private GameObject _terrainParent;
 
-    private GridChunk _gridChunk;
+    private WorldGrid _grid;
 
     /// <summary> Starts this object. </summary>
     public void Start()
@@ -26,29 +27,11 @@ namespace NineByteGames.TowerDefense.Behaviors.World
       Managers.Terrain = this;
 
       _terrainParent = gameObject;
+      _grid = new WorldGrid();
 
-      GenerateTerrain();
-    }
+      _grid.TileAdded += AddTile;
 
-    /// <summary> Generates the background for the game. </summary>
-    private void GenerateTerrain()
-    {
-      const float factor = 1 / 10.0f;
-      const int offset = 100;
-      const int mapWidth = 50;
-
-      _gridChunk = new GridChunk();
-
-      for (int x = -mapWidth; x < mapWidth; x++)
-      {
-        for (int y = -mapWidth; y < mapWidth; y++)
-        {
-          var coordinate = new GridCoordinate(x, y);
-          int type = (int) (Mathf.PerlinNoise(x * factor + offset, y * factor + offset) * Templates.Length);
-
-          AddTile(type, coordinate);
-        }
-      }
+      _grid.Initialize(Templates.Length);
     }
 
     /// <summary> Creates a tile. </summary>
@@ -56,13 +39,6 @@ namespace NineByteGames.TowerDefense.Behaviors.World
     /// <param name="coordinate"> The coordinate. </param>
     private void AddTile(int type, GridCoordinate coordinate)
     {
-      // add it to the chunk
-      _gridChunk[coordinate] = new GridData()
-                               {
-                                 Data = type
-                               };
-
-      // then add it to unity
       var newTile = Templates[type].GameObject.Clone(coordinate.ToVector3(), Quaternion.identity);
       newTile.name = "Terrain @ " + coordinate;
       newTile.SetParent(_terrainParent);

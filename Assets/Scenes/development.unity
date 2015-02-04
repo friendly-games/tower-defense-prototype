@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &187267940
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &287532922
@@ -1012,7 +1012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &469924218
@@ -1248,6 +1248,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 475792145}
   - 114: {fileID: 475792146}
+  - 114: {fileID: 475792147}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -1285,6 +1286,96 @@ MonoBehaviour:
   - Name: Dirt
     GameObject: {fileID: 100000, guid: e5dfb34f412b1ad42905b48af00535a8, type: 2}
     DoesBlockPath: 1
+--- !u!114 &475792147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 475792144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  astarData:
+    hasBeenReverted: 0
+    data: 504b0304140000080800ed8a41464a29cf1713020000360400000b0024006772617068302e6a736f6e0a002000000000000100180071f44414763ed00171f44414763ed00171f44414763ed0015d535d8fda3010fc2b959f1394849012deae70472b5d7ba7a3551faa3e186721168e1dd94e0f38e5bf77ed84402012c433e3ddd90f3ec8bee105597c907f54344016249f16e9740630ff9cc38ca5719826b3bcc8601ab3292b20cb481b106a6a60f68d5aaec8220e0837aa02ab397b907b8151a28068651d2d5dec2359e4089d3c71c66f0cc1405ad03d7b4f3692095ad5506cf8197a4d1c752afc458554057424a6674a086efa64f654bb3a3675091a48400a4ed19b4b85ca12f8beb46491dc5c7ad9ed0cd8ce343dadb8c6d27c2cf245d9122354d41c6e5a348ff3a4bd84fa3ee6c218999d56d5d73e91776d4bce0e6ff4c4a8416847858131b8baf5d8d4a3aecc267916a5599ace1fc368deb56892779fb4bda9635902432f5637707137821af94ec5816e05fc2e41fe506bad1a590cac8164d51d5a57f2712978b575b9d2ebf1e1c88d6f1e021ba15ca3dd6041e334bea17f3f71e39d23e64cfd32f093eecd50750f3f716d2c12be60da58f5cce561ad7971555ed01537f69957dc371307ef0adbaa46a3923cfa26630f1abb545a8203bb726a9054d8d32b66b3e319df3143be3bfc8932abba81f44cbfdb63b90707ad1b3697789f8ad78ef729b151f2624ce2a4d1b9abf5d35ad3da2d58a1e9fb9a9f2b35d8e772a7364c03c8177fb74f5a51fc931d877d43f99feb2e0451ffdc6dcc9d221cce83b09305619a7754960497d7240dc26492cfa3649aa02c0be2bf6dfb1f504b0304140000080800ed8a4146287e18aa4300000048000000120024006772617068305f656469746f722e6a736f6e0a0020000000000001001800871b4514763ed001871b4514763ed001871b4514763ed001ab56cac94fce4e4d51b22a292a4dd5512acec82f77ad28294a54b24a4bcc29068a94a456949416a58665166726e5a4c2d4156496e59728592939a7e695a41629d50200504b0304140000080800ed8a4146df75b5fd7500000083000000090024006d6574612e6a736f6e0a0020000000000001001800871b4514763ed001871b4514763ed001871b4514763ed0011d8c3d0f82301400ffcb9bb1b1f443cbeac066d80d43d3f78437d892524c0cf1bf4bdd6eb8bb1dde94574e113a50c288161a98b25fe6153a79e0c678d0039c42ad0cd1f5e2c8042d4fba350e2d29195440b216c606ca67a1bb7fd1bf187c999f1c91e324faccd8d76bb56242baa52d96aa9dc7ef0f504b01022d00140000080800ed8a41464a29cf1713020000360400000b00240000000000000000000000000000006772617068302e6a736f6e0a002000000000000100180071f44414763ed00171f44414763ed00171f44414763ed001504b01022d00140000080800ed8a4146287e18aa43000000480000001200240000000000000000000000600200006772617068305f656469746f722e6a736f6e0a0020000000000001001800871b4514763ed001871b4514763ed001871b4514763ed001504b01022d00140000080800ed8a4146df75b5fd75000000830000000900240000000000000000000000f70200006d6574612e6a736f6e0a0020000000000001001800871b4514763ed001871b4514763ed001871b4514763ed001504b050600000000030003001c010000b70300000000
+    data_backup: 
+    file_cachedStartup: {fileID: 0}
+    data_cachedStartup: 
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 1
+  unwalkableNodeDebugSize: .300000012
+  logPathResults: 4
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _NodeConnection: {r: 1, g: 1, b: 1, a: .899999976}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: .5}
+    _BoundsHandles: {r: .289999992, g: .453999996, b: .740999997, a: .899999976}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: .5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: .5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: .5}
+    _MeshColor: {r: .125, g: .68599999, b: 0, a: .189999998}
+    _AreaColors: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 0
+  maxFrameTime: 1
+  minAreaSize: 10
+  limitGraphUpdates: 1
+  maxGraphUpdateFreq: .200000003
+  lastScanTime: .0190111995
+  inGameDebugPath: 
+  isScanning: 0
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 1
+  showGraphs: 1
 --- !u!1001 &524697611
 Prefab:
   m_ObjectHideFlags: 0
@@ -1346,7 +1437,9 @@ GameObject:
   - 114: {fileID: 531652501}
   - 114: {fileID: 531652502}
   - 114: {fileID: 531652503}
-  m_Layer: 0
+  - 114: {fileID: 531652504}
+  - 114: {fileID: 531652505}
+  m_Layer: 14
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1467,6 +1560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b22770d67d101945becb44e3cc08c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Speed: 1
 --- !u!114 &531652502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1493,6 +1587,57 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemToDropOnDeath: {fileID: 100000, guid: e1058774aa8f5ae45a9211c85f20e661, type: 2}
+--- !u!114 &531652504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400012, guid: dcd705db3af702542aa9a7e77da5101e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1432281104}
+  m_GameObject: {fileID: 531652493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drawGizmos: 1
+  detailedGizmos: 0
+  saveGetNearestHints: 1
+  startEndModifier:
+    priority: 2
+    addPoints: 0
+    exactStartPoint: 3
+    exactEndPoint: 3
+    useRaycasting: 0
+    mask:
+      serializedVersion: 2
+      m_Bits: 4294967295
+    useGraphRaycasting: 0
+  traversableTags:
+    tagsChange: -1
+    tagsSet: -1
+  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+--- !u!114 &531652505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400014, guid: dcd705db3af702542aa9a7e77da5101e,
+    type: 2}
+  m_PrefabInternal: {fileID: 1432281104}
+  m_GameObject: {fileID: 531652493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 1
+  smoothType: 0
+  subdivisions: 2
+  iterations: 2
+  strength: .5
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: .400000006
+  offset: .200000003
+  factor: .100000001
 --- !u!1 &670391996
 GameObject:
   m_ObjectHideFlags: 0
@@ -2005,7 +2150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &904809364
@@ -2332,7 +2477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &1123929363
@@ -2623,7 +2768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &1338907089
@@ -2904,7 +3049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Template: {fileID: 11400000, guid: 6479c91dcb5d95241aedfd32b672039c, type: 2}
   Parent: {fileID: 670391996}
-  Period: 1
+  Period: 3
 --- !u!1001 &1432281104
 Prefab:
   m_ObjectHideFlags: 0
@@ -3314,7 +3459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &1547828901
@@ -3472,6 +3617,10 @@ Prefab:
     - target: {fileID: 100000, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
       propertyPath: m_Name
       value: Tower_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400010, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
+      propertyPath: ProjectileLayer.LayerBit
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
@@ -3642,7 +3791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Template: {fileID: 11400000, guid: 6479c91dcb5d95241aedfd32b672039c, type: 2}
   Parent: {fileID: 670391996}
-  Period: 1
+  Period: 3
 --- !u!1001 &1647812863
 Prefab:
   m_ObjectHideFlags: 0
@@ -3755,7 +3904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &1684803302
@@ -4402,7 +4551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &1961712108

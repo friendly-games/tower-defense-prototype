@@ -1,28 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.Common.Structures;
 
 namespace NineByteGames.TowerDefense.World.Grid
 {
   /// <summary> Represents the grid of the world. </summary>
   public class GridChunk
   {
-    private readonly GridData[,] _data;
+    // todo OPTIMIZE by using a flat array
+    private readonly Array2D<GridData> _data;
+
     private const int GridSize = 1024;
     private const int HalfGridSize = 1024 / 2;
 
     /// <summary> Default constructor. </summary>
     public GridChunk()
     {
-      _data = new GridData[GridSize, GridSize];
+      _data = new Array2D<GridData>(GridSize, GridSize);
     }
 
     /// <summary> T data at the specified grid coordinate. </summary>
     /// <param name="index"> Zero-based index of the entry to access. </param>
     public GridData this[GridCoordinate index]
     {
-      get { return _data[index.X / (HalfGridSize), index.Z / (HalfGridSize)]; }
-      set { _data[index.X / (HalfGridSize), index.Z / (HalfGridSize)] = value; }
+      get { return this[index.X, index.Z]; }
+      set { this[index.X, index.Z] = value; }
     }
 
     /// <summary> T data at the specified grid coordinate. </summary>
@@ -30,8 +33,8 @@ namespace NineByteGames.TowerDefense.World.Grid
     /// <param name="z"> The z coordinate of the position. </param>
     public GridData this[int x, int z]
     {
-      get { return this[new GridCoordinate(x, z)]; }
-      set { this[new GridCoordinate(x, z)] = value; }
+      get { return _data[x / (HalfGridSize), z / (HalfGridSize)]; }
+      set { _data[x / (HalfGridSize), z / (HalfGridSize)] = value; }
     }
   }
 }

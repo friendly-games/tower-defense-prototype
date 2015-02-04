@@ -179,7 +179,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProjectileLayer:
-    LayerBit: 9
+    LayerBit: 8
   ProjectilePeriod: 30
   ProjectileTemplate: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!114 &11400012
