@@ -17,7 +17,8 @@ namespace NineByteGames.TowerDefense.Behaviors
     {
       const float range = 0.5f;
       var offset = new Vector3(Random.Range(-range, range), Random.Range(-range, range), Random.Range(-range, range));
-      ItemToDropOnDeath.Clone(transform.position + offset, transform.rotation);
+      var cloned = ItemToDropOnDeath.Clone(transform.position + offset, transform.rotation);
+      cloned.SetParent(GameObject.Find("Dropped Items"));
 
       return SignalListenerResult.Continue;
     }

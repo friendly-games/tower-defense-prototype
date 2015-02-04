@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -32,6 +34,17 @@ namespace NineByteGames.TowerDefense.Behaviors.World
       _grid.TileAdded += AddTile;
 
       _grid.Initialize(Templates.Length);
+
+      StartCoroutine(TestMethod());
+    }
+
+    private IEnumerator TestMethod()
+    {
+      yield return new WaitForSeconds(1);
+
+      GridUpdate.ResetGraph();
+      GridUpdate.MarkWalkable(new GridCoordinate(0, 0), new Size(5, 3), false);
+      Debug.Log("Done");
     }
 
     /// <summary> Creates a tile. </summary>

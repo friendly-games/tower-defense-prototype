@@ -7,14 +7,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{58E121D6-F50C-010B-5579-601AE8A9E798}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>4.6.0f3</UnityVersion>
@@ -194,6 +196,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\RotateTowardsTargetBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\DrawPlayerInfoBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\DrawPropertyBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\GridUpdate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TerrainManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TileTemplate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />
@@ -231,6 +234,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridCoordinate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridData.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridTargetFlow.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\Size.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\WorldGrid.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionException.cs" />
