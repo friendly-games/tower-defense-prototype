@@ -83,5 +83,31 @@ namespace NineByteGames.TowerDefense.World
 
       TileAdded.InvokeSafe(type, coordinate);
     }
+
+    /// <summary> Check if the given area of the grid is empty. </summary>
+    /// <param name="lowerLeft"> The lower left starting position to check. </param>
+    /// <param name="size"> The size of the area to check.  The entire area spans from
+    ///  <paramref name="lowerLeft"/> to lowerLeft + size. </param>
+    /// <returns> True if the area is empty and a building can be placed, false otherwise. </returns>
+    public bool IsEmpty(GridCoordinate lowerLeft, Size size)
+    {
+      int startX = lowerLeft.X;
+      int endX = startX + size.Width;
+      int startZ = lowerLeft.Z;
+      int endZ = startZ + size.Height;
+
+      for (int x = lowerLeft.X; x < endX; x++)
+      {
+        for (int z = lowerLeft.Z; z < endZ; z++)
+        {
+          if (!_gridChunk[x, z].IsEmpty)
+          {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
   }
 }

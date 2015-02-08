@@ -174,6 +174,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManagerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\IInstanceManager.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\AI\InstanceManagerBase.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DropItemOnDealthBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\EntityTrackerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\GlobalsBehavior.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Tasks\Task.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Towers\TowerManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\AdvancedCoroutine.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\EnumerableExtensions.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridCoordinate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridData.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridTargetFlow.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\PathGrid.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\Size.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\WorldGrid.cs" />
     <Compile Include="Assets\UnityTestTools\Assertions\AssertionComponent.cs" />

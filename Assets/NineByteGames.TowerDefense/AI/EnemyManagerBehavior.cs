@@ -16,7 +16,7 @@ namespace NineByteGames.TowerDefense.AI
     }
 
     /// <summary> The actual enemy manager. </summary>
-    public EnemyManager EnemyManager
+    public EnemyManager InstanceManager
     {
       get { return _manager; }
     }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Services;
+using NineByteGames.TowerDefense.Towers;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using Pathfinding;
@@ -35,16 +36,11 @@ namespace NineByteGames.TowerDefense.Behaviors.World
 
       _grid.Initialize(Templates.Length);
 
-      StartCoroutine(TestMethod());
-    }
-
-    private IEnumerator TestMethod()
-    {
-      yield return new WaitForSeconds(1);
+      var towerManager = new TowerManager(GameObject.Find("Towers"), _grid, GameObject.Find("Tower"));
 
       GridUpdate.ResetGraph();
-      GridUpdate.MarkWalkable(new GridCoordinate(0, 0), new Size(5, 3), false);
-      Debug.Log("Done");
+      towerManager.PlaceAt(new GridCoordinate(0, 0));
+      towerManager.PlaceAt(new GridCoordinate(4, 0));
     }
 
     /// <summary> Creates a tile. </summary>

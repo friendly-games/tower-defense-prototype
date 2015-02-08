@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Signals;
+using NineByteGames.TowerDefense.Towers;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 
@@ -39,6 +41,15 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     public GameObject CurrentObject { get; set; }
 
+    public void Start()
+    {
+      _physics = Owner.GetComponent<Collider2D>();
+      _transform = Owner.GetComponent<Transform>();
+
+      _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
+
+    }
+
     public void Update()
     {
       TrackMouse();
@@ -55,14 +66,6 @@ namespace NineByteGames.TowerDefense.Behaviors
         EnemyCreator.Clone(Owner.transform.position + Owner.transform.up * 3, Quaternion.identity);
         EnemyCreator.GetComponent<EntityTrackerBehavior>().Target = gameObject;
       }
-    }
-
-    public void Start()
-    {
-      _physics = Owner.GetComponent<Collider2D>();
-      _transform = Owner.GetComponent<Transform>();
-
-      _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
     }
 
     /// <summary> Check all input related to movement and move the player accordingly. </summary>

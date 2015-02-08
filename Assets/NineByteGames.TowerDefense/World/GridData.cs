@@ -8,5 +8,10 @@ namespace NineByteGames.TowerDefense.World.Grid
   public struct GridData
   {
     public int Data;
+
+    public bool IsEmpty
+    {
+      get { return Data == 0; }
+    }
   }
 }
