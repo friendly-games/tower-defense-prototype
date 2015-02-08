@@ -30,7 +30,7 @@ namespace NineByteGames.TowerDefense.World
     private readonly WorldGrid _world;
     private readonly int _halfWidth;
     private Array2D<FlowData> _data;
-    private readonly Array2D<GridData> _cachedView;
+    private readonly Array2D<CellData> _cachedView;
     private readonly Queue<GridCoordinate> _reanalyzeQueue;
 
     /// <summary> Constructor. </summary>
@@ -43,7 +43,7 @@ namespace NineByteGames.TowerDefense.World
       _halfWidth = halfWidth;
 
       // + 1 because we want an odd number so that our "target" is directly in the middle of our grid
-      _cachedView = new Array2D<GridData>(halfWidth * 2 + 1, halfWidth * 2 + 1);
+      _cachedView = new Array2D<CellData>(halfWidth * 2 + 1, halfWidth * 2 + 1);
       _data = new Array2D<FlowData>(_cachedView.Width, _cachedView.Width);
 
       _reanalyzeQueue = new Queue<GridCoordinate>();

@@ -9,7 +9,7 @@ namespace NineByteGames.TowerDefense.World.Grid
   public class GridChunk
   {
     // todo OPTIMIZE by using a flat array
-    private readonly Array2D<GridData> _data;
+    private readonly Array2D<CellData> _data;
 
     private const int GridSize = 1024;
     private const int HalfGridSize = 1024 / 2;
@@ -17,12 +17,12 @@ namespace NineByteGames.TowerDefense.World.Grid
     /// <summary> Default constructor. </summary>
     public GridChunk()
     {
-      _data = new Array2D<GridData>(GridSize, GridSize);
+      _data = new Array2D<CellData>(GridSize, GridSize);
     }
 
     /// <summary> T data at the specified grid coordinate. </summary>
     /// <param name="index"> Zero-based index of the entry to access. </param>
-    public GridData this[GridCoordinate index]
+    public CellData this[GridCoordinate index]
     {
       get { return this[index.X, index.Z]; }
       set { this[index.X, index.Z] = value; }
@@ -31,7 +31,7 @@ namespace NineByteGames.TowerDefense.World.Grid
     /// <summary> T data at the specified grid coordinate. </summary>
     /// <param name="x"> The x coordinate of the position. </param>
     /// <param name="z"> The z coordinate of the position. </param>
-    public GridData this[int x, int z]
+    public CellData this[int x, int z]
     {
       get { return _data[x / (HalfGridSize), z / (HalfGridSize)]; }
       set { _data[x / (HalfGridSize), z / (HalfGridSize)] = value; }

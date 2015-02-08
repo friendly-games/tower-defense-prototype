@@ -34,7 +34,7 @@ namespace NineByteGames.TowerDefense.World
         for (int y = -mapWidth; y < mapWidth; y++)
         {
           var coordinate = new GridCoordinate(x, y);
-          int type = (int) (Mathf.PerlinNoise(x * factor + offset, y * factor + offset) * numberOfTiles);
+          byte type = (byte) (Mathf.PerlinNoise(x * factor + offset, y * factor + offset) * numberOfTiles);
 
           AddTile(type, coordinate);
         }
@@ -49,7 +49,7 @@ namespace NineByteGames.TowerDefense.World
     /// </summary>
     /// <param name="snapshot"> The snapshot to fill. </param>
     /// <param name="bottomLeft"> The bottom left position of the snapshot. </param>
-    public void Fill(Array2D<GridData> snapshot, GridCoordinate bottomLeft)
+    public void Fill(Array2D<CellData> snapshot, GridCoordinate bottomLeft)
     {
       // TODO check for error conditions
 
@@ -73,12 +73,12 @@ namespace NineByteGames.TowerDefense.World
     /// <summary> Creates a tile. </summary>
     /// <param name="type"> The type. </param>
     /// <param name="coordinate"> The coordinate. </param>
-    private void AddTile(int type, GridCoordinate coordinate)
+    private void AddTile(byte type, GridCoordinate coordinate)
     {
       // add it to the chunk
-      _gridChunk[coordinate] = new GridData()
+      _gridChunk[coordinate] = new CellData()
                                {
-                                 Data = type
+                                 RawType = type
                                };
 
       TileAdded.InvokeSafe(type, coordinate);

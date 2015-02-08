@@ -27,8 +27,6 @@ namespace NineByteGames.TowerDefense.Behaviors.World
     /// <summary> Starts this object. </summary>
     public void Start()
     {
-      Managers.Terrain = this;
-
       _terrainParent = gameObject;
       _grid = new WorldGrid();
 
@@ -36,11 +34,12 @@ namespace NineByteGames.TowerDefense.Behaviors.World
 
       _grid.Initialize(Templates.Length);
 
-      var towerManager = new TowerManager(GameObject.Find("Towers"), _grid, GameObject.Find("Tower"));
+      Managers.Terrain = this;
+      Managers.Towers = new TowerManager(GameObject.Find("Towers"), _grid, GameObject.Find("Tower"));
 
       GridUpdate.ResetGraph();
-      towerManager.PlaceAt(new GridCoordinate(0, 0));
-      towerManager.PlaceAt(new GridCoordinate(4, 0));
+      Managers.Towers.PlaceAt(new GridCoordinate(0, 0));
+      Managers.Towers.PlaceAt(new GridCoordinate(4, 0));
     }
 
     /// <summary> Creates a tile. </summary>

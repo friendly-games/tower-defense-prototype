@@ -5,7 +5,7 @@ using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Behaviors
+namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
   [RequireComponent(typeof(EntityTrackerBehavior))]
   internal class RotateTowardsTargetBehavior : AttachedBehavior

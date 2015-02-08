@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Utils
@@ -46,6 +47,18 @@ namespace NineByteGames.TowerDefense.Utils
       objectTransform.rotation = Quaternion.RotateTowards(objectTransform.rotation,
                                                           Quaternion.AngleAxis(desiredAngle, Vector3.forward),
                                                           MaxDegreesPerSecond * rateToTurn);
+    }
+
+    /// <summary>
+    ///  Gets the unity position of a building with a 2x2 size whose lower left position is given by
+    ///  <paramref name="lowerLeft"/>
+    /// </summary>
+    public static Vector3 GetCenterOf2x2(GridCoordinate lowerLeft)
+    {
+      var location = lowerLeft.ToVector3();
+      location.x += 0.5f;
+      location.y += 0.5f;
+      return location;
     }
   }
 }

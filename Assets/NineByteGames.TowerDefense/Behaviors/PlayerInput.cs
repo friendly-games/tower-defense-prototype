@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Behaviors.World;
+using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Towers;
 using NineByteGames.TowerDefense.Utils;
+using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors
@@ -38,6 +40,7 @@ namespace NineByteGames.TowerDefense.Behaviors
     private Transform _transform;
 
     private RateLimiter _weaponRecharge;
+    private GameObject _fake;
 
     public GameObject CurrentObject { get; set; }
 
@@ -48,6 +51,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
       _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
 
+      _fake = GameObject.Find("Create Tower");
     }
 
     public void Update()
@@ -61,10 +65,19 @@ namespace NineByteGames.TowerDefense.Behaviors
         BulletProjectile.GetComponent<ProjectileBehavior>()
                         .CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
       }
-      else if (Input.GetMouseButton(1) && _weaponRecharge.Trigger())
+
+      var location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      var lowerLeft = GridCoordinate.FromVector3(location);
+      location = MathUtils.GetCenterOf2x2(lowerLeft);
+
+      _fake.GetComponent<Transform>().position = location;
+
+      if (Input.GetMouseButton(1) && _weaponRecharge.Trigger())
       {
-        EnemyCreator.Clone(Owner.transform.position + Owner.transform.up * 3, Quaternion.identity);
-        EnemyCreator.GetComponent<EntityTrackerBehavior>().Target = gameObject;
+        //if (Managers.Towers.CanCreate(lowerLeft))
+        {
+          Managers.Towers.PlaceAt(lowerLeft);
+        }
       }
     }
 

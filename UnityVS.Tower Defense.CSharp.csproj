@@ -234,7 +234,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Terrain.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridChunk.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridCoordinate.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\World\GridData.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\CellData.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridTargetFlow.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\PathGrid.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\Size.cs" />
