@@ -48,9 +48,9 @@ namespace NineByteGames.TowerDefense.Behaviors.World
     /// <param name="coordinate"> The coordinate. </param>
     private void AddTile(int type, GridCoordinate coordinate)
     {
-      var newTile = Templates[type].GameObject.Clone(coordinate.ToVector3(), Quaternion.identity);
-      newTile.name = "Terrain @ " + coordinate;
-      newTile.SetParent(_terrainParent);
+      //var newTile = Templates[type].GameObject.Clone(coordinate.ToVector3(), Quaternion.identity);
+      //newTile.name = "Terrain @ " + coordinate;
+      //newTile.SetParent(_terrainParent);
     }
   }
 }
