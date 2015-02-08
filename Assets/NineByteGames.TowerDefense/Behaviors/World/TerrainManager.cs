@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Towers;
+using NineByteGames.TowerDefense.Unity;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
-using Pathfinding;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -34,8 +33,10 @@ namespace NineByteGames.TowerDefense.Behaviors.World
 
       _grid.Initialize(Templates.Length);
 
+      var towerPrefab = Prefabs.Find("Tower");
+
+      Managers.Towers = new TowerManager(towerPrefab.Parent, _grid, towerPrefab.GameObject);
       Managers.Terrain = this;
-      Managers.Towers = new TowerManager(GameObject.Find("Towers"), _grid, GameObject.Find("Tower"));
 
       GridUpdate.ResetGraph();
       Managers.Towers.PlaceAt(new GridCoordinate(0, 0));
