@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Behaviors.UI;
-using NineByteGames.TowerDefense.Signals;
+using NineByteGames.TowerDefense.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace NineByteGames.TowerDefense.Behaviors
+namespace NineByteGames.TowerDefense.Behaviors.UI
 {
   /// <summary> A draw property behavior. </summary>
   [RequireComponent(typeof(Text))]
@@ -15,7 +13,7 @@ namespace NineByteGames.TowerDefense.Behaviors
   {
     protected override GameObject GetObjectToDraw()
     {
-      return Player.GetComponent<PlayerInput>().CurrentObject;
+      return Player.GetComponent<PlayerInputBehavior>().CurrentObject;
     }
   }
 }

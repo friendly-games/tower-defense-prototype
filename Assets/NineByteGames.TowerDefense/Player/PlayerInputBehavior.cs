@@ -1,23 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Objects;
-using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
-using NineByteGames.TowerDefense.Utils;
-using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Behaviors
+namespace NineByteGames.TowerDefense.Player
 {
-  internal class PlayerInput : AttachedBehavior, IUpdatable
+  internal class PlayerInputBehavior : AttachedBehavior, IUpdatable
   {
-    /// <summary> The layer on which projectiles should be created. </summary>
-    public Layer ProjectileLayer;
-
-    /// <summary> The object to generate when a bullet is fired. </summary>
-    public GameObject BulletProjectile;
-
     /// <summary> The object that should be created when right clicking. </summary>
     public GameObject EnemyCreator;
 
@@ -37,12 +27,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     private Collider2D _physics;
     private Transform _transform;
-
-    private RateLimiter _weaponRecharge;
-    private GameObject _fake;
-
-    [Tooltip("The item that will be placed in the world")]
-    public PlaceableObject Placeable;
+    private InventoryBehavior _inventory;
 
     public GameObject CurrentObject { get; set; }
 
@@ -50,10 +35,7 @@ namespace NineByteGames.TowerDefense.Behaviors
     {
       _physics = Owner.GetComponent<Collider2D>();
       _transform = Owner.GetComponent<Transform>();
-
-      _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
-
-      _fake = Placeable.PreviewItem.Clone();
+      _inventory = Owner.GetComponent<InventoryBehavior>();
     }
 
     public void Update()
@@ -62,23 +44,17 @@ namespace NineByteGames.TowerDefense.Behaviors
       CheckMovement();
       DetectCurrentObject();
 
-      if (Input.GetMouseButton(0) && _weaponRecharge.Trigger())
+      if (Input.GetMouseButton(0) && _inventory.CanTrigger1)
       {
-        BulletProjectile.GetComponent<ProjectileBehavior>()
-                        .CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
+        _inventory.Trigger1();
       }
 
-      var location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-      var lowerLeft = GridCoordinate.FromVector3(location);
+      _inventory.UpdateCursor(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-      _fake.GetComponent<Transform>().position = Placeable.ConvertToGameObjectPosition(lowerLeft);
 
-      if (Input.GetMouseButton(1) && _weaponRecharge.Trigger())
+      if (Input.GetMouseButton(1) && _inventory.CanTrigger2)
       {
-        //if (Managers.Towers.CanCreate(lowerLeft))
-        {
-          Managers.Towers.PlaceAt(lowerLeft);
-        }
+        _inventory.Trigger2();
       }
     }
 

@@ -184,7 +184,6 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\MoneyCollector.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\NoMessagesBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PayloadBehavior.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PlayerInput.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\PrefabBasedObjectBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\ProjectileBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\SpawnerBehavior.cs" />
@@ -210,6 +209,8 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShape.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectType.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\PlaceableObject.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\InventoryBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AttachedBehavior.cs" />

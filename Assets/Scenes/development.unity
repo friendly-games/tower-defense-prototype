@@ -1800,6 +1800,7 @@ GameObject:
   - 114: {fileID: 1444686649}
   - 114: {fileID: 1444686652}
   - 114: {fileID: 1444686653}
+  - 114: {fileID: 1444686654}
   m_Layer: 12
   m_Name: Player
   m_TagString: Untagged
@@ -1818,16 +1819,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d6926dec8edff4f86803d369adcf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProjectileLayer:
-    LayerBit: 8
-  BulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
   EnemyCreator: {fileID: 100000, guid: dcd705db3af702542aa9a7e77da5101e, type: 2}
   PlayerSpeed: 4
   TurnSpeed: 6
   InfoLayerMask:
     serializedVersion: 2
     m_Bits: 2147495936
-  Placeable: {fileID: 11400000, guid: 022c2da824fdc2b408d92be8c8277b98, type: 2}
 --- !u!58 &1444686646
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1936,6 +1933,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41c1ef78f2b0044c87d840076b2594f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1444686654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1444686644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64ec278bd40605d4cbd1782cab9814f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Placeable: {fileID: 11400000, guid: 022c2da824fdc2b408d92be8c8277b98, type: 2}
+  ProjectileLayer:
+    LayerBit: 8
+  BulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
 --- !u!1 &1492155040
 GameObject:
   m_ObjectHideFlags: 0
