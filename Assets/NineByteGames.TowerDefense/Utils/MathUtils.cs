@@ -50,6 +50,15 @@ namespace NineByteGames.TowerDefense.Utils
     }
 
     /// <summary>
+    ///  Gets the unity position of a building with a 1x1 size whose lower left position is given by
+    ///  <paramref name="lowerLeft"/>
+    /// </summary>
+    public static Vector3 GetCenterOf1x1(GridCoordinate lowerLeft)
+    {
+      return lowerLeft.ToVector3();
+    }
+
+    /// <summary>
     ///  Gets the unity position of a building with a 2x2 size whose lower left position is given by
     ///  <paramref name="lowerLeft"/>
     /// </summary>

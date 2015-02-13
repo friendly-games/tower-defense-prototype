@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Behaviors.World;
+using NineByteGames.TowerDefense.Objects;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
-using NineByteGames.TowerDefense.Towers;
 using NineByteGames.TowerDefense.Utils;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors
 {
-  public class PlayerInput : AttachedBehavior, IUpdatable
+  internal class PlayerInput : AttachedBehavior, IUpdatable
   {
     /// <summary> The layer on which projectiles should be created. </summary>
     public Layer ProjectileLayer;
@@ -42,6 +41,9 @@ namespace NineByteGames.TowerDefense.Behaviors
     private RateLimiter _weaponRecharge;
     private GameObject _fake;
 
+    [Tooltip("The item that will be placed in the world")]
+    public PlaceableObject Placeable;
+
     public GameObject CurrentObject { get; set; }
 
     public void Start()
@@ -51,7 +53,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
       _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
 
-      _fake = GameObject.Find("Create Tower");
+      _fake = Placeable.PreviewItem.Clone();
     }
 
     public void Update()
@@ -68,9 +70,8 @@ namespace NineByteGames.TowerDefense.Behaviors
 
       var location = Camera.main.ScreenToWorldPoint(Input.mousePosition);
       var lowerLeft = GridCoordinate.FromVector3(location);
-      location = MathUtils.GetCenterOf2x2(lowerLeft);
 
-      _fake.GetComponent<Transform>().position = location;
+      _fake.GetComponent<Transform>().position = Placeable.ConvertToGameObjectPosition(lowerLeft);
 
       if (Input.GetMouseButton(1) && _weaponRecharge.Trigger())
       {

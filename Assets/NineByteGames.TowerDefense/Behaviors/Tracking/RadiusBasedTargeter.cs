@@ -17,10 +17,8 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     private LinkedList<GameObject> _currentTargets;
     private GameObject _lastTarget;
 
-    public override void Start()
+    public void Awake()
     {
-      base.Start();
-
       _currentTargets = new LinkedList<GameObject>();
     }
 

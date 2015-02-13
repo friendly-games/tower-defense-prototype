@@ -206,6 +206,10 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\MoneyTransfer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\SignalIndicators.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\InitializeObjectInWorldBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShape.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectType.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\PlaceableObject.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AttachedBehavior.cs" />
@@ -223,9 +227,10 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Tasks\Task.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Towers\TowerManager.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\Prefabs.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\PrefabsBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Unity\SingletonBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\AdvancedCoroutine.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\EnumerableExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\Lazy.cs" />
@@ -234,9 +239,9 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\GridBased.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Scaling.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Terrain.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\CellData.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridChunk.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridCoordinate.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\World\CellData.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridTargetFlow.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\PathGrid.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\Size.cs" />
@@ -293,6 +298,5 @@
     <None Include="Assets\UnityTestTools\changelog.txt" />
     <None Include="Assets\UnityTestTools\LICENSE.txt" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
