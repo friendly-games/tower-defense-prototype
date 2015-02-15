@@ -8,7 +8,6 @@ namespace NineByteGames.TowerDefense.World.Grid
   /// <summary> Represents the grid of the world. </summary>
   public class GridChunk
   {
-    // todo OPTIMIZE by using a flat array
     private readonly Array2D<CellData> _data;
 
     private const int GridSize = 1024;
@@ -33,8 +32,8 @@ namespace NineByteGames.TowerDefense.World.Grid
     /// <param name="z"> The z coordinate of the position. </param>
     public CellData this[int x, int z]
     {
-      get { return _data[x / (HalfGridSize), z / (HalfGridSize)]; }
-      set { _data[x / (HalfGridSize), z / (HalfGridSize)] = value; }
+      get { return _data[x + HalfGridSize, z + HalfGridSize]; }
+      set { _data[x + HalfGridSize, z + HalfGridSize] = value; }
     }
   }
 }
