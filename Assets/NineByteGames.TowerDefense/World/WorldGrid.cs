@@ -20,27 +20,6 @@ namespace NineByteGames.TowerDefense.World
       _gridChunk = new GridChunk();
     }
 
-    /// <summary> Initialize the world creating the tiles as needed. </summary>
-    /// <param name="numberOfTiles"> Number of tiles. </param>
-    public void Initialize(int numberOfTiles)
-    {
-      const float factor = 1 / 10.0f;
-      const int offset = 100;
-      const int mapWidth = 50;
-      // TODO make the tile count static (or at least not based on unity)
-
-      for (int x = -mapWidth; x < mapWidth; x++)
-      {
-        for (int y = -mapWidth; y < mapWidth; y++)
-        {
-          var coordinate = new GridCoordinate(x, y);
-          byte type = (byte) (Mathf.PerlinNoise(x * factor + offset, y * factor + offset) * numberOfTiles);
-
-          AddTile(type, coordinate);
-        }
-      }
-    }
-
     // TODO do this some other way
     public event Action<int, GridCoordinate> TileAdded;
 
@@ -68,20 +47,6 @@ namespace NineByteGames.TowerDefense.World
           iterator.MoveNext();
         }
       }
-    }
-
-    /// <summary> Creates a tile. </summary>
-    /// <param name="type"> The type. </param>
-    /// <param name="coordinate"> The coordinate. </param>
-    private void AddTile(byte type, GridCoordinate coordinate)
-    {
-      // add it to the chunk
-      _gridChunk[coordinate] = new CellData()
-                               {
-                                 RawType = type
-                               };
-
-      TileAdded.InvokeSafe(type, coordinate);
     }
 
     /// <summary> Check if the given area of the grid is empty. </summary>

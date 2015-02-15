@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
-using NineByteGames.TowerDefense.Utils;
-using NineByteGames.TowerDefense.World;
-using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NineByteGames.TowerDefense.Objects
 {
+  /// <summary>
+  ///  An object that can be placed in the world and which must be navigated around for path finding.
+  /// </summary>
   internal class PlaceableObject : ScriptableObject
   {
     [Tooltip("The none-displayed name of the item")]
@@ -22,34 +20,15 @@ namespace NineByteGames.TowerDefense.Objects
     public GameObject PreviewItem;
 
     [Tooltip("The number of grid units the object takes up")]
-    [FormerlySerializedAs("Size")]
     public ObjectShape ShapeSize;
 
-    /// <summary> The size of the object when placed in the world. </summary>
-    public Size Size { get; private set; }
+    /// <summary> The strategy associated with the given object. </summary>
+    public IObjectShapeStrategy Strategy { get; private set; }
 
     /// <summary> Invoked when the object is initialized. </summary>
     public void OnEnable()
     {
-      Size = ShapeSize.CalculateSize();
-    }
-
-    /// <summary>
-    ///  Convert the given coordinate into a Vector3 that represents the location at which
-    ///  <see cref="Template"/> would be placed if the lower left of <see cref="Template"/> existed at
-    ///  <see cref="lowerLeft"/>.
-    /// </summary>
-    public Vector3 ConvertToGameObjectPosition(GridCoordinate lowerLeft)
-    {
-      switch (ShapeSize)
-      {
-        case ObjectShape.SquareUnit:
-          return MathUtils.GetCenterOf1x1(lowerLeft);
-        case ObjectShape.TwoByTwo:
-          return MathUtils.GetCenterOf2x2(lowerLeft);
-        default:
-          throw new ArgumentOutOfRangeException();
-      }
+      Strategy = ObjectShapeStrategies.GetStrategyFor(ShapeSize);
     }
   }
 }

@@ -4,32 +4,43 @@ using System.Linq;
 using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
-using UnityEditor;
 using UnityEngine;
-using MathUtils = NineByteGames.TowerDefense.Utils.MathUtils;
 
 namespace NineByteGames.TowerDefense.Objects
 {
+  /// <summary> Aids in the placement of objects in the world. </summary>
   internal class ObjectWorldPlacement
   {
     private readonly WorldGrid _worldGrid;
 
+    /// <summary> Constructor. </summary>
+    /// <param name="worldGrid"> The world grid. </param>
     public ObjectWorldPlacement(WorldGrid worldGrid)
     {
       _worldGrid = worldGrid;
     }
 
+    /// <summary> True if the given object can be placed at the given location. </summary>
+    /// <param name="lowerLeft"> The lower left position of the place where the object may be placed. </param>
+    /// <param name="placeable"> The object that may be placed at the given location. </param>
+    /// <returns> True if the object can be placed at the location, false otherwise. </returns>
     public bool CanCreate(GridCoordinate lowerLeft, PlaceableObject placeable)
     {
+      _worldGrid.IsEmpty(lowerLeft, placeable.Strategy.Size);
       return true;
     }
 
+    /// <summary> Place an instance of <paramref name="placeable"/> at the given coordinate. </summary>
+    /// <param name="lowerLeft"> The lower left position of the place where the object should be
+    ///  placed. </param>
+    /// <param name="placeable"> The object that should be placed at the given location. </param>
+    /// <returns> A clone of the template of <paramref name="placeable"/>. </returns>
     public GameObject PlaceAt(GridCoordinate lowerLeft, PlaceableObject placeable)
     {
-      var position = placeable.ConvertToGameObjectPosition(lowerLeft);
+      var position = placeable.Strategy.ConvertToGameObjectPosition(lowerLeft);
       var clone = Create(placeable.Template, position, Quaternion.identity);
 
-      GridUpdate.MarkWalkable(lowerLeft, placeable.Size, false);
+      GridUpdate.MarkWalkable(lowerLeft, placeable.Strategy.Size, false);
       return clone;
     }
 

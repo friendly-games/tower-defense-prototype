@@ -44,7 +44,7 @@ namespace NineByteGames.TowerDefense.Player
       _cursorLocation = location;
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
 
-      _fake.GetComponent<Transform>().position = Placeable.ConvertToGameObjectPosition(lowerLeft);
+      _fake.GetComponent<Transform>().position = Placeable.Strategy.ConvertToGameObjectPosition(lowerLeft);
     }
 
     /// <summary> True if we can activate the primary item. </summary>
