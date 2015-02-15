@@ -26,8 +26,7 @@ namespace NineByteGames.TowerDefense.Objects
     /// <returns> True if the object can be placed at the location, false otherwise. </returns>
     public bool CanCreate(GridCoordinate lowerLeft, PlaceableObject placeable)
     {
-      _worldGrid.IsEmpty(lowerLeft, placeable.Strategy.Size);
-      return true;
+      return _worldGrid.IsEmpty(lowerLeft, placeable.Strategy.Size);
     }
 
     /// <summary> Place an instance of <paramref name="placeable"/> at the given coordinate. </summary>
@@ -39,6 +38,8 @@ namespace NineByteGames.TowerDefense.Objects
     {
       var position = placeable.Strategy.ConvertToGameObjectPosition(lowerLeft);
       var clone = Create(placeable.Template, position, Quaternion.identity);
+
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData {RawType = 1});
 
       GridUpdate.MarkWalkable(lowerLeft, placeable.Strategy.Size, false);
       return clone;

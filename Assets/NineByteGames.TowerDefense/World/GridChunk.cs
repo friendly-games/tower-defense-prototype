@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.Common.Structures;
+using NineByteGames.TowerDefense.World.Grid;
 
-namespace NineByteGames.TowerDefense.World.Grid
+namespace NineByteGames.TowerDefense.World
 {
   /// <summary> Represents the grid of the world. </summary>
   public class GridChunk

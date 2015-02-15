@@ -26,9 +26,9 @@ namespace NineByteGames.TowerDefense.World
     /// <summary>
     ///  Fill the given snapshot with the grid data starting with <paramref name="bottomLeft"/>
     /// </summary>
-    /// <param name="snapshot"> The snapshot to fill. </param>
     /// <param name="bottomLeft"> The bottom left position of the snapshot. </param>
-    public void Fill(Array2D<CellData> snapshot, GridCoordinate bottomLeft)
+    /// <param name="snapshot"> The snapshot to fill. </param>
+    public void Get(GridCoordinate bottomLeft, Array2D<CellData> snapshot)
     {
       // TODO check for error conditions
 
@@ -45,6 +45,28 @@ namespace NineByteGames.TowerDefense.World
         {
           iterator.Value = _gridChunk[new GridCoordinate(x, z)];
           iterator.MoveNext();
+        }
+      }
+    }
+
+    /// <summary> Sets an area to have the cell values given by <paramref name="cellData"/>. </summary>
+    /// <param name="bottomLeft"> The bottom left position of the area. </param>
+    /// <param name="size"> The size of the area to set the value of. </param>
+    /// <param name="cellData"> The value that the area should be set to. </param>
+    public void Set(GridCoordinate bottomLeft, Size size, CellData cellData)
+    {
+      // TODO check for error conditions
+
+      int width = size.Width;
+      int height = size.Height;
+      int startX = bottomLeft.X;
+      int startZ = bottomLeft.Z;
+
+      for (int x = startX; x < startX + width; x++)
+      {
+        for (int z = startZ; z < startZ + height; z++)
+        {
+          _gridChunk[new GridCoordinate(x, z)] = cellData;
         }
       }
     }

@@ -54,7 +54,7 @@ namespace NineByteGames.TowerDefense.World
     public void ReanalyzeFor(GridCoordinate coordinate)
     {
       var upperLeft = new GridCoordinate(coordinate.X - _halfWidth, coordinate.Z - _halfWidth);
-      _world.Fill(_cachedView, upperLeft);
+      _world.Get(upperLeft, _cachedView);
 
       _reanalyzeQueue.Clear();
       _reanalyzeQueue.Enqueue(new GridCoordinate(_halfWidth, _halfWidth));
