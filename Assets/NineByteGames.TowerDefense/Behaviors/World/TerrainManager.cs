@@ -30,8 +30,6 @@ namespace NineByteGames.TowerDefense.Behaviors.World
       _terrainParent = gameObject;
       _grid = new WorldGrid();
 
-      _grid.TileAdded += AddTile;
-
       var towerPrefab = Prefabs.Find("Tower.Instance");
 
       Managers.Towers = new TowerManager(towerPrefab.Parent, _grid, towerPrefab.GameObject);

@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+#pragma warning disable 0169
+#pragma warning disable 0649
+
 namespace UnityTest
 {
 	[Serializable]

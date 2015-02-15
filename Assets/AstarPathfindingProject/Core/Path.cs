@@ -5,6 +5,8 @@ using System.Collections;
 using Pathfinding;
 using System.Collections.Generic;
 
+#pragma warning disable 0169
+
 namespace Pathfinding {
 	/** Base class for all path types */
 	public abstract class Path {

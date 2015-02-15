@@ -5,6 +5,9 @@ using System.Collections;
 using System.Text;
 using Pathfinding;
 
+#pragma warning disable 0169
+#pragma warning disable 0649
+
 [AddComponentMenu("Pathfinding/Debugger")]
 [ExecuteInEditMode]
 /** Debugger for the A* Pathfinding Project.

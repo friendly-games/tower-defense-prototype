@@ -20,9 +20,6 @@ namespace NineByteGames.TowerDefense.World
       _gridChunk = new GridChunk();
     }
 
-    // TODO do this some other way
-    public event Action<int, GridCoordinate> TileAdded;
-
     /// <summary>
     ///  Fill the given snapshot with the grid data starting with <paramref name="bottomLeft"/>
     /// </summary>

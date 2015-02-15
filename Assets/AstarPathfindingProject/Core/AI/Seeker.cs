@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Pathfinding;
 using System.Diagnostics;
 
+#pragma warning disable 0169
+
 [AddComponentMenu ("Pathfinding/Seeker")]
 /** Handles path calls for a single unit.
  * \ingroup relevant

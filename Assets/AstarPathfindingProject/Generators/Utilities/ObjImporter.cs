@@ -10,6 +10,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+
+#pragma warning disable 0169
+#pragma warning disable 0649
+
 #if NETFX_CORE && !UNITY_EDITOR
 //using MarkerMetro.Unity.WinLegacy.IO;
 #endif

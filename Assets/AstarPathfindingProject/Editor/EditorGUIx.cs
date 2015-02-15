@@ -1,3 +1,5 @@
+#pragma warning disable 0169
+#pragma warning disable 0649
 
 #if UNITY_4_0 || UNITY_4_1 || UNITY_4_2 || UNITY_4_3 || UNITY_4_4 || UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_4_8 || UNITY_4_9
 #define UNITY_4
