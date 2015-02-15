@@ -19,17 +19,15 @@ namespace NineByteGames.TowerDefense.Utils
       _lastTime = 0;
     }
 
-    /// <summary> Attempts to trigger the item. </summary>
-    /// <returns> true if the item was triggered, false if it is still in the cooldown time. </returns>
-    public bool Trigger()
+    public bool CanTrigger
     {
-      if (Time.time - _lastTime > _rechargeRate)
-      {
-        _lastTime = Time.time;
-        return true;
-      }
+      get { return (Time.time - _lastTime) > _rechargeRate; }
+    }
 
-      return false;
+    /// <summary> Attempts to trigger the item. </summary>
+    public void Trigger()
+    {
+      _lastTime = Time.time;
     }
   }
 }

@@ -50,12 +50,14 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> True if we can activate the primary item. </summary>
     public bool CanTrigger1
     {
-      get { return _weaponRecharge.Trigger(); }
+      get { return _weaponRecharge.CanTrigger; }
     }
 
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void Trigger1()
     {
+      _weaponRecharge.Trigger();
+
       BulletProjectile.GetComponent<ProjectileBehavior>()
                       .CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
     }
@@ -63,14 +65,21 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> True if we can activate the secondary item. </summary>
     public bool CanTrigger2
     {
-      get { return _weaponRecharge.Trigger(); }
+      get { return _weaponRecharge.CanTrigger; }
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
     public void Trigger2()
     {
+      _weaponRecharge.Trigger();
+
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
-      Managers.Placer.PlaceAt(lowerLeft, Placeable);
+
+      if (Managers.Placer.CanCreate(lowerLeft, Placeable))
+      {
+        Debug.Log("Object placed");
+        Managers.Placer.PlaceAt(lowerLeft, Placeable);
+      }
     }
   }
 }
