@@ -19,8 +19,6 @@ namespace NineByteGames.TowerDefense.Player
     [Tooltip("The item that will be placed in the world")]
     public PlaceableObject Placeable;
 
-    private RateLimiter _weaponRecharge;
-    private GameObject _fake;
 
     /// <summary> The layer on which projectiles should be created. </summary>
     public Layer ProjectileLayer;
@@ -28,7 +26,12 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> The object to generate when a bullet is fired. </summary>
     public GameObject BulletProjectile;
 
+
     private Vector3 _cursorLocation;
+
+    private RateLimiter _weaponRecharge;
+
+    private GameObject _fake;
 
     public void Start()
     {
@@ -77,7 +80,6 @@ namespace NineByteGames.TowerDefense.Player
 
       if (Managers.Placer.CanCreate(lowerLeft, Placeable))
       {
-        Debug.Log("Object placed");
         Managers.Placer.PlaceAt(lowerLeft, Placeable);
       }
     }

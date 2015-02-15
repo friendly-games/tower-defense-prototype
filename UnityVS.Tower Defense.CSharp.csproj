@@ -208,7 +208,6 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\InitializeObjectInWorldBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShape.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShapeExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShapeStrategies.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectType.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectWorldPlacement.cs" />

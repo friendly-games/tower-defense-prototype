@@ -8,9 +8,6 @@ namespace NineByteGames.TowerDefense.Player
 {
   internal class PlayerInputBehavior : AttachedBehavior, IUpdatable
   {
-    /// <summary> The object that should be created when right clicking. </summary>
-    public GameObject EnemyCreator;
-
     /// <summary> How fast the player moves </summary>
     public float PlayerSpeed = 2.25f;
 
@@ -25,7 +22,6 @@ namespace NineByteGames.TowerDefense.Player
     private const KeyCode KeyLeft = KeyCode.A;
     private const KeyCode KeyRight = KeyCode.D;
 
-    private Collider2D _physics;
     private Transform _transform;
     private InventoryBehavior _inventory;
 
@@ -33,7 +29,6 @@ namespace NineByteGames.TowerDefense.Player
 
     public void Start()
     {
-      _physics = Owner.GetComponent<Collider2D>();
       _transform = Owner.GetComponent<Transform>();
       _inventory = Owner.GetComponent<InventoryBehavior>();
     }

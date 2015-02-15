@@ -19,6 +19,7 @@ namespace NineByteGames.TowerDefense.Utils
       _lastTime = 0;
     }
 
+    /// <summary> True if the item can be re-triggered. </summary>
     public bool CanTrigger
     {
       get { return (Time.time - _lastTime) > _rechargeRate; }
