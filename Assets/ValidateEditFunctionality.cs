@@ -6,7 +6,7 @@ using UnityEngine;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 internal class ValidateEditFunctionality : MonoBehaviour
 {
   public void Update()

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using NineByteGames.TowerDefense.Utils;
+using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NineByteGames.TowerDefense.Objects
 {
@@ -20,7 +22,17 @@ namespace NineByteGames.TowerDefense.Objects
     public GameObject PreviewItem;
 
     [Tooltip("The number of grid units the object takes up")]
-    public ObjectShape Size;
+    [FormerlySerializedAs("Size")]
+    public ObjectShape ShapeSize;
+
+    /// <summary> The size of the object when placed in the world. </summary>
+    public Size Size { get; private set; }
+
+    /// <summary> Invoked when the object is initialized. </summary>
+    public void OnEnable()
+    {
+      Size = ShapeSize.CalculateSize();
+    }
 
     /// <summary>
     ///  Convert the given coordinate into a Vector3 that represents the location at which
@@ -29,7 +41,7 @@ namespace NineByteGames.TowerDefense.Objects
     /// </summary>
     public Vector3 ConvertToGameObjectPosition(GridCoordinate lowerLeft)
     {
-      switch (Size)
+      switch (ShapeSize)
       {
         case ObjectShape.SquareUnit:
           return MathUtils.GetCenterOf1x1(lowerLeft);

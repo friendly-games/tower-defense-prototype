@@ -70,7 +70,7 @@ namespace NineByteGames.TowerDefense.Player
     public void Trigger2()
     {
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
-      Managers.Towers.PlaceAt(lowerLeft);
+      Managers.Placer.PlaceAt(lowerLeft, Placeable);
     }
   }
 }
