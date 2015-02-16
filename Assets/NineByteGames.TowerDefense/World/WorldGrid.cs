@@ -66,7 +66,7 @@ namespace NineByteGames.TowerDefense.World
         }
       }
 
-      GridUpdate.MarkWalkable(bottomLeft, size, cellData.IsEmpty);
+      GridUpdate.MarkCost(bottomLeft, size, cellData.RawType * 10);
     }
 
     /// <summary> Check if the given area of the grid is empty. </summary>

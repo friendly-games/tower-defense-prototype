@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Messages;
 using NineByteGames.TowerDefense.Signals;
 using Pathfinding;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     private EntityTrackerBehavior _tracker;
     private Path _path;
+    private Vector2 _lastPosition;
+    private int _numTimesStuck;
 
     public override void Start()
     {
@@ -57,6 +60,31 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
       var body = GetComponent<Rigidbody2D>();
       body.position += new Vector2(dir.x, dir.y);
+
+      // if we didn't move far from last time
+      if ((body.position - _lastPosition).sqrMagnitude < 0.05 * Time.fixedDeltaTime)
+      {
+        if (_numTimesStuck > 20)
+        {
+          var ray = Physics2D.Raycast(body.position, dir, 1.0f, Layer.FromName("Buildings").LayerMaskValue);
+          if (ray.collider != null)
+          {
+            Debug.Log("Hit:" + ray.collider.gameObject);
+            ray.collider.gameObject.SendSignal(new Damage(10));
+          }
+        }
+        else
+        {
+          _numTimesStuck++;
+        }
+      }
+      else
+      {
+        _numTimesStuck = 0;
+      }
+
+      _lastPosition = body.position;
+
       _currentPathCount++;
 
       //Check if we are close enough to the next waypoint

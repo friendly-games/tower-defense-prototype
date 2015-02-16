@@ -21,14 +21,16 @@ namespace NineByteGames.TowerDefense.World
 
     public CellType Type
     {
-      get { return (CellType) RawType; }
+      get { return (CellType)RawType; }
+      set { RawType = (byte)value; }
     }
   }
 
   public enum CellType : byte
   {
     Empty,
-    Solid
+    Wall,
+    Tower
   }
 
   /// <summary> Represents a type of terrain. </summary>

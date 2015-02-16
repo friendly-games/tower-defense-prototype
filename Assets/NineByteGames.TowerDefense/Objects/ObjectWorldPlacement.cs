@@ -69,7 +69,7 @@ namespace NineByteGames.TowerDefense.Objects
       var position = instance.GetComponent<Transform>().position;
       var lowerLeft = strategy.ConvertFromGameObjectPosition(position);
 
-      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { RawType = 1 });
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { Type = CellType.Wall});
     }
 
     public void NotifyDestroy(GameObject instance)
