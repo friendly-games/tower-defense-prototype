@@ -4,7 +4,6 @@ using System.Linq;
 using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Objects;
 using NineByteGames.TowerDefense.Towers;
-using NineByteGames.TowerDefense.World;
 
 namespace NineByteGames.TowerDefense.Services
 {

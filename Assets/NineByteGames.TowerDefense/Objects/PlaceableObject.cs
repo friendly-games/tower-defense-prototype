@@ -10,7 +10,7 @@ namespace NineByteGames.TowerDefense.Objects
   /// </summary>
   internal class PlaceableObject : ScriptableObject
   {
-    [Tooltip("The none-displayed name of the item")]
+    [Tooltip("The non-displayed name of the item")]
     public string Name;
 
     [Tooltip("The item that can be placed in the world")]

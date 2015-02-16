@@ -16,9 +16,8 @@ namespace NineByteGames.TowerDefense.Player
   /// </summary>
   internal class InventoryBehavior : AttachedBehavior
   {
-    [Tooltip("The item that will be placed in the world")]
-    public PlaceableObject Placeable;
-
+    [Tooltip("List of items currently in inventory")]
+    public PlaceableObject[] InventoryList;
 
     /// <summary> The layer on which projectiles should be created. </summary>
     public Layer ProjectileLayer;
@@ -26,6 +25,8 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> The object to generate when a bullet is fired. </summary>
     public GameObject BulletProjectile;
 
+    /// <summary> The current inventory item index. </summary>
+    private int _currentInventoryItemIndex;
 
     private Vector3 _cursorLocation;
 
@@ -36,8 +37,14 @@ namespace NineByteGames.TowerDefense.Player
     public void Start()
     {
       _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
+      _currentInventoryItemIndex = 0;
 
       _fake = Placeable.PreviewItem.Clone();
+    }
+
+    public PlaceableObject Placeable
+    {
+      get { return InventoryList[_currentInventoryItemIndex]; }
     }
 
     /// <summary> Updates the current location of the cursor. </summary>
@@ -81,6 +88,19 @@ namespace NineByteGames.TowerDefense.Player
       if (Managers.Placer.CanCreate(lowerLeft, Placeable))
       {
         Managers.Placer.PlaceAt(lowerLeft, Placeable);
+      }
+    }
+
+    /// <summary> Try to switch to the given inventory item. </summary>
+    /// <param name="inventoryId"> The inventory item to switch to. </param>
+    public void TrySwitchTo(int inventoryId)
+    {
+      if (_currentInventoryItemIndex != inventoryId && inventoryId < InventoryList.Length)
+      {
+        _currentInventoryItemIndex = inventoryId;
+        // TODO do we want to cache this somehow
+        _fake.DestorySelf();
+        _fake = Placeable.PreviewItem.Clone();
       }
     }
   }

@@ -1819,7 +1819,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d6926dec8edff4f86803d369adcf27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCreator: {fileID: 100000, guid: dcd705db3af702542aa9a7e77da5101e, type: 2}
   PlayerSpeed: 4
   TurnSpeed: 6
   InfoLayerMask:
@@ -1944,7 +1943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ec278bd40605d4cbd1782cab9814f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Placeable: {fileID: 11400000, guid: 022c2da824fdc2b408d92be8c8277b98, type: 2}
+  InventoryList:
+  - {fileID: 11400000, guid: 022c2da824fdc2b408d92be8c8277b98, type: 2}
+  - {fileID: 11400000, guid: 15e2c4d2c9981ff48995656cf721bbe1, type: 2}
   ProjectileLayer:
     LayerBit: 8
   BulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}

@@ -10,6 +10,20 @@ namespace NineByteGames.TowerDefense
 {
   public static class UnityExtensions
   {
+    /// <summary> Destroy the game object associated with he component. </summary>
+    /// <param name="component"> The component to act on. </param>
+    public static void DestroyOwner(this Component component)
+    {
+      component.gameObject.DestorySelf();
+    }
+
+    /// <summary> Destroy the given game object. </summary>
+    /// <param name="gameObject"> The gameObject to act on. </param>
+    public static void DestorySelf(this GameObject gameObject)
+    {
+      Object.Destroy(gameObject);
+    }
+
     /// <summary> Returns true if the game object is dead or null. </summary>
     public static bool IsDead(this GameObject gameObject)
     {

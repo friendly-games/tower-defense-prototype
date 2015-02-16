@@ -38,19 +38,7 @@ namespace NineByteGames.TowerDefense.Player
       TrackMouse();
       CheckMovement();
       DetectCurrentObject();
-
-      if (Input.GetMouseButton(0) && _inventory.CanTrigger1)
-      {
-        _inventory.Trigger1();
-      }
-
-      _inventory.UpdateCursor(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-
-      if (Input.GetMouseButton(1) && _inventory.CanTrigger2)
-      {
-        _inventory.Trigger2();
-      }
+      CheckInventory();
     }
 
     /// <summary> Check all input related to movement and move the player accordingly. </summary>
@@ -78,6 +66,7 @@ namespace NineByteGames.TowerDefense.Player
         desiredVelocity.x += 1;
       }
 
+
       if (desiredVelocity.sqrMagnitude > 0.001f)
       {
         desiredVelocity = desiredVelocity.normalized;
@@ -85,6 +74,30 @@ namespace NineByteGames.TowerDefense.Player
       }
 
       _transform.rigidbody2D.velocity = new Vector2();
+    }
+
+    private void CheckInventory()
+    {
+      _inventory.UpdateCursor(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
+      if (Input.GetKey(KeyCode.Alpha1))
+      {
+        _inventory.TrySwitchTo(0);
+      }
+      else if (Input.GetKey(KeyCode.Alpha2))
+      {
+        _inventory.TrySwitchTo(1);
+      }
+
+      if (Input.GetMouseButton(0) && _inventory.CanTrigger1)
+      {
+        _inventory.Trigger1();
+      }
+
+      if (Input.GetMouseButton(1) && _inventory.CanTrigger2)
+      {
+        _inventory.Trigger2();
+      }
     }
 
     private void TrackMouse()
