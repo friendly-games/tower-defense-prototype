@@ -89,14 +89,14 @@ namespace NineByteGames.TowerDefense.Player
         _inventory.TrySwitchTo(1);
       }
 
-      if (Input.GetMouseButton(0) && _inventory.CanTrigger1)
+      if (Input.GetMouseButton(0))
       {
-        _inventory.Trigger1();
+        _inventory.TryTrigger1();
       }
 
-      if (Input.GetMouseButton(1) && _inventory.CanTrigger2)
+      if (Input.GetMouseButton(1))
       {
-        _inventory.Trigger2();
+        _inventory.TryTrigger2();
       }
     }
 

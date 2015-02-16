@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.Common.Extensions;
 using NineByteGames.TowerDefense.Behaviors;
 using NineByteGames.TowerDefense.Objects;
 using NineByteGames.TowerDefense.Services;
@@ -30,13 +31,18 @@ namespace NineByteGames.TowerDefense.Player
 
     private Vector3 _cursorLocation;
 
-    private RateLimiter _weaponRecharge;
+    private RateLimiter _weaponRechargeLimiter;
+    private RateLimiter _weaponSwapLimiter;
+    private RateLimiter _buildingPlacer;
 
     private GameObject _fake;
 
     public void Start()
     {
-      _weaponRecharge = new RateLimiter(TimeSpan.FromSeconds(0.5f));
+      _weaponRechargeLimiter = new RateLimiter(TimeSpan.FromSeconds(0.5f));
+      _weaponSwapLimiter = new RateLimiter(TimeSpan.FromMilliseconds(500));
+      _buildingPlacer = new RateLimiter(TimeSpan.FromMilliseconds(100));
+
       _currentInventoryItemIndex = 0;
 
       _fake = Placeable.PreviewItem.Clone();
@@ -57,31 +63,25 @@ namespace NineByteGames.TowerDefense.Player
       _fake.GetComponent<Transform>().position = Placeable.Strategy.ConvertToGameObjectPosition(lowerLeft);
     }
 
-    /// <summary> True if we can activate the primary item. </summary>
-    public bool CanTrigger1
-    {
-      get { return _weaponRecharge.CanTrigger; }
-    }
-
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
-    public void Trigger1()
+    public void TryTrigger1()
     {
-      _weaponRecharge.Trigger();
+      if (!_weaponRechargeLimiter.CanTrigger)
+        return;
+
+      _weaponRechargeLimiter.Restart();
 
       BulletProjectile.GetComponent<ProjectileBehavior>()
                       .CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
     }
 
-    /// <summary> True if we can activate the secondary item. </summary>
-    public bool CanTrigger2
-    {
-      get { return _weaponRecharge.CanTrigger; }
-    }
-
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
-    public void Trigger2()
+    public void TryTrigger2()
     {
-      _weaponRecharge.Trigger();
+      if (!_buildingPlacer.CanTrigger)
+        return;
+
+      _buildingPlacer.Restart();
 
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
 
@@ -95,13 +95,16 @@ namespace NineByteGames.TowerDefense.Player
     /// <param name="inventoryId"> The inventory item to switch to. </param>
     public void TrySwitchTo(int inventoryId)
     {
-      if (_currentInventoryItemIndex != inventoryId && inventoryId < InventoryList.Length)
-      {
-        _currentInventoryItemIndex = inventoryId;
-        // TODO do we want to cache this somehow
-        _fake.DestorySelf();
-        _fake = Placeable.PreviewItem.Clone();
-      }
+      if (!_weaponSwapLimiter.CanTrigger
+          || _currentInventoryItemIndex == inventoryId
+          || !InventoryList.IsValid(inventoryId))
+        return;
+
+      _currentInventoryItemIndex = inventoryId;
+      // TODO do we want to cache this somehow
+      _fake.DestorySelf();
+      _fake = Placeable.PreviewItem.Clone();
+      _weaponSwapLimiter.Restart();
     }
   }
 }

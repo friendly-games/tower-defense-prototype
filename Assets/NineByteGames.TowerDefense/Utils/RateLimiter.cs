@@ -8,15 +8,22 @@ namespace NineByteGames.TowerDefense.Utils
   /// <summary> Limits the rate at which something can occur. </summary>
   public class RateLimiter
   {
-    private readonly float _rechargeRate;
+    private float _rechargeRate;
     private float _lastTime;
 
     /// <summary> Constructor. </summary>
     /// <param name="rechargeRate"> The time it takes for an action to "recharge". </param>
     public RateLimiter(TimeSpan rechargeRate)
     {
-      _rechargeRate = (float) rechargeRate.TotalSeconds;
+      RechargeRate = rechargeRate;
       _lastTime = 0;
+    }
+
+    /// <summary> The rate at which the limiter expires and can be used again. </summary>
+    public TimeSpan RechargeRate
+    {
+      get { return TimeSpan.FromSeconds(_rechargeRate); }
+      set { _rechargeRate = (float) value.TotalSeconds; }
     }
 
     /// <summary> True if the item can be re-triggered. </summary>
@@ -26,7 +33,7 @@ namespace NineByteGames.TowerDefense.Utils
     }
 
     /// <summary> Attempts to trigger the item. </summary>
-    public void Trigger()
+    public void Restart()
     {
       _lastTime = Time.time;
     }
