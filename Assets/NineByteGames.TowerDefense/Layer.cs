@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense
@@ -10,6 +11,7 @@ namespace NineByteGames.TowerDefense
   public struct Layer : IEquatable<Layer>
   {
     [SerializeField]
+    [UsedImplicitly]
     private int LayerBit;
 
     /// <summary> Creates a new layer object. </summary>

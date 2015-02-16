@@ -232,11 +232,13 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Tasks\Task.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Towers\TowerManager.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Unity\LayerMaskExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\Prefabs.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\PrefabsBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\Singleton.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\SingletonBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Unity\TimeDuration.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\AdvancedCoroutine.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\EnumerableExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\Lazy.cs" />

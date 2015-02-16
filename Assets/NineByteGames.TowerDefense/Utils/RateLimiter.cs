@@ -6,10 +6,18 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Utils
 {
   /// <summary> Limits the rate at which something can occur. </summary>
+  [Serializable]
   public class RateLimiter
   {
+    [SerializeField]
     private float _rechargeRate;
+
     private float _lastTime;
+
+    public RateLimiter()
+      : this(TimeSpan.FromSeconds(0))
+    {
+    }
 
     /// <summary> Constructor. </summary>
     /// <param name="rechargeRate"> The time it takes for an action to "recharge". </param>

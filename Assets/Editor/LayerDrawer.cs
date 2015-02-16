@@ -17,7 +17,7 @@ namespace Assets.Editor
       // if it's different from the prefab, go ahead and bold it
       if (property.isInstantiatedPrefab)
       {
-        SetBoldDefaultFont(property.prefabOverride);
+        EditorUtils.SetBoldDefaultFont(property.prefabOverride);
       }
 
       // get the current value of the field
@@ -42,17 +42,6 @@ namespace Assets.Editor
 
       // store the id of the layer that was selected
       layerNumberProperty.intValue = allLayers[layerIndex].LayerId;
-    }
-
-    // http://answers.unity3d.com/questions/62455/how-do-i-make-fields-in-the-inspector-go-bold-when.html?sort=oldest
-    private static MethodInfo _boldFontMethodInfo = null;
-
-    private static void SetBoldDefaultFont(bool value)
-    {
-      if (_boldFontMethodInfo == null)
-        _boldFontMethodInfo = typeof(EditorGUIUtility).GetMethod("SetBoldDefaultFont",
-                                                                 BindingFlags.Static | BindingFlags.NonPublic);
-      _boldFontMethodInfo.Invoke(null, new[] {value as object});
     }
   }
 }
