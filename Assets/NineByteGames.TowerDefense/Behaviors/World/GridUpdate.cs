@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.Common.Structures;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using Pathfinding;

@@ -59,6 +59,14 @@ namespace NineByteGames.TowerDefense.Utils
     }
 
     /// <summary>
+    ///  Converts a vector3 position to a grid coordinate for an object which is 1x1 in size.
+    /// </summary>
+    public static GridCoordinate GetGridCoordinateFor1x1(Vector3 position)
+    {
+      return GridCoordinate.FromVector3(position);
+    }
+
+    /// <summary>
     ///  Gets the unity position of a building with a 2x2 size whose lower left position is given by
     ///  <paramref name="lowerLeft"/>
     /// </summary>
@@ -68,6 +76,17 @@ namespace NineByteGames.TowerDefense.Utils
       location.x += 0.5f;
       location.y += 0.5f;
       return location;
+    }
+
+    /// <summary>
+    ///  Converts a vector3 position to a grid coordinate for an object which is 2x2 in size.
+    /// </summary>
+    public static GridCoordinate GetGridCoordinateFor2x2(Vector3 position)
+    {
+      position.x -= 0.5f;
+      position.y -= 0.5f;
+
+      return GridCoordinate.FromVector3(position);
     }
   }
 }

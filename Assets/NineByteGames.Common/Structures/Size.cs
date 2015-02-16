@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NineByteGames.TowerDefense.World
+namespace NineByteGames.Common.Structures
 {
   /// <summary> Represents a concrete size. </summary>
   public struct Size : IEquatable<Size>
   {
+    /// <summary> The width portion of the size. </summary>
     public readonly int Width;
+
+    /// <summary> The height portion of the size. </summary>
     public readonly int Height;
 
+    /// <summary> Constructor. </summary>
+    /// <param name="width"> The width portion of the size. </param>
+    /// <param name="height"> The height portion of the size. </param>
     public Size(int width, int height)
     {
       Width = width;

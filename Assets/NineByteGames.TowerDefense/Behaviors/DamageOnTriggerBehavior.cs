@@ -6,7 +6,6 @@ using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Unity;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NineByteGames.TowerDefense.Behaviors
 {

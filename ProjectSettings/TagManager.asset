@@ -41,6 +41,10 @@ TagManager:
     userID: 2
     uniqueID: 1176491175
     locked: 0
+  - name: Area of Effect
+    userID: 1
+    uniqueID: 3220653575
+    locked: 0
   - name: Default
     userID: 0
     uniqueID: 0
@@ -48,8 +52,4 @@ TagManager:
   - name: Buildings
     userID: 3
     uniqueID: 1598288111
-    locked: 0
-  - name: Area of Effect
-    userID: 1
-    uniqueID: 3220653575
     locked: 0

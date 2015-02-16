@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.Common.Extensions;
 using NineByteGames.TowerDefense.Messages;
 using NineByteGames.TowerDefense.Signals;
-using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking

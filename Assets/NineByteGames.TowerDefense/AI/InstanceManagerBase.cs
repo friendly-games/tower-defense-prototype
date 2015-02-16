@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Behaviors;
+using NineByteGames.TowerDefense.Objects;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.AI
@@ -48,7 +49,7 @@ namespace NineByteGames.TowerDefense.AI
       var cloned = prefab.Clone(position, euler);
       cloned.SetParent(Parent);
 
-      var prefabBased = cloned.AddComponent<PrefabBasedObjectBehavior>();
+      var prefabBased = cloned.AddComponent<LifetimeManagementBehavior>();
       prefabBased.Manager = this;
 
       return cloned;

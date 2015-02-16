@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.AI;
+using NineByteGames.TowerDefense.Behaviors;
 using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
@@ -9,7 +11,7 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Objects
 {
   /// <summary> Aids in the placement of objects in the world. </summary>
-  internal class ObjectWorldPlacement
+  internal class ObjectWorldPlacement : IInstanceManager
   {
     private readonly WorldGrid _worldGrid;
 
@@ -37,11 +39,8 @@ namespace NineByteGames.TowerDefense.Objects
     public GameObject PlaceAt(GridCoordinate lowerLeft, PlaceableObject placeable)
     {
       var position = placeable.Strategy.ConvertToGameObjectPosition(lowerLeft);
-      var clone = Create(placeable.Template, position, Quaternion.identity);
+      var clone = Create(placeable, position, Quaternion.identity);
 
-      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData {RawType = 1});
-
-      GridUpdate.MarkWalkable(lowerLeft, placeable.Strategy.Size, false);
       return clone;
     }
 
@@ -50,15 +49,39 @@ namespace NineByteGames.TowerDefense.Objects
     /// <param name="position"> The location at which the new instance should be placed. </param>
     /// <param name="euler"> The rotation at which the new instance should be placed. </param>
     /// <returns> A GameObject representing the newly created instance. </returns>
-    protected GameObject Create(GameObject prefab, Vector3 position, Quaternion euler)
+    private GameObject Create(PlaceableObject prefab, Vector3 position, Quaternion euler)
     {
-      var cloned = prefab.Clone(position, euler);
-      //cloned.SetParent(Parent);
+      var cloned = prefab.Template.Clone(position, euler);
 
-      //var prefabBased = cloned.AddComponent<PrefabBasedObjectBehavior>();
-      //prefabBased.Manager = this;
+      var prefabBased = cloned.AddComponent<LifetimeManagementBehavior>();
+      prefabBased.Manager = this;
+      prefabBased.Tag = prefab;
 
       return cloned;
+    }
+
+    public void NotifyAlive(GameObject instance)
+    {
+      var placeable = instance.GetComponent<LifetimeManagementBehavior>()
+                              .GetTag<PlaceableObject>();
+
+      var strategy = placeable.Strategy;
+      var position = instance.GetComponent<Transform>().position;
+      var lowerLeft = strategy.ConvertFromGameObjectPosition(position);
+
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { RawType = 1 });
+    }
+
+    public void NotifyDestroy(GameObject instance)
+    {
+      var placeable = instance.GetComponent<LifetimeManagementBehavior>()
+                              .GetTag<PlaceableObject>();
+
+      var strategy = placeable.Strategy;
+      var position = instance.GetComponent<Transform>().position;
+      var lowerLeft = strategy.ConvertFromGameObjectPosition(position);
+
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { RawType = 0 });
     }
   }
 }

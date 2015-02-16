@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Objects;
-using NineByteGames.TowerDefense.Towers;
 
 namespace NineByteGames.TowerDefense.Services
 {
@@ -12,8 +11,6 @@ namespace NineByteGames.TowerDefense.Services
   {
     /// <summary> The terrain manager for the system. </summary>
     public static TerrainManager Terrain { get; internal set; }
-
-    internal static TowerManager Towers { get; set; }
 
     internal static ObjectWorldPlacement Placer { get; set; }
   }

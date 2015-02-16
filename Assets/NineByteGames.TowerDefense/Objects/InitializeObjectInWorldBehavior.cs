@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.Common.Structures;
 using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.World;

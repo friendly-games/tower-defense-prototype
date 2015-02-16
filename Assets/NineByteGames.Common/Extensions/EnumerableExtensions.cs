@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NineByteGames.TowerDefense.Utils
+namespace NineByteGames.Common.Extensions
 {
   // https://code.google.com/p/morelinq/source/browse/MoreLinq/MinBy.cs
   public static class EnumerableExtensions

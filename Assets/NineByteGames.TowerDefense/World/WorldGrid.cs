@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.Common.Extensions;
 using NineByteGames.Common.Structures;
+using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.World.Grid;
-using UnityEngine;
 
 namespace NineByteGames.TowerDefense.World
 {
@@ -66,6 +65,8 @@ namespace NineByteGames.TowerDefense.World
           _gridChunk[new GridCoordinate(x, z)] = cellData;
         }
       }
+
+      GridUpdate.MarkWalkable(bottomLeft, size, cellData.IsEmpty);
     }
 
     /// <summary> Check if the given area of the grid is empty. </summary>
