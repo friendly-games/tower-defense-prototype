@@ -21,7 +21,6 @@ namespace NineByteGames.TowerDefense.Behaviors
     public float damage;
 
     [Tooltip("How fast damage occurs on a given target")]
-    [FormerlySerializedAs("attackLimiter")]
     public RateLimiter rateOfAttack;
 
     public void OnTriggerStay2D(Collider2D other)

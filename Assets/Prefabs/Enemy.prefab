@@ -103,7 +103,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Radius: .699999988
+  m_Radius: .899999976
   m_Center: {x: 0, y: 0}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -237,12 +237,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa3c4b2e1ce6dc499b9dcfbdd587048, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
   layerMask:
     serializedVersion: 2
     m_Bits: 4096
-  attackLimiter:
-    _rechargeRate: 2
+  damage: 2
+  rateOfAttack:
+    _rechargeRate: .200000003
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

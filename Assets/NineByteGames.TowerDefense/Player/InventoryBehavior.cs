@@ -9,6 +9,7 @@ using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Utils;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NineByteGames.TowerDefense.Player
 {
@@ -18,31 +19,32 @@ namespace NineByteGames.TowerDefense.Player
   internal class InventoryBehavior : AttachedBehavior
   {
     [Tooltip("List of items currently in inventory")]
-    public PlaceableObject[] InventoryList;
+    public PlaceableObject[] inventoryList;
 
-    /// <summary> The layer on which projectiles should be created. </summary>
-    public Layer ProjectileLayer;
+    [Tooltip("The layer on which projectiles should be created")]
+    public Layer projectileLayer;
 
-    /// <summary> The object to generate when a bullet is fired. </summary>
-    public GameObject BulletProjectile;
+    [Tooltip("The object to generate when a bullet is fired")]
+    public GameObject bulletProjectile;
+
+    [Tooltip("How fast a weapon can be fired")]
+    public RateLimiter weaponRechargeRate;
+
+    [Tooltip("How fast weapons can be switched")]
+    public RateLimiter weaponSwapRate;
+
+    [Tooltip("The rate at which buildings can be placed")]
+    public RateLimiter buildingRate;
 
     /// <summary> The current inventory item index. </summary>
     private int _currentInventoryItemIndex;
 
     private Vector3 _cursorLocation;
 
-    private RateLimiter _weaponRechargeLimiter;
-    private RateLimiter _weaponSwapLimiter;
-    private RateLimiter _buildingPlacer;
-
     private GameObject _fake;
 
     public void Start()
     {
-      _weaponRechargeLimiter = new RateLimiter(TimeSpan.FromSeconds(0.5f));
-      _weaponSwapLimiter = new RateLimiter(TimeSpan.FromMilliseconds(500));
-      _buildingPlacer = new RateLimiter(TimeSpan.FromMilliseconds(100));
-
       _currentInventoryItemIndex = 0;
 
       _fake = Placeable.PreviewItem.Clone();
@@ -50,7 +52,7 @@ namespace NineByteGames.TowerDefense.Player
 
     public PlaceableObject Placeable
     {
-      get { return InventoryList[_currentInventoryItemIndex]; }
+      get { return inventoryList[_currentInventoryItemIndex]; }
     }
 
     /// <summary> Updates the current location of the cursor. </summary>
@@ -66,22 +68,22 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void TryTrigger1()
     {
-      if (!_weaponRechargeLimiter.CanTrigger)
+      if (!weaponRechargeRate.CanTrigger)
         return;
 
-      _weaponRechargeLimiter.Restart();
+      weaponRechargeRate.Restart();
 
-      BulletProjectile.GetComponent<ProjectileBehavior>()
-                      .CreateAndInitializeFrom(Owner.transform, ProjectileLayer);
+      bulletProjectile.GetComponent<ProjectileBehavior>()
+                      .CreateAndInitializeFrom(Owner.transform, projectileLayer);
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
     public void TryTrigger2()
     {
-      if (!_buildingPlacer.CanTrigger)
+      if (!buildingRate.CanTrigger)
         return;
 
-      _buildingPlacer.Restart();
+      buildingRate.Restart();
 
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
 
@@ -95,16 +97,16 @@ namespace NineByteGames.TowerDefense.Player
     /// <param name="inventoryId"> The inventory item to switch to. </param>
     public void TrySwitchTo(int inventoryId)
     {
-      if (!_weaponSwapLimiter.CanTrigger
+      if (!weaponSwapRate.CanTrigger
           || _currentInventoryItemIndex == inventoryId
-          || !InventoryList.IsValid(inventoryId))
+          || !inventoryList.IsValid(inventoryId))
         return;
 
       _currentInventoryItemIndex = inventoryId;
       // TODO do we want to cache this somehow
       _fake.DestorySelf();
       _fake = Placeable.PreviewItem.Clone();
-      _weaponSwapLimiter.Restart();
+      weaponSwapRate.Restart();
     }
   }
 }
