@@ -73,7 +73,7 @@ namespace NineByteGames.TowerDefense.Player
         _transform.position += desiredVelocity * Time.deltaTime * PlayerSpeed;
       }
 
-      _transform.rigidbody2D.velocity = new Vector2();
+      _transform.GetComponent<Rigidbody2D>().velocity = new Vector2();
     }
 
     private void CheckInventory()

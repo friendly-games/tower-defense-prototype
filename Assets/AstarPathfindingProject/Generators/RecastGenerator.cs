@@ -2160,7 +2160,7 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 				TreeInstance instance = data.treeInstances[i];
 				TreePrototype prot = data.treePrototypes[instance.prototypeIndex];
 				
-				if (prot.prefab.collider == null) {
+				if (prot.prefab.GetComponent<Collider>() == null) {
 					Bounds b = new Bounds(terrain.transform.position + Vector3.Scale(instance.position,data.size), new Vector3(instance.widthScale,instance.heightScale,instance.widthScale));
 					
 					Matrix4x4 matrix = Matrix4x4.TRS (terrain.transform.position +  Vector3.Scale(instance.position,data.size), Quaternion.identity, new Vector3(instance.widthScale,instance.heightScale,instance.widthScale)*0.5f);
@@ -2178,7 +2178,7 @@ But this time, edit the setting named "Forward" to "Z forward" (not -Z as it is 
 					Vector3 scale = new Vector3(instance.widthScale,instance.heightScale,instance.widthScale);
 					
 					//Generate a mesh from the collider
-					ExtraMesh m = RasterizeCollider (prot.prefab.collider,Matrix4x4.TRS (pos,Quaternion.identity,scale));
+					ExtraMesh m = RasterizeCollider (prot.prefab.GetComponent<Collider>(),Matrix4x4.TRS (pos,Quaternion.identity,scale));
 					
 					//Make sure a valid mesh was generated
 					if (m.vertices != null) {
