@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.Common.Extensions;
 using NineByteGames.TowerDefense.Behaviors;
+using NineByteGames.TowerDefense.Equipment;
 using NineByteGames.TowerDefense.Objects;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Utils;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace NineByteGames.TowerDefense.Player
 {
@@ -21,14 +21,11 @@ namespace NineByteGames.TowerDefense.Player
     [Tooltip("List of items currently in inventory")]
     public PlaceableObject[] inventoryList;
 
+    [Tooltip("List of weapons currently in inventory")]
+    public FirableWeapon[] weaponList;
+
     [Tooltip("The layer on which projectiles should be created")]
     public Layer projectileLayer;
-
-    [Tooltip("The object to generate when a bullet is fired")]
-    public GameObject bulletProjectile;
-
-    [Tooltip("How fast a weapon can be fired")]
-    public RateLimiter weaponRechargeRate;
 
     [Tooltip("How fast weapons can be switched")]
     public RateLimiter weaponSwapRate;
@@ -55,6 +52,11 @@ namespace NineByteGames.TowerDefense.Player
       get { return inventoryList[_currentInventoryItemIndex]; }
     }
 
+    public FirableWeapon Weapon
+    {
+      get { return weaponList[0]; }
+    }
+
     /// <summary> Updates the current location of the cursor. </summary>
     /// <param name="location"> The newest location of the cursor. </param>
     public void UpdateCursor(Vector3 location)
@@ -68,13 +70,7 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void TryTrigger1()
     {
-      if (!weaponRechargeRate.CanTrigger)
-        return;
-
-      weaponRechargeRate.Restart();
-
-      bulletProjectile.GetComponent<ProjectileBehavior>()
-                      .CreateAndInitializeFrom(Owner.transform, projectileLayer);
+      Weapon.AttemptTrigger(Owner.GetComponent<Transform>(), projectileLayer);
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
@@ -99,7 +95,7 @@ namespace NineByteGames.TowerDefense.Player
     {
       if (!weaponSwapRate.CanTrigger
           || _currentInventoryItemIndex == inventoryId
-          || !inventoryList.IsValid(inventoryId))
+          || !inventoryList.IsIndexValid(inventoryId))
         return;
 
       _currentInventoryItemIndex = inventoryId;

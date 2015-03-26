@@ -12,6 +12,7 @@ namespace NineByteGames.TowerDefense.Utils
     [SerializeField]
     private float _rechargeRate;
 
+    [NonSerialized]
     private float _lastTime;
 
     public RateLimiter()
@@ -31,7 +32,7 @@ namespace NineByteGames.TowerDefense.Utils
     public TimeSpan RechargeRate
     {
       get { return TimeSpan.FromSeconds(_rechargeRate); }
-      set { _rechargeRate = (float) value.TotalSeconds; }
+      set { _rechargeRate = (float)value.TotalSeconds; }
     }
 
     /// <summary> True if the item can be re-triggered. </summary>

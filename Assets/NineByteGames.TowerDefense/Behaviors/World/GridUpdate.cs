@@ -40,6 +40,9 @@ namespace NineByteGames.TowerDefense.Behaviors.World
 
     public static void MarkCost(GridCoordinate lowerLeft, Size size, int penality)
     {
+      if (AstarPath.active == null)
+        return;
+
       AstarPath.active.UpdateGraphs(new GraphUpdateObject
                                     {
                                       setWalkability = true,

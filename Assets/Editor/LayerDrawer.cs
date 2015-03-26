@@ -21,7 +21,7 @@ namespace Assets.Editor
       }
 
       // get the current value of the field
-      SerializedProperty layerNumberProperty = property.FindPropertyRelative("LayerBit");
+      SerializedProperty layerNumberProperty = property.FindPropertyRelative("_layerBit");
 
       // find out which one should be selected by default
       var allLayers = Layer.GetAllLayers();

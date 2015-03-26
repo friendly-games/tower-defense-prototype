@@ -203,6 +203,8 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\GridUpdate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TerrainManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TileTemplate.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\FirableWeapon.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\Damage.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\Healing.cs" />

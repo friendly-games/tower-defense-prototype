@@ -24,6 +24,7 @@ namespace NineByteGames.TowerDefense.Player
 
     private Transform _transform;
     private InventoryBehavior _inventory;
+    private Transform _cameraTransform;
 
     public GameObject CurrentObject { get; set; }
 
@@ -31,6 +32,7 @@ namespace NineByteGames.TowerDefense.Player
     {
       _transform = Owner.GetComponent<Transform>();
       _inventory = Owner.GetComponent<InventoryBehavior>();
+      _cameraTransform = FindObjectOfType<Camera>().GetComponent<Transform>();
     }
 
     public void Update()
@@ -39,6 +41,13 @@ namespace NineByteGames.TowerDefense.Player
       CheckMovement();
       DetectCurrentObject();
       CheckInventory();
+      RecenterCamera();
+    }
+
+    private void RecenterCamera()
+    {
+      // todo make this scroll smoother
+      _cameraTransform.position = _transform.position;
     }
 
     /// <summary> Check all input related to movement and move the player accordingly. </summary>

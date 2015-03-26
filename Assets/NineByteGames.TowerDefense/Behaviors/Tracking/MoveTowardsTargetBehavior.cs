@@ -101,8 +101,6 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       if (target == null || _pathPending)
         return;
 
-      Debug.Log("New Path Requested");
-
       var seeker = GetComponent<Seeker>();
       var location = GetComponent<Transform>();
       seeker.StartPath(location.position, target.GetComponent<Transform>().position);

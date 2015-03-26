@@ -14,15 +14,6 @@ namespace NineByteGames.TowerDefense.Behaviors
     public float InitialSpeed = 15;
     public float TimeToLive = 5;
 
-    private Transform _transform;
-    private Rigidbody2D _body;
-
-    public void Awake()
-    {
-      _transform = GetComponent<Transform>();
-      _body = GetComponent<Rigidbody2D>();
-    }
-
     public void Start()
     {
       if (name != "Bullet")
@@ -34,14 +25,10 @@ namespace NineByteGames.TowerDefense.Behaviors
     public void CreateAndInitializeFrom(Transform transform, Layer layer)
     {
       var clone = this.ReplicateGameObject();
-      clone.Initialize(transform, layer);
-    }
 
-    private void Initialize(Transform transform, Layer layer)
-    {
-      _body.velocity = transform.up * InitialSpeed;
-      _transform.position = transform.position + transform.up;
-      gameObject.layer = layer.LayerId;
+      clone.GetComponent<Rigidbody2D>().velocity = transform.up * clone.InitialSpeed;
+      clone.GetComponent<Transform>().position = transform.position + transform.up;
+      clone.gameObject.layer = layer.LayerId;
     }
   }
 }
