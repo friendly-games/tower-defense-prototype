@@ -82,9 +82,6 @@
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>Library\UnityAssemblies\UnityEditor.OSXStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Pathfinding.ClipperLib">
       <HintPath>Assets\AstarPathfindingProject\Plugins\Clipper\Pathfinding.ClipperLib.dll</HintPath>
     </Reference>
@@ -96,24 +93,6 @@
     </Reference>
     <Reference Include="Pathfinding.Poly2Tri">
       <HintPath>Assets\AstarPathfindingProject\Plugins\Poly2Tri\Pathfinding.Poly2Tri.dll</HintPath>
-    </Reference>
-    <Reference Include="NSubstitute">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NSubstitute\NSubstitute.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil.Mdb">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\Mono.Cecil.Mdb.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.core.interfaces">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.core.interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>Assets\UnityTestTools\UnitTesting\Editor\NUnit\Libs\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>Assets\UnityVS\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
@@ -161,45 +140,6 @@
     <Compile Include="Assets\Editor\ReorderMyComponents.cs" />
     <Compile Include="Assets\Editor\TimeDurationDrawer.cs" />
     <Compile Include="Assets\Editor\ValidateGridPositions.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionComponentEditor.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionExplorerWindow.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionListRenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\AssertionStripper.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\DropDownControl.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\GroupByComparerRenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\GroupByExecutionMethodRenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\GroupByGORenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\GroupByNothingRenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\GroupByTestsRenderer.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\PropertyPathSelector.cs" />
-    <Compile Include="Assets\UnityTestTools\Assertions\Editor\PropertyResolver.cs" />
-    <Compile Include="Assets\UnityTestTools\Common\Editor\Icons.cs" />
-    <Compile Include="Assets\UnityTestTools\Common\Editor\Styles.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Batch.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\IntegrationTestsRunnerWindow.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\PlatformRunner\PlatformRunner.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\PlatformRunner\PlatformRunnerSettingsWindow.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\IntegrationTestGroupLine.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\IntegrationTestLine.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\Renderer\IntegrationTestRendererBase.cs" />
-    <Compile Include="Assets\UnityTestTools\IntegrationTestsFramework\TestRunner\Editor\TestComponentEditor.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\Batch.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\NUnit\Renderer\GroupLine.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\NUnit\Renderer\RenderingOptions.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\NUnit\Renderer\TestLine.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\NUnit\Renderer\UnitTestRendererLine.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\BackgroundRunner.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\GuiHelper.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\ITestRunnerCallback.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\IUnitTestEngine.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\NUnitExtensions.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\NUnitTestEngine.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\TestRunner.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\TestRunnerCallbackList.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\UnitTestInfo.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\UnitTestResult.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\TestRunner\UnitTestView.cs" />
-    <Compile Include="Assets\UnityTestTools\UnitTesting\Editor\UnityUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
@@ -212,8 +152,6 @@
     <None Include="Assets\AstarPathfindingProject\Plugins\Poly2Tri\License.txt" />
     <None Include="Assets\AstarPathfindingProject\Readme.txt" />
     <None Include="Assets\AstarPathfindingProject\Readme_upgrading.txt" />
-    <None Include="Assets\UnityTestTools\changelog.txt" />
-    <None Include="Assets\UnityTestTools\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
