@@ -11,8 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3061e9d1ecb0d6046baa07a022275980, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: 
-  weaponObject: {fileID: 127844, guid: 82fb3c4401deb4343ad96ce8c71f3b50, type: 2}
-  bulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
+  Name: Pistol
+  Description: Basic weapon that fires a single shot at a time but has a fast reload
+    and shoots straight from the player with very little variance
+  WeaponObject: {fileID: 127844, guid: 82fb3c4401deb4343ad96ce8c71f3b50, type: 2}
+  BulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
   Quality:
     weaponRechargeRate:
       _rechargeRate: .600000024

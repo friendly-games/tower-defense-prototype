@@ -4,6 +4,7 @@ using System.Linq;
 using NineByteGames.TowerDefense.Behaviors;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 namespace NineByteGames.TowerDefense.Equipment
@@ -11,14 +12,25 @@ namespace NineByteGames.TowerDefense.Equipment
   /// <summary> A weapon that can be fired. </summary>
   public class FirableWeapon : ScriptableObject
   {
+    #region Unity Properties
+
+    [Tooltip("The name of the weapon")]
+    public string Name;
+
+    [TextArea(1, 3)]
+    [Tooltip("Human readable description of the weapon")]
+    public string Description;
+
     [Tooltip("The game object that serves as the weapon")]
-    public GameObject weaponObject;
+    public GameObject WeaponObject;
 
     [Tooltip("The object to generate when a bullet is fired")]
-    public GameObject bulletProjectile;
+    public GameObject BulletProjectile;
 
     [Tooltip("The qualities associated with the weapon")]
     public FirableWeaponQualities Quality;
+
+    #endregion
 
     public void AttemptTrigger(Transform transform, Layer layer)
     {
@@ -30,7 +42,7 @@ namespace NineByteGames.TowerDefense.Equipment
 
       for (int i = 0; i < Quality.NumberOfProjectiles; i++)
       {
-        InitializeProjectile(bulletProjectile.Clone(), Quality, transform, layer);
+        InitializeProjectile(BulletProjectile.Clone(), Quality, transform, layer);
       }
     }
 

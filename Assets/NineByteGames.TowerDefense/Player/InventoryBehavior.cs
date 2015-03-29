@@ -18,7 +18,7 @@ namespace NineByteGames.TowerDefense.Player
   /// </summary>
   internal class InventoryBehavior : AttachedBehavior
   {
-    #region Unity Editor Properties
+    #region Unity Properties
 
     [Tooltip("List of items currently in inventory")]
     public PlaceableObject[] inventoryList;
