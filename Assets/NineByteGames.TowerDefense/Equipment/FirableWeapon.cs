@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Behaviors;
+using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -34,14 +35,14 @@ namespace NineByteGames.TowerDefense.Equipment
 
     /// <summary> Creates an instance of the given firable weapon. </summary>
     /// <returns> The new instance. </returns>
-    public FireableWeaponInstance CreateObjectInstance(GameObject owner)
+    public FireableWeaponInstance CreateObjectInstance(GameObject owner, LocationAndRotation locationAndRotation)
     {
       var clonedWeapon = WeaponObject.Clone();
       // make sure it's placed under the owner object a little bit to the right
       // TODO should we allow left/right placement
       clonedWeapon.SetParent(owner);
-      clonedWeapon.transform.localPosition = new Vector3(1, .5f);
-      clonedWeapon.transform.localRotation = Quaternion.identity;
+      clonedWeapon.transform.localPosition = locationAndRotation.Location;
+      clonedWeapon.transform.localRotation = locationAndRotation.Rotation;
 
       var weapon = clonedWeapon.GetComponent<WeaponBehavior>();
       weapon.Initialize(this.Quality);

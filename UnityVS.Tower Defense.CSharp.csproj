@@ -217,7 +217,12 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectType.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectWorldPlacement.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Objects\PlaceableObject.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentPointsBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentToPositionLookup.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentTypeBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentPoint.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\InventoryBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\LocationAndRotation.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />

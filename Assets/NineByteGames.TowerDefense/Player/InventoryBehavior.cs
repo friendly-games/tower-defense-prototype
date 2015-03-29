@@ -42,14 +42,17 @@ namespace NineByteGames.TowerDefense.Player
     private Vector3 _cursorLocation;
     private GameObject _placeablePreviewItem;
     private FireableWeaponInstance _currentWeapon;
+    private AttachmentToPositionLookup _lookup;
 
     public void Start()
     {
       _placeables = new DataCollection<PlaceableObject>(inventoryList);
       _weapons = new DataCollection<FirableWeapon>(weaponList);
 
+      _lookup = AttachmentPointsBehavior.RetrieveFor(Owner);
+
       _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
-      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner);
+      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
     }
 
     /// <summary> Updates the current location of the cursor. </summary>
@@ -115,7 +118,7 @@ namespace NineByteGames.TowerDefense.Player
 
       // TODO implement switching weapons animation
       _currentWeapon.Owner.DestroySelf();
-      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner);
+      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
     }
   }
 }
