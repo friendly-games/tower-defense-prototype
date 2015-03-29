@@ -7,8 +7,8 @@ using UnityEngine;
 
 namespace Assets.Editor
 {
-  [CustomPropertyDrawer(typeof(RateLimiter))]
-  public class RateLimiterDrawer : PropertyDrawer
+  [CustomPropertyDrawer(typeof(TimeField))]
+  public class TimeFieldDrawer : PropertyDrawer
   {
     /// <inheritdoc />
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -20,16 +20,16 @@ namespace Assets.Editor
       }
 
       // get the current value of the field
-      SerializedProperty rechargeRate = property.FindPropertyRelative("_rechargeRate");
+      SerializedProperty timeValue = property.FindPropertyRelative("_timeValue");
 
       // get the name of the property
       var niceName = ObjectNames.NicifyVariableName(property.name) + " (in ms)";
 
-      int timeInMs = (int)(rechargeRate.floatValue * 1000);
+      int timeInMs = (int)(timeValue.floatValue);
 
       timeInMs = EditorGUI.IntField(position, niceName, timeInMs);
 
-      rechargeRate.floatValue = timeInMs / 1000.0f;
+      timeValue.floatValue = timeInMs;
     }
   }
 }

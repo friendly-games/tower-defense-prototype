@@ -14,12 +14,12 @@ namespace NineByteGames.TowerDefense
     /// <param name="component"> The component to act on. </param>
     public static void DestroyOwner(this Component component)
     {
-      component.gameObject.DestorySelf();
+      component.gameObject.DestroySelf();
     }
 
     /// <summary> Destroy the given game object. </summary>
     /// <param name="gameObject"> The gameObject to act on. </param>
-    public static void DestorySelf(this GameObject gameObject)
+    public static void DestroySelf(this GameObject gameObject)
     {
       Object.Destroy(gameObject);
     }

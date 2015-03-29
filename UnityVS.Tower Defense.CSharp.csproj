@@ -247,6 +247,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\Lazy.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\MathUtils.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\RateLimiter.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\TimeField.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\GridBased.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Scaling.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Validation\Terrain.cs" />

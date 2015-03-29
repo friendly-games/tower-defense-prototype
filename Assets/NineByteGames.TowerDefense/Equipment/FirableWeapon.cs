@@ -32,42 +32,32 @@ namespace NineByteGames.TowerDefense.Equipment
 
     #endregion
 
-    public void AttemptTrigger(Transform transform, Layer layer)
+    /// <summary> Creates an instance of the given firable weapon. </summary>
+    /// <returns> The new instance. </returns>
+    public FireableWeaponInstance CreateObjectInstance(GameObject owner)
     {
-      if (!Quality.weaponRechargeRate.CanTrigger)
-        return;
+      var clonedWeapon = WeaponObject.Clone();
+      // make sure it's placed under the owner object a little bit to the right
+      // TODO should we allow left/right placement
+      clonedWeapon.SetParent(owner);
+      clonedWeapon.transform.localPosition = new Vector3(1, .5f);
+      clonedWeapon.transform.localRotation = Quaternion.identity;
 
-      // TODO we shouldn't affect this objects weapon recharge rate
-      Quality.weaponRechargeRate.Restart();
-
-      for (int i = 0; i < Quality.NumberOfProjectiles; i++)
-      {
-        InitializeProjectile(BulletProjectile.Clone(), Quality, transform, layer);
-      }
+      var weapon = clonedWeapon.GetComponent<WeaponBehavior>();
+      weapon.Initialize(this.Quality);
+      return new FireableWeaponInstance(clonedWeapon, weapon);
     }
+  }
 
-    /// <summary>
-    ///  Initialize the projectile to begin moving forward from the given <paramref name="transform"/>,
-    ///  on the given <paramref name="layer"/>.  Add variability in the direction based on the
-    ///  <paramref name="qualities"/> passed in.
-    /// </summary>
-    private static void InitializeProjectile(GameObject projectileClone,
-                                             FirableWeaponQualities qualities,
-                                             Transform transform,
-                                             Layer layer)
+  public class FireableWeaponInstance
+  {
+    public readonly GameObject Owner;
+    public readonly WeaponBehavior Weapon;
+
+    public FireableWeaponInstance(GameObject owner, WeaponBehavior weapon)
     {
-      // TODO should we attach to something else
-      var projectileBehavior = projectileClone.GetComponent<ProjectileBehavior>();
-      var cloneTransform = projectileClone.GetComponent<Transform>();
-      var bodyTransform = projectileClone.GetComponent<Rigidbody2D>();
-
-      // we want to tilt it based on the Variability
-      var randomness = Random.Range(-qualities.Variability, qualities.Variability);
-      var velocity = Quaternion.AngleAxis(randomness, Vector3.forward) * transform.up;
-
-      bodyTransform.velocity = velocity * projectileBehavior.InitialSpeed;
-      cloneTransform.position = transform.position + transform.up;
-      projectileClone.layer = layer.LayerId;
+      Owner = owner;
+      Weapon = weapon;
     }
   }
 
@@ -75,7 +65,7 @@ namespace NineByteGames.TowerDefense.Equipment
   public class FirableWeaponQualities
   {
     [Tooltip("How fast the weapon can be fired")]
-    public RateLimiter weaponRechargeRate;
+    public TimeField WeaponRechargeRate;
 
     [Tooltip("The number of projectiles that are fired when the weapon is triggered")]
     [Range(1, 50)]

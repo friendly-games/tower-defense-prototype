@@ -17,7 +17,7 @@ MonoBehaviour:
   WeaponObject: {fileID: 194084, guid: 6c59d84174f598d4a893c1e1ac563759, type: 2}
   BulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
   Quality:
-    weaponRechargeRate:
-      _rechargeRate: .600000024
-    NumberOfProjectiles: 5
+    WeaponRechargeRate:
+      _timeValue: 1100
+    NumberOfProjectiles: 4
     Variability: 10

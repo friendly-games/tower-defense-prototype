@@ -41,6 +41,7 @@ namespace NineByteGames.TowerDefense.Player
     private DataCollection<FirableWeapon> _weapons;
     private Vector3 _cursorLocation;
     private GameObject _placeablePreviewItem;
+    private FireableWeaponInstance _currentWeapon;
 
     public void Start()
     {
@@ -48,6 +49,7 @@ namespace NineByteGames.TowerDefense.Player
       _weapons = new DataCollection<FirableWeapon>(weaponList);
 
       _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
+      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner);
     }
 
     /// <summary> Updates the current location of the cursor. </summary>
@@ -64,7 +66,7 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void TryTrigger1()
     {
-      _weapons.Selected.AttemptTrigger(Owner.GetComponent<Transform>(), projectileLayer);
+      _currentWeapon.Weapon.AttemptFire(Owner.GetComponent<Transform>(), projectileLayer);
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
@@ -102,7 +104,7 @@ namespace NineByteGames.TowerDefense.Player
         return;
 
       // TODO do we want to cache this somehow
-      _placeablePreviewItem.DestorySelf();
+      _placeablePreviewItem.DestroySelf();
       _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
     }
 
@@ -112,6 +114,8 @@ namespace NineByteGames.TowerDefense.Player
         return;
 
       // TODO implement switching weapons animation
+      _currentWeapon.Owner.DestroySelf();
+      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner);
     }
   }
 }
