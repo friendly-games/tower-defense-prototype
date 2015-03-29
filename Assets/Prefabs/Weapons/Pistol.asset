@@ -16,5 +16,5 @@ MonoBehaviour:
   Quality:
     weaponRechargeRate:
       _rechargeRate: .600000024
-    NumberOfProjectiles: 5
-    Variability: 30
+    NumberOfProjectiles: 1
+    Variability: 3

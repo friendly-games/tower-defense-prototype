@@ -42,8 +42,6 @@ MonoBehaviour:
   weaponRechargeRate:
     _rechargeRate: .5
   bulletProjectile: {fileID: 0}
-  NumberOfProjectiles: 1
-  Variability: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

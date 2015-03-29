@@ -17,14 +17,6 @@ namespace NineByteGames.TowerDefense.Equipment
     [Tooltip("The object to generate when a bullet is fired")]
     public GameObject bulletProjectile;
 
-    [Tooltip("The number of projectiles that are fired when the weapon is triggered")]
-    [Range(1, 50)]
-    public int NumberOfProjectiles = 1;
-
-    [Tooltip("The range (in degrees) that the projectile can be fired.")]
-    [Range(0, 30)]
-    public float Variability = 1f;
-
     /// <summary> Fires the weapon. </summary>
     /// <param name="layer"> The layer on which projectiles should fire. </param>
     public void Fire(Layer layer)

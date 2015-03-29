@@ -18,6 +18,8 @@ namespace NineByteGames.TowerDefense.Player
   /// </summary>
   internal class InventoryBehavior : AttachedBehavior
   {
+    #region Unity Editor Properties
+
     [Tooltip("List of items currently in inventory")]
     public PlaceableObject[] inventoryList;
 
@@ -33,28 +35,19 @@ namespace NineByteGames.TowerDefense.Player
     [Tooltip("The rate at which buildings can be placed")]
     public RateLimiter buildingRate;
 
-    /// <summary> The current inventory item index. </summary>
-    private int _currentInventoryItemIndex;
+    #endregion
 
+    private DataCollection<PlaceableObject> _placeables;
+    private DataCollection<FirableWeapon> _weapons;
     private Vector3 _cursorLocation;
-
-    private GameObject _fake;
+    private GameObject _placeablePreviewItem;
 
     public void Start()
     {
-      _currentInventoryItemIndex = 0;
+      _placeables = new DataCollection<PlaceableObject>(inventoryList);
+      _weapons = new DataCollection<FirableWeapon>(weaponList);
 
-      _fake = Placeable.PreviewItem.Clone();
-    }
-
-    public PlaceableObject Placeable
-    {
-      get { return inventoryList[_currentInventoryItemIndex]; }
-    }
-
-    public FirableWeapon Weapon
-    {
-      get { return weaponList[0]; }
+      _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
     }
 
     /// <summary> Updates the current location of the cursor. </summary>
@@ -64,13 +57,14 @@ namespace NineByteGames.TowerDefense.Player
       _cursorLocation = location;
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
 
-      _fake.GetComponent<Transform>().position = Placeable.Strategy.ConvertToGameObjectPosition(lowerLeft);
+      _placeablePreviewItem.GetComponent<Transform>().position =
+        _placeables.Selected.Strategy.ConvertToGameObjectPosition(lowerLeft);
     }
 
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void TryTrigger1()
     {
-      Weapon.AttemptTrigger(Owner.GetComponent<Transform>(), projectileLayer);
+      _weapons.Selected.AttemptTrigger(Owner.GetComponent<Transform>(), projectileLayer);
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
@@ -83,9 +77,9 @@ namespace NineByteGames.TowerDefense.Player
 
       var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
 
-      if (Managers.Placer.CanCreate(lowerLeft, Placeable))
+      if (Managers.Placer.CanCreate(lowerLeft, _placeables.Selected))
       {
-        Managers.Placer.PlaceAt(lowerLeft, Placeable);
+        Managers.Placer.PlaceAt(lowerLeft, _placeables.Selected);
       }
     }
 
@@ -93,16 +87,31 @@ namespace NineByteGames.TowerDefense.Player
     /// <param name="inventoryId"> The inventory item to switch to. </param>
     public void TrySwitchTo(int inventoryId)
     {
-      if (!weaponSwapRate.CanTrigger
-          || _currentInventoryItemIndex == inventoryId
-          || !inventoryList.IsIndexValid(inventoryId))
+      if (!weaponSwapRate.CanTrigger)
         return;
 
-      _currentInventoryItemIndex = inventoryId;
-      // TODO do we want to cache this somehow
-      _fake.DestorySelf();
-      _fake = Placeable.PreviewItem.Clone();
+      SwitchPlaceable(inventoryId);
+      SwitchWeapon(inventoryId);
+
       weaponSwapRate.Restart();
+    }
+
+    private void SwitchPlaceable(int inventoryId)
+    {
+      if (!_placeables.SetSelectedIndex(inventoryId))
+        return;
+
+      // TODO do we want to cache this somehow
+      _placeablePreviewItem.DestorySelf();
+      _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
+    }
+
+    private void SwitchWeapon(int inventoryId)
+    {
+      if (!_weapons.SetSelectedIndex(inventoryId))
+        return;
+
+      // TODO implement switching weapons animation
     }
   }
 }

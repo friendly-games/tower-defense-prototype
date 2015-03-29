@@ -243,6 +243,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\TimeDuration.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UnityExtensions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\AdvancedCoroutine.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Utils\DataCollection.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\Lazy.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\MathUtils.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\RateLimiter.cs" />
