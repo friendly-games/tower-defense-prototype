@@ -221,7 +221,9 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentToPositionLookup.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentTypeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentPoint.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\InventoryBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\CursorBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Utils\LocationAndRotation.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />

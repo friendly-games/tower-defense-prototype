@@ -25,6 +25,7 @@ namespace NineByteGames.TowerDefense.Player
     private Transform _transform;
     private InventoryBehavior _inventory;
     private Transform _cameraTransform;
+    private PlayerCursor _playerCursor;
 
     public GameObject CurrentObject { get; set; }
 
@@ -33,6 +34,9 @@ namespace NineByteGames.TowerDefense.Player
       _transform = Owner.GetComponent<Transform>();
       _inventory = Owner.GetComponent<InventoryBehavior>();
       _cameraTransform = FindObjectOfType<Camera>().GetComponent<Transform>();
+      _playerCursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
+
+      Cursor.visible = false;
     }
 
     public void Update()
@@ -87,7 +91,7 @@ namespace NineByteGames.TowerDefense.Player
 
     private void CheckInventory()
     {
-      _inventory.UpdateCursor(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+      _playerCursor.UpdateMouseLocation(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
       if (Input.GetKey(KeyCode.Alpha1))
       {
@@ -111,11 +115,10 @@ namespace NineByteGames.TowerDefense.Player
 
     private void TrackMouse()
     {
-      Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-      Quaternion desired = Quaternion.Lerp(transform.rotation,
-                                           Quaternion.LookRotation(Vector3.forward, mousePos - transform.position),
-                                           Time.deltaTime * TurnSpeed);
+      Quaternion desired = Quaternion.Lerp(
+        transform.rotation,
+        Quaternion.LookRotation(Vector3.forward, _playerCursor.CursorPositionAbsolute - transform.position),
+        Time.deltaTime * TurnSpeed);
 
       transform.rotation = desired;
     }

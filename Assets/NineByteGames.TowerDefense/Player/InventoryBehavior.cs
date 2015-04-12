@@ -39,15 +39,16 @@ namespace NineByteGames.TowerDefense.Player
 
     private DataCollection<PlaceableObject> _placeables;
     private DataCollection<FirableWeapon> _weapons;
-    private Vector3 _cursorLocation;
     private GameObject _placeablePreviewItem;
     private FireableWeaponInstance _currentWeapon;
     private AttachmentToPositionLookup _lookup;
+    private PlayerCursor _cursor;
 
     public void Start()
     {
       _placeables = new DataCollection<PlaceableObject>(inventoryList);
       _weapons = new DataCollection<FirableWeapon>(weaponList);
+      _cursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
 
       _lookup = AttachmentPointsBehavior.RetrieveFor(Owner);
 
@@ -55,14 +56,11 @@ namespace NineByteGames.TowerDefense.Player
       _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
     }
 
-    /// <summary> Updates the current location of the cursor. </summary>
-    /// <param name="location"> The newest location of the cursor. </param>
-    public void UpdateCursor(Vector3 location)
+    public void Update()
     {
-      _cursorLocation = location;
-      var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
+      var lowerLeft = GridCoordinate.FromVector3(_cursor.CursorPositionAbsolute);
 
-      _placeablePreviewItem.GetComponent<Transform>().position =
+      _placeablePreviewItem.transform.position =
         _placeables.Selected.Strategy.ConvertToGameObjectPosition(lowerLeft);
     }
 
@@ -80,7 +78,7 @@ namespace NineByteGames.TowerDefense.Player
 
       buildingRate.Restart();
 
-      var lowerLeft = GridCoordinate.FromVector3(_cursorLocation);
+      var lowerLeft = GridCoordinate.FromVector3(_cursor.CursorPositionAbsolute);
 
       if (Managers.Placer.CanCreate(lowerLeft, _placeables.Selected))
       {
