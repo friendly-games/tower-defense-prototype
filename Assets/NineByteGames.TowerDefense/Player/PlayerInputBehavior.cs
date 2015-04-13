@@ -37,6 +37,7 @@ namespace NineByteGames.TowerDefense.Player
       _playerCursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
 
       Cursor.visible = false;
+      Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void Update()
