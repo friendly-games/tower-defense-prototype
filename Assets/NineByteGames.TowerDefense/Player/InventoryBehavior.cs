@@ -67,7 +67,15 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void TryTrigger1()
     {
-      _currentWeapon.Weapon.AttemptFire(Owner.GetComponent<Transform>(), projectileLayer);
+      var currentTransform = Owner.GetComponent<Transform>();
+
+      // we want the projectile to move towards the current target (as opposed to directly straight
+      // out of the muzzle).  While this is less "correct" it should lead to a better player
+      // experience. 
+      var direction = _cursor.CursorPositionAbsolute - currentTransform.position;
+      var positionAndDirection = new Ray(currentTransform.position, direction.normalized);
+
+      _currentWeapon.Weapon.AttemptFire(positionAndDirection, projectileLayer);
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>

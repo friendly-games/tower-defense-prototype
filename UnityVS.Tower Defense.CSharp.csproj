@@ -276,7 +276,6 @@
     <None Include="Assets\AstarPathfindingProject\Readme_upgrading.txt" />
     <None Include="Assets\AstarPathfindingProject\link.xml" />
     <None Include="Assets\uIntelliSense\Editor\Resources\uintellisense-data.xml" />
-    <None Include="Assets\uIntelliSense\LICENSE.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

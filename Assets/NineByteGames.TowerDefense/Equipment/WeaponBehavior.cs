@@ -33,9 +33,10 @@ namespace NineByteGames.TowerDefense.Equipment
     }
 
     /// <summary> Attempt to fire the weapon. </summary>
-    /// <param name="transform"> The location from which the projectile should be created. </param>
-    /// <param name="layer"> The layer on which the projectil should target. </param>
-    public void AttemptFire(Transform transform, Layer layer)
+    /// <param name="positionAndDirection"> The location from which the projectile should be created
+    ///  and the direction the projectile should travel. </param>
+    /// <param name="layer"> The layer on which the projectile should target. </param>
+    public void AttemptFire(Ray positionAndDirection, Layer layer)
     {
       if (!_rechargeRate.CanTrigger)
         return;
@@ -44,7 +45,7 @@ namespace NineByteGames.TowerDefense.Equipment
 
       for (int i = 0; i < _qualities.NumberOfProjectiles; i++)
       {
-        InitializeProjectile(BulletProjectile.Clone(), _qualities, this.transform, layer);
+        InitializeProjectile(BulletProjectile.Clone(), _qualities, layer, positionAndDirection);
       }
     }
 
@@ -55,8 +56,8 @@ namespace NineByteGames.TowerDefense.Equipment
     /// </summary>
     private static void InitializeProjectile(GameObject projectileClone,
                                              FirableWeaponQualities qualities,
-                                             Transform transform,
-                                             Layer layer)
+                                             Layer layer,
+                                             Ray positionAndDirection)
     {
       // TODO should we attach to something else
       var projectileBehavior = projectileClone.GetComponent<ProjectileBehavior>();
@@ -65,10 +66,10 @@ namespace NineByteGames.TowerDefense.Equipment
 
       // we want to tilt it based on the Variability
       var randomness = Random.Range(-qualities.Variability, qualities.Variability);
-      var velocity = Quaternion.AngleAxis(randomness, Vector3.forward) * transform.up;
+      var velocity = Quaternion.AngleAxis(randomness, Vector3.forward) * positionAndDirection.direction;
 
       bodyTransform.velocity = velocity * projectileBehavior.InitialSpeed;
-      cloneTransform.position = transform.position + transform.up;
+      cloneTransform.position = positionAndDirection.origin + positionAndDirection.direction;
       projectileClone.layer = layer.LayerId;
     }
   }

@@ -22,7 +22,7 @@ namespace NineByteGames.TowerDefense.Equipment
     [Tooltip("Human readable description of the weapon")]
     public string Description;
 
-    [Tooltip("The game object that serves as the weapon")]
+    [Tooltip("The game object that serves as the weapon.  Requires it to have a WeaponBehavior")]
     public GameObject WeaponObject;
 
     [Tooltip("The object to generate when a bullet is fired")]
