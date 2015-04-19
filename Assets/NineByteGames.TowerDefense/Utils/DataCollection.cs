@@ -31,6 +31,12 @@ namespace NineByteGames.TowerDefense.Utils
       get { return _data[_selectedIndex]; }
     }
 
+    /// <summary> The number of items in the collection. </summary>
+    public int Count
+    {
+      get { return _data.Length; }
+    }
+
     /// <summary> Attempt to set the specified index as the current item in the array. </summary>
     /// <param name="index"> The index of the item to set. </param>
     /// <returns> True if the index was set, false if it was invalid or the same value as before. </returns>

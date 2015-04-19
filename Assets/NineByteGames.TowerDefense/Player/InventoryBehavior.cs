@@ -7,6 +7,8 @@ using NineByteGames.TowerDefense.Equipment;
 using NineByteGames.TowerDefense.Objects;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
+using NineByteGames.TowerDefense.UI;
+using NineByteGames.TowerDefense.Unity;
 using NineByteGames.TowerDefense.Utils;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
@@ -43,7 +45,9 @@ namespace NineByteGames.TowerDefense.Player
     private FireableWeaponInstance _currentWeapon;
     private AttachmentToPositionLookup _lookup;
     private PlayerCursor _cursor;
+    private IInventoryDisplayView _display;
 
+    [UnityMethod]
     public void Start()
     {
       _placeables = new DataCollection<PlaceableObject>(inventoryList);
@@ -54,8 +58,25 @@ namespace NineByteGames.TowerDefense.Player
 
       _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
       _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
+
+      // TODO make this not lookup by name
+      SetupDisplay();
     }
 
+    private void SetupDisplay()
+    {
+      _display = GameObject.Find("PlayView").GetComponent<IInventoryDisplayView>();
+
+      _display.UpdateSlotText(0, "Pistol");
+      _display.UpdateSlotText(1, "Shotgun");
+      _display.UpdateSlotText(2, "Wall");
+      _display.UpdateSlotText(3, "Wall");
+      _display.UpdateSlotText(4, "-");
+
+      _display.SelectedSlot = 1;
+    }
+
+    [UnityMethod]
     public void Update()
     {
       var lowerLeft = GridCoordinate.FromVector3(_cursor.CursorPositionAbsolute);
@@ -100,6 +121,8 @@ namespace NineByteGames.TowerDefense.Player
     {
       if (!weaponSwapRate.CanTrigger)
         return;
+
+      _display.SelectedSlot = inventoryId;
 
       SwitchPlaceable(inventoryId);
       SwitchWeapon(inventoryId);

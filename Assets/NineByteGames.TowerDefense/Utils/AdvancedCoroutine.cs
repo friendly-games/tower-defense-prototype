@@ -47,7 +47,7 @@ namespace NineByteGames.TowerDefense.Utils
     /// <returns> An object that indicates that a coroutine should wait for the designated amount of time. </returns>
     public static object Wait(TimeSpan timeToWait)
     {
-      return new WaitForSeconds((float) timeToWait.TotalSeconds);
+      return new WaitForSeconds((float)timeToWait.TotalSeconds);
     }
   }
 
@@ -59,7 +59,7 @@ namespace NineByteGames.TowerDefense.Utils
 
     public CoroutineTimer(TimeSpan rate)
     {
-      _rechargeRate = (float) rate.TotalSeconds;
+      _rechargeRate = (float)rate.TotalSeconds;
       _lastTime = 0;
     }
 
