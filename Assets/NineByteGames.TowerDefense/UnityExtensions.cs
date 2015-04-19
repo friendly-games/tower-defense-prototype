@@ -10,17 +10,45 @@ namespace NineByteGames.TowerDefense
 {
   public static class UnityExtensions
   {
+    /// <summary> Check if the given object is alive. </summary>
+    /// <param name="instance"> The object to check. </param>
+    /// <returns> true if the object is alive, false otherwise. </returns>
+    public static bool IsAlive(this Object instance)
+    {
+      return instance != null;
+    }
+
+    /// <summary> Check if the given object is no longer alive. </summary>
+    /// <param name="instance"> The object to check. </param>
+    /// <returns> true if the object is not alive, false otherwise. </returns>
+    public static bool IsDead(this Object instance)
+    {
+      return instance == null;
+    }
+
     /// <summary> Destroy the game object associated with he component. </summary>
     /// <param name="component"> The component to act on. </param>
     public static void DestroyOwner(this Component component)
     {
-      component.gameObject.DestroySelf();
+      component.gameObject.Kill();
+    }
+
+    /// <summary> Destroy the game object associated with he component. </summary>
+    /// <param name="component"> The component to act on. </param>
+    public static void RemoveComponent(this Component component)
+    {
+      Object.Destroy(component);
     }
 
     /// <summary> Destroy the given game object. </summary>
     /// <param name="gameObject"> The gameObject to act on. </param>
-    public static void DestroySelf(this GameObject gameObject)
+    public static void Kill(this GameObject gameObject)
     {
+      //foreach (var componentsInChild in gameObject.GetComponentsInChildren<IDestructor>())
+      //{
+      //  componentsInChild.OnDestroying();
+      //}
+
       Object.Destroy(gameObject);
     }
 
@@ -55,7 +83,7 @@ namespace NineByteGames.TowerDefense
     public static T Clone<T>(this T instance)
       where T : Object
     {
-      return (T) Object.Instantiate(instance);
+      return (T)Object.Instantiate(instance);
     }
 
     /// <summary> Create a copy of an object. </summary>
@@ -67,13 +95,13 @@ namespace NineByteGames.TowerDefense
     public static T Clone<T>(this T instance, Vector3 position, Quaternion rotation)
       where T : Object
     {
-      return (T) Object.Instantiate(instance, position, rotation);
+      return (T)Object.Instantiate(instance, position, rotation);
     }
 
     public static T ReplicateGameObject<T>(this T self)
       where T : MonoBehaviour
     {
-      return ((GameObject) Object.Instantiate(self.gameObject)).GetComponent<T>();
+      return ((GameObject)Object.Instantiate(self.gameObject)).GetComponent<T>();
     }
 
     /// <summary> Get the signal broadcaster for a designated GameObject. </summary>

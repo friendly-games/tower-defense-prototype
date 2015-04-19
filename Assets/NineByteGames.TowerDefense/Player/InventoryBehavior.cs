@@ -113,7 +113,7 @@ namespace NineByteGames.TowerDefense.Player
         return;
 
       // TODO do we want to cache this somehow
-      _placeablePreviewItem.DestroySelf();
+      _placeablePreviewItem.Kill();
       _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
     }
 
@@ -123,7 +123,7 @@ namespace NineByteGames.TowerDefense.Player
         return;
 
       // TODO implement switching weapons animation
-      _currentWeapon.Owner.DestroySelf();
+      _currentWeapon.Owner.Kill();
       _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
     }
   }

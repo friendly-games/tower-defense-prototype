@@ -30,7 +30,7 @@ namespace NineByteGames.TowerDefense.Player
       {
         lookup.Add((int)child.Type,
                    new LocationAndRotation(child.transform.localPosition, child.transform.localRotation));
-        child.gameObject.DestroySelf();
+        child.gameObject.Kill();
       }
 
       _lookup = new AttachmentToPositionLookup(lookup);
@@ -47,7 +47,7 @@ namespace NineByteGames.TowerDefense.Player
 
       if (instance.gameObject != gameObject)
       {
-        instance.gameObject.DestroySelf();
+        instance.gameObject.Kill();
       }
       else
       {

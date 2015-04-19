@@ -54,7 +54,7 @@ namespace NineByteGames.TowerDefense.Behaviors
           break;
 
         case PayloadType.Money:
-          bool wasHandled = otherObject.SendSignal(new MoneyTransfer((int) Amount));
+          bool wasHandled = otherObject.SendSignal(new MoneyTransfer((int)Amount));
           if (wasHandled)
           {
             DestroyOwner();

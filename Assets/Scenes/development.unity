@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Template: {fileID: 11400000, guid: 6479c91dcb5d95241aedfd32b672039c, type: 2}
   Parent: {fileID: 670391996}
-  Period: 3
+  Period: .5
 --- !u!1 &1444686644
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,7 +1507,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Template: {fileID: 11400000, guid: 6479c91dcb5d95241aedfd32b672039c, type: 2}
   Parent: {fileID: 670391996}
-  Period: 3
+  Period: .5
 --- !u!4 &1722301600
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 3a11d49a42c93db46b84e80539808296, type: 2}
