@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.Common.Structures;
-using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Objects
+namespace NineByteGames.TowerDefense.Buildings
 {
   /// <summary> The shape of a placeable object in the world. </summary>
-  internal enum ObjectShape
+  internal enum BuildingShape
   {
     SquareUnit,
     TwoByTwo,
   }
 
-  internal interface IObjectShapeStrategy
+  internal interface IBuildingShapeStrategy
   {
     /// <summary> The shape for which this strategy is valid. </summary>
-    ObjectShape Shape { get; }
+    BuildingShape Shape { get; }
 
     /// <summary> The size of the object when placed in the world. </summary>
     Size Size { get; }

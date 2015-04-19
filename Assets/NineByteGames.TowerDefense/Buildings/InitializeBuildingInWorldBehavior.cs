@@ -4,13 +4,12 @@ using System.Linq;
 using NineByteGames.Common.Structures;
 using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Signals;
-using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Objects
+namespace NineByteGames.TowerDefense.Buildings
 {
-  internal class InitializeObjectInWorldBehavior : AttachedBehavior
+  internal class InitializeBuildingInWorldBehavior : AttachedBehavior
   {
     [Range(1, 5)]
     [Tooltip("The number of spaces that this element takes up")]

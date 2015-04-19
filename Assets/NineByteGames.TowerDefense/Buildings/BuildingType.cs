@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NineByteGames.TowerDefense.Objects
+namespace NineByteGames.TowerDefense.Buildings
 {
-  internal enum ObjectType
+  internal enum BuildingType
   {
     Tower,
     Wall

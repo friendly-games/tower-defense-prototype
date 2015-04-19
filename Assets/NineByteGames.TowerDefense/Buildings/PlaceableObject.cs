@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Objects
+namespace NineByteGames.TowerDefense.Buildings
 {
   /// <summary>
   ///  An object that can be placed in the world and which must be navigated around for path finding.
@@ -20,15 +20,15 @@ namespace NineByteGames.TowerDefense.Objects
     public GameObject PreviewItem;
 
     [Tooltip("The number of grid units the object takes up")]
-    public ObjectShape ShapeSize;
+    public BuildingShape ShapeSize;
 
     /// <summary> The strategy associated with the given object. </summary>
-    public IObjectShapeStrategy Strategy { get; private set; }
+    public IBuildingShapeStrategy Strategy { get; private set; }
 
     /// <summary> Invoked when the object is initialized. </summary>
     public void OnEnable()
     {
-      Strategy = ObjectShapeStrategies.GetStrategyFor(ShapeSize);
+      Strategy = BuildingShapeStrategies.GetStrategyFor(ShapeSize);
     }
   }
 }

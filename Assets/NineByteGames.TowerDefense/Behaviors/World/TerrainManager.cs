@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Objects;
+using NineByteGames.TowerDefense.Buildings;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Unity;
 using NineByteGames.TowerDefense.World;
@@ -31,7 +31,7 @@ namespace NineByteGames.TowerDefense.Behaviors.World
       GridUpdate.ResetGraph();
 
       Managers.Terrain = this;
-      Managers.Placer = new ObjectWorldPlacement(_grid);
+      Managers.Placer = new BuildingWorldPlacement(_grid);
     }
 
     /// <summary> Creates a tile. </summary>

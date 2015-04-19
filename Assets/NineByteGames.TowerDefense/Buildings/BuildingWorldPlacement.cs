@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.AI;
 using NineByteGames.TowerDefense.Behaviors;
-using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Objects
+namespace NineByteGames.TowerDefense.Buildings
 {
   /// <summary> Aids in the placement of objects in the world. </summary>
-  internal class ObjectWorldPlacement : IInstanceManager
+  internal class BuildingWorldPlacement : IInstanceManager
   {
     private readonly WorldGrid _worldGrid;
 
     /// <summary> Constructor. </summary>
     /// <param name="worldGrid"> The world grid. </param>
-    public ObjectWorldPlacement(WorldGrid worldGrid)
+    public BuildingWorldPlacement(WorldGrid worldGrid)
     {
       _worldGrid = worldGrid;
     }
@@ -69,7 +68,7 @@ namespace NineByteGames.TowerDefense.Objects
       var position = instance.GetComponent<Transform>().position;
       var lowerLeft = strategy.ConvertFromGameObjectPosition(position);
 
-      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { Type = CellType.Wall});
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { Type = CellType.Wall });
     }
 
     public void NotifyDestroy(GameObject instance)

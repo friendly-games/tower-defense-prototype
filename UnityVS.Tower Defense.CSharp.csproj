@@ -204,6 +204,12 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\GridUpdate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TerrainManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TileTemplate.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\InitializeBuildingInWorldBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\BuildingShape.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\BuildingShapeStrategies.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\BuildingType.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\BuildingWorldPlacement.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\PlaceableObject.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\FirableWeapon.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeBehavior.cs" />
@@ -214,12 +220,6 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\MoneyTransfer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\SignalIndicators.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Messages\TargetAquiredSignal.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\InitializeObjectInWorldBehavior.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShape.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectShapeStrategies.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectType.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\ObjectWorldPlacement.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Objects\PlaceableObject.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentPoint.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentPointsBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentToPositionLookup.cs" />
@@ -285,6 +285,5 @@
     <None Include="Assets\AstarPathfindingProject\link.xml" />
     <None Include="Assets\uIntelliSense\Editor\Resources\uintellisense-data.xml" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>
