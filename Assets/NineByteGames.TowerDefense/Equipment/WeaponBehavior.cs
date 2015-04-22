@@ -36,10 +36,10 @@ namespace NineByteGames.TowerDefense.Equipment
     /// <param name="positionAndDirection"> The location from which the projectile should be created
     ///  and the direction the projectile should travel. </param>
     /// <param name="layer"> The layer on which the projectile should target. </param>
-    public void AttemptFire(Ray positionAndDirection, Layer layer)
+    public bool AttemptFire(Ray positionAndDirection, Layer layer)
     {
       if (!_rechargeRate.CanTrigger)
-        return;
+        return false;
 
       _rechargeRate.Restart();
 
@@ -47,6 +47,8 @@ namespace NineByteGames.TowerDefense.Equipment
       {
         InitializeProjectile(BulletProjectile.Clone(), _qualities, layer, positionAndDirection);
       }
+
+      return true;
     }
 
     /// <summary>

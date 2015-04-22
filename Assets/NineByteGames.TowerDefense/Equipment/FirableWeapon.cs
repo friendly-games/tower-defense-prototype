@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Behaviors;
+using NineByteGames.TowerDefense.General;
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
@@ -11,7 +12,7 @@ using Random = UnityEngine.Random;
 namespace NineByteGames.TowerDefense.Equipment
 {
   /// <summary> A weapon that can be fired. </summary>
-  public class FirableWeapon : ScriptableObject
+  public class FirableWeapon : ScriptableObject, IInventoryItemBlueprint
   {
     #region Unity Properties
 
@@ -33,33 +34,77 @@ namespace NineByteGames.TowerDefense.Equipment
 
     #endregion
 
-    /// <summary> Creates an instance of the given firable weapon. </summary>
-    /// <returns> The new instance. </returns>
-    public FireableWeaponInstance CreateObjectInstance(GameObject owner, LocationAndRotation locationAndRotation)
+    #region Implementation of IInventoryItemBlueprint
+
+    ITriggerableItem IInventoryItemBlueprint.CreateInstance(IPlayer player)
     {
+      var locationAndRotation = player.AttachmentPoints[AttachmentPoint.Weapon];
+
       var clonedWeapon = WeaponObject.Clone();
       // make sure it's placed under the owner object a little bit to the right
       // TODO should we allow left/right placement
-      clonedWeapon.SetParent(owner);
+      clonedWeapon.SetParent(player.Owner);
       clonedWeapon.transform.localPosition = locationAndRotation.Location;
       clonedWeapon.transform.localRotation = locationAndRotation.Rotation;
 
       var weapon = clonedWeapon.GetComponent<WeaponBehavior>();
       weapon.Initialize(this.Quality);
-      return new FireableWeaponInstance(clonedWeapon, weapon);
+      return new FireableWeaponInstance(player, clonedWeapon, weapon);
     }
+
+    #endregion
   }
 
-  public class FireableWeaponInstance
+  internal class FireableWeaponInstance : ITriggerableItem
   {
+    private readonly IPlayer _player;
     public readonly GameObject Owner;
     public readonly WeaponBehavior Weapon;
 
-    public FireableWeaponInstance(GameObject owner, WeaponBehavior weapon)
+    public FireableWeaponInstance(IPlayer player, GameObject owner, WeaponBehavior weapon)
     {
+      _player = player;
       Owner = owner;
       Weapon = weapon;
     }
+
+    #region Implementation of ITriggerableItem
+
+    /// <inheritdoc />
+    string ITriggerableItem.Name
+    {
+      get { return Weapon.name; }
+    }
+
+    /// <inheritdoc />
+    bool ITriggerableItem.Trigger()
+    {
+      var currentTransform = Owner.GetComponent<Transform>();
+
+      // we want the projectile to move towards the current target (as opposed to directly straight
+      // out of the muzzle).  While this is less "correct" it should lead to a better player
+      // experience. 
+      var direction = _player.Cursor.PositionAbsolute - currentTransform.position;
+      var positionAndDirection = new Ray(currentTransform.position, direction.normalized);
+
+      // TODO layer
+      return Weapon.AttemptFire(positionAndDirection, Layer.FromName("Projectile (Player)"));
+    }
+
+    /// <inheritdoc />
+    GameObject ITriggerableItem.PreviewItem
+    {
+      // TODO return a cursor
+      get { return null; }
+    }
+
+    /// <inheritdoc />
+    void ITriggerableItem.MarkDone()
+    {
+      Owner.Kill();
+    }
+
+    #endregion
   }
 
   [Serializable]

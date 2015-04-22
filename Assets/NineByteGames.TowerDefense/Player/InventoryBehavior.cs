@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.Common.Extensions;
-using NineByteGames.TowerDefense.Behaviors;
 using NineByteGames.TowerDefense.Buildings;
 using NineByteGames.TowerDefense.Equipment;
-using NineByteGames.TowerDefense.Services;
+using NineByteGames.TowerDefense.General;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.UI;
 using NineByteGames.TowerDefense.Unity;
@@ -18,7 +16,7 @@ namespace NineByteGames.TowerDefense.Player
   /// <summary>
   ///  Contains all functionality related to the player and its current inventory.
   /// </summary>
-  internal class InventoryBehavior : AttachedBehavior
+  internal class InventoryBehavior : AttachedBehavior, IPlayer
   {
     #region Unity Properties
 
@@ -39,28 +37,41 @@ namespace NineByteGames.TowerDefense.Player
 
     #endregion
 
-    private DataCollection<PlaceableObject> _placeables;
-    private DataCollection<FirableWeapon> _weapons;
-    private GameObject _placeablePreviewItem;
-    private FireableWeaponInstance _currentWeapon;
-    private AttachmentToPositionLookup _lookup;
+    private DataCollection<IInventoryItemBlueprint> _inventoryList;
+    private ITriggerableItem _currentItem;
+    private GameObject _previewitem;
+
     private PlayerCursor _cursor;
     private IInventoryDisplayView _display;
 
     [UnityMethod]
     public void Start()
     {
-      _placeables = new DataCollection<PlaceableObject>(inventoryList);
-      _weapons = new DataCollection<FirableWeapon>(weaponList);
       _cursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
+      AttachmentPoints = AttachmentPointsBehavior.RetrieveFor(Owner);
 
-      _lookup = AttachmentPointsBehavior.RetrieveFor(Owner);
+      // TODO use a single inventory list across all items
+      _inventoryList = new DataCollection<IInventoryItemBlueprint>(
+        Enumerable.Concat<IInventoryItemBlueprint>(weaponList, inventoryList).ToArray()
+        );
+      _currentItem = _inventoryList.Selected.CreateInstance(this);
 
-      _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
-      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
+      if (_currentItem.PreviewItem != null)
+      {
+        _previewitem = _currentItem.PreviewItem.Clone();
+      }
 
       // TODO make this not lookup by name
       SetupDisplay();
+    }
+
+    /// <inheritdoc />
+    public AttachmentToPositionLookup AttachmentPoints { get; private set; }
+
+    /// <inheritdoc />
+    public IPlayerCursor Cursor
+    {
+      get { return _cursor; }
     }
 
     private void SetupDisplay()
@@ -79,24 +90,22 @@ namespace NineByteGames.TowerDefense.Player
     [UnityMethod]
     public void Update()
     {
-      var lowerLeft = GridCoordinate.FromVector3(_cursor.CursorPositionAbsolute);
+      if (_previewitem == null)
+        return;
 
-      _placeablePreviewItem.transform.position =
-        _placeables.Selected.Strategy.ConvertToGameObjectPosition(lowerLeft);
+      var lowerLeft = GridCoordinate.FromVector3(_cursor.PositionAbsolute);
+
+      //_previewitem.transform.position =
+      //  _previewitem.Selected.Strategy.ConvertToGameObjectPosition(lowerLeft);
     }
 
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
     public void TryTrigger1()
     {
-      var currentTransform = Owner.GetComponent<Transform>();
-
-      // we want the projectile to move towards the current target (as opposed to directly straight
-      // out of the muzzle).  While this is less "correct" it should lead to a better player
-      // experience. 
-      var direction = _cursor.CursorPositionAbsolute - currentTransform.position;
-      var positionAndDirection = new Ray(currentTransform.position, direction.normalized);
-
-      _currentWeapon.Weapon.AttemptFire(positionAndDirection, projectileLayer);
+      if (_currentItem.Trigger())
+      {
+        buildingRate.Restart();
+      }
     }
 
     /// <summary> Activate the secondary item, for example, placing an object. </summary>
@@ -105,13 +114,9 @@ namespace NineByteGames.TowerDefense.Player
       if (!buildingRate.CanTrigger)
         return;
 
-      buildingRate.Restart();
-
-      var lowerLeft = GridCoordinate.FromVector3(_cursor.CursorPositionAbsolute);
-
-      if (Managers.Placer.CanCreate(lowerLeft, _placeables.Selected))
+      if (_currentItem.Trigger())
       {
-        Managers.Placer.PlaceAt(lowerLeft, _placeables.Selected);
+        buildingRate.Restart();
       }
     }
 
@@ -124,30 +129,34 @@ namespace NineByteGames.TowerDefense.Player
 
       _display.SelectedSlot = inventoryId;
 
-      SwitchPlaceable(inventoryId);
-      SwitchWeapon(inventoryId);
+      if (!_inventoryList.SetSelectedIndex(inventoryId))
+        return;
+
+      _currentItem.MarkDone();
+      _currentItem = _inventoryList.Selected.CreateInstance(this);
+
+      if (_previewitem != null)
+      {
+        _previewitem.Kill();
+      }
+
+      // TODO do we want to cache this somehow
+      if (_currentItem.PreviewItem != null)
+      {
+        _previewitem = _currentItem.PreviewItem.Clone();
+      }
 
       weaponSwapRate.Restart();
     }
 
-    private void SwitchPlaceable(int inventoryId)
-    {
-      if (!_placeables.SetSelectedIndex(inventoryId))
-        return;
+    #region Implementation of IPlayer
 
-      // TODO do we want to cache this somehow
-      _placeablePreviewItem.Kill();
-      _placeablePreviewItem = _placeables.Selected.PreviewItem.Clone();
+    /// <inheritdoc />
+    Layer IPlayer.ProjectileLayer
+    {
+      get { return projectileLayer; }
     }
 
-    private void SwitchWeapon(int inventoryId)
-    {
-      if (!_weapons.SetSelectedIndex(inventoryId))
-        return;
-
-      // TODO implement switching weapons animation
-      _currentWeapon.Owner.Kill();
-      _currentWeapon = _weapons.Selected.CreateObjectInstance(Owner, _lookup[AttachmentPoint.Weapon]);
-    }
+    #endregion
   }
 }

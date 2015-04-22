@@ -173,6 +173,7 @@
     <Compile Include="Assets\NineByteGames.Common\Extensions\ArrayExtensions.cs" />
     <Compile Include="Assets\NineByteGames.Common\Extensions\DelegateExtensions.cs" />
     <Compile Include="Assets\NineByteGames.Common\Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Assets\NineByteGames.Common\Extensions\ObjectExtensions.cs" />
     <Compile Include="Assets\NineByteGames.Common\Structures\Array2D.cs" />
     <Compile Include="Assets\NineByteGames.Common\Structures\Size.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManager.cs" />
@@ -212,6 +213,8 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\PlaceableObject.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\FirableWeapon.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\General\INamedObject.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\General\ITriggerableItem.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeTowardsOtherBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />
@@ -226,6 +229,8 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentTypeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\CursorBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\InventoryBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayer.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
@@ -285,5 +290,6 @@
     <None Include="Assets\AstarPathfindingProject\link.xml" />
     <None Include="Assets\uIntelliSense\Editor\Resources\uintellisense-data.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2013\UnityVS.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.Common.Extensions;
@@ -6,7 +7,7 @@ using NineByteGames.Common.Extensions;
 namespace NineByteGames.TowerDefense.Utils
 {
   /// <summary> Maintains an array of data and an associated current item. </summary>
-  internal class DataCollection<T>
+  internal class DataCollection<T> : IEnumerable<T>
   {
     /// <summary> The data that provides the current value for the "selected" item. </summary>
     private readonly T[] _data;
@@ -47,6 +48,18 @@ namespace NineByteGames.TowerDefense.Utils
 
       _selectedIndex = index;
       return true;
+    }
+
+    /// <inheritdoc />
+    public IEnumerator<T> GetEnumerator()
+    {
+      return ((IEnumerable<T>)_data).GetEnumerator();
+    }
+
+    /// <inheritdoc />
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return GetEnumerator();
     }
   }
 }

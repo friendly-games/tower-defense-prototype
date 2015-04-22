@@ -29,7 +29,7 @@ namespace NineByteGames.TowerDefense.Player
 
     public void Update()
     {
-      this.transform.position = PlayerCursor.CursorPositionAbsolute;
+      this.transform.position = PlayerCursor.PositionAbsolute;
     }
   }
 }

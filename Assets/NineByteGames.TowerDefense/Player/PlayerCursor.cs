@@ -6,7 +6,7 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Player
 {
   /// <summary> A ranged cursor. </summary>
-  internal class PlayerCursor
+  internal class PlayerCursor : IPlayerCursor
   {
     private Vector3 _mouseLocation;
     private Vector3 _cursorPositionRelative;
@@ -34,7 +34,7 @@ namespace NineByteGames.TowerDefense.Player
     }
 
     /// <summary> The position of the cursor in world space. </summary>
-    public Vector3 CursorPositionAbsolute
+    public Vector3 PositionAbsolute
     {
       get { return CursorPositionRelative + _transform.position; }
     }

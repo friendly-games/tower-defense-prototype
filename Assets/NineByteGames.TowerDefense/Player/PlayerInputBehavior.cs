@@ -102,6 +102,14 @@ namespace NineByteGames.TowerDefense.Player
       {
         _inventory.TrySwitchTo(1);
       }
+      else if (Input.GetKey(KeyCode.Alpha3))
+      {
+        _inventory.TrySwitchTo(2);
+      }
+      else if (Input.GetKey(KeyCode.Alpha4))
+      {
+        _inventory.TrySwitchTo(3);
+      }
 
       if (Input.GetMouseButton(0))
       {
@@ -118,7 +126,7 @@ namespace NineByteGames.TowerDefense.Player
     {
       Quaternion desired = Quaternion.Lerp(
         transform.rotation,
-        Quaternion.LookRotation(Vector3.forward, _playerCursor.CursorPositionAbsolute - transform.position),
+        Quaternion.LookRotation(Vector3.forward, _playerCursor.PositionAbsolute - transform.position),
         Time.deltaTime * TurnSpeed);
 
       transform.rotation = desired;
