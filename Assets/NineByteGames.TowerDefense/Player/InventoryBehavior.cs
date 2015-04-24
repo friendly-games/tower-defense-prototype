@@ -38,8 +38,7 @@ namespace NineByteGames.TowerDefense.Player
     #endregion
 
     private DataCollection<IInventoryItemBlueprint> _inventoryList;
-    private ITriggerableItem _currentItem;
-    private GameObject _previewitem;
+    private IInventoryInstance _currentItem;
 
     private PlayerCursor _cursor;
     private IInventoryDisplayView _display;
@@ -50,53 +49,27 @@ namespace NineByteGames.TowerDefense.Player
       _cursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
       AttachmentPoints = AttachmentPointsBehavior.RetrieveFor(Owner);
 
-      // TODO use a single inventory list across all items
       _inventoryList = new DataCollection<IInventoryItemBlueprint>(
         Enumerable.Concat<IInventoryItemBlueprint>(weaponList, inventoryList).ToArray()
         );
       _currentItem = _inventoryList.Selected.CreateInstance(this);
 
-      if (_currentItem.PreviewItem != null)
-      {
-        _previewitem = _currentItem.PreviewItem.Clone();
-      }
-
-      // TODO make this not lookup by name
       SetupDisplay();
-    }
-
-    /// <inheritdoc />
-    public AttachmentToPositionLookup AttachmentPoints { get; private set; }
-
-    /// <inheritdoc />
-    public IPlayerCursor Cursor
-    {
-      get { return _cursor; }
     }
 
     private void SetupDisplay()
     {
+      // TODO make this not lookup by name
       _display = GameObject.Find("PlayView").GetComponent<IInventoryDisplayView>();
 
-      _display.UpdateSlotText(0, "Pistol");
-      _display.UpdateSlotText(1, "Shotgun");
-      _display.UpdateSlotText(2, "Wall");
-      _display.UpdateSlotText(3, "Wall");
-      _display.UpdateSlotText(4, "-");
+      int index = 0;
+      foreach (var blueprint in _inventoryList)
+      {
+        _display.UpdateSlotText(index, blueprint.Name);
+        index++;
+      }
 
-      _display.SelectedSlot = 1;
-    }
-
-    [UnityMethod]
-    public void Update()
-    {
-      if (_previewitem == null)
-        return;
-
-      var lowerLeft = GridCoordinate.FromVector3(_cursor.PositionAbsolute);
-
-      //_previewitem.transform.position =
-      //  _previewitem.Selected.Strategy.ConvertToGameObjectPosition(lowerLeft);
+      _display.SelectedSlot = 0;
     }
 
     /// <summary> Activate the primary item, for example, firing a weapon. </summary>
@@ -135,17 +108,6 @@ namespace NineByteGames.TowerDefense.Player
       _currentItem.MarkDone();
       _currentItem = _inventoryList.Selected.CreateInstance(this);
 
-      if (_previewitem != null)
-      {
-        _previewitem.Kill();
-      }
-
-      // TODO do we want to cache this somehow
-      if (_currentItem.PreviewItem != null)
-      {
-        _previewitem = _currentItem.PreviewItem.Clone();
-      }
-
       weaponSwapRate.Restart();
     }
 
@@ -156,6 +118,15 @@ namespace NineByteGames.TowerDefense.Player
     {
       get { return projectileLayer; }
     }
+
+    /// <inheritdoc />
+    public IPlayerCursor Cursor
+    {
+      get { return _cursor; }
+    }
+
+    /// <inheritdoc />
+    public AttachmentToPositionLookup AttachmentPoints { get; private set; }
 
     #endregion
   }

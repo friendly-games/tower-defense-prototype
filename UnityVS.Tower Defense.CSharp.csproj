@@ -214,7 +214,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\FirableWeapon.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\General\INamedObject.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\General\ITriggerableItem.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\General\IInventoryItemBlueprint.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeTowardsOtherBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Layer.cs" />

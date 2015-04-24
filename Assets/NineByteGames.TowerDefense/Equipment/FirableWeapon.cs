@@ -36,7 +36,7 @@ namespace NineByteGames.TowerDefense.Equipment
 
     #region Implementation of IInventoryItemBlueprint
 
-    ITriggerableItem IInventoryItemBlueprint.CreateInstance(IPlayer player)
+    IInventoryInstance IInventoryItemBlueprint.CreateInstance(IPlayer player)
     {
       var locationAndRotation = player.AttachmentPoints[AttachmentPoint.Weapon];
 
@@ -52,10 +52,16 @@ namespace NineByteGames.TowerDefense.Equipment
       return new FireableWeaponInstance(player, clonedWeapon, weapon);
     }
 
+    /// <inheritdoc />
+    string IInventoryItemBlueprint.Name
+    {
+      get { return this.Name; }
+    }
+
     #endregion
   }
 
-  internal class FireableWeaponInstance : ITriggerableItem
+  internal class FireableWeaponInstance : IInventoryInstance
   {
     private readonly IPlayer _player;
     public readonly GameObject Owner;
@@ -71,13 +77,13 @@ namespace NineByteGames.TowerDefense.Equipment
     #region Implementation of ITriggerableItem
 
     /// <inheritdoc />
-    string ITriggerableItem.Name
+    string IInventoryInstance.Name
     {
       get { return Weapon.name; }
     }
 
     /// <inheritdoc />
-    bool ITriggerableItem.Trigger()
+    bool IInventoryInstance.Trigger()
     {
       var currentTransform = Owner.GetComponent<Transform>();
 
@@ -92,14 +98,7 @@ namespace NineByteGames.TowerDefense.Equipment
     }
 
     /// <inheritdoc />
-    GameObject ITriggerableItem.PreviewItem
-    {
-      // TODO return a cursor
-      get { return null; }
-    }
-
-    /// <inheritdoc />
-    void ITriggerableItem.MarkDone()
+    void IInventoryInstance.MarkDone()
     {
       Owner.Kill();
     }

@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using NineByteGames.TowerDefense.General;
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Services;
+using NineByteGames.TowerDefense.Signals;
+using NineByteGames.TowerDefense.Unity;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
@@ -34,37 +37,59 @@ namespace NineByteGames.TowerDefense.Buildings
     public IBuildingShapeStrategy Strategy { get; private set; }
 
     /// <summary> Invoked when the object is initialized. </summary>
+    [UnityMethod]
     public void OnEnable()
     {
       Strategy = BuildingShapeStrategies.GetStrategyFor(ShapeSize);
     }
 
     /// <inheritdoc />
-    public ITriggerableItem CreateInstance(IPlayer player)
+    public IInventoryInstance CreateInstance(IPlayer player)
     {
-      return new PlaceableObjectItem(player, this);
+      // TODO can we cache this somehow TODO set the parent to be the player (currently we don't do
+      // this because then the preview turns with the player) 
+      var previewItem = PreviewItem.Clone();
+      previewItem.name = "<Preview Item>";
+      var instance = previewItem.AddComponent<PlacableObjectInstanceBehavior>();
+      instance.Initialize(this, player.Cursor);
+      return instance;
     }
 
-    private class PlaceableObjectItem : ITriggerableItem
+    /// <inheritdoc />
+    string IInventoryItemBlueprint.Name
     {
-      private readonly PlaceableObject _owner;
-      private readonly IPlayer _player;
+      get { return this.Name; }
+    }
 
-      public PlaceableObjectItem(IPlayer player, PlaceableObject owner)
+    [UsedImplicitly]
+    private class PlacableObjectInstanceBehavior : AttachedBehavior, IInventoryInstance
+    {
+      private IPlayerCursor _cursor;
+      private PlaceableObject _owner;
+
+      public void Initialize(PlaceableObject owner, IPlayerCursor cursor)
       {
-        // TODO take into account the player inventory (e.g. resources etc)
         _owner = owner;
-        _player = player;
+        _cursor = cursor;
       }
 
+      [UnityMethod]
+      public void Update()
+      {
+        var lowerLeft = GridCoordinate.FromVector3(_cursor.PositionAbsolute);
+        this.transform.position = _owner.Strategy.ConvertToGameObjectPosition(lowerLeft);
+      }
+
+      /// <inheritdoc />
       public string Name
       {
-        get { return _owner.Name; }
+        get { return _owner.name; }
       }
 
+      /// <inheritdoc />
       public bool Trigger()
       {
-        var lowerLeft = GridCoordinate.FromVector3(_player.Cursor.PositionAbsolute);
+        var lowerLeft = GridCoordinate.FromVector3(_cursor.PositionAbsolute);
 
         if (Managers.Placer.CanCreate(lowerLeft, _owner))
         {
@@ -75,14 +100,10 @@ namespace NineByteGames.TowerDefense.Buildings
         return false;
       }
 
-      public GameObject PreviewItem
-      {
-        get { return _owner.PreviewItem; }
-      }
-
+      /// <inheritdoc />
       public void MarkDone()
       {
-        // no-op
+        Owner.Kill();
       }
     }
   }

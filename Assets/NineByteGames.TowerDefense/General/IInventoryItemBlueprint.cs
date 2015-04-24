@@ -7,7 +7,13 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.General
 {
   /// <summary> An item that can be stored in inventory and be triggered. </summary>
-  internal interface ITriggerableItem
+  /// <remarks>
+  ///  IInventoryInstances should not have any state in them and should not be player specific.
+  ///  <see cref="IInventoryItemBlueprint"/> on the other hand can and most likely will
+  ///  be player specific.
+  /// </remarks>
+  /// <seealso cref="IInventoryItemBlueprint"/>
+  internal interface IInventoryInstance
   {
     /// <summary> The displayed name </summary>
     string Name { get; }
@@ -16,18 +22,19 @@ namespace NineByteGames.TowerDefense.General
     /// <returns> true if it succeeds, false if it fails. </returns>
     bool Trigger();
 
-    /// <summary> Cursor Item. </summary>
-    GameObject PreviewItem { get; }
-
     /// <summary> Mark the object as no longer used by the player. </summary>
     void MarkDone();
   }
 
   /// <summary> An blueprint for an item that can be stored in inventory. </summary>
+  /// <seealso cref="IInventoryInstance"/>
   internal interface IInventoryItemBlueprint
   {
     /// <summary> Creates the instance. </summary>
     /// <returns> The player specific instance of the inventory item. </returns>
-    ITriggerableItem CreateInstance(IPlayer player);
+    IInventoryInstance CreateInstance(IPlayer player);
+
+    /// <summary> The name of the item </summary>
+    string Name { get; }
   }
 }
