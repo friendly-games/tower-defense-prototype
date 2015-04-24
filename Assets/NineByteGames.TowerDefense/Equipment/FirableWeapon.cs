@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Behaviors;
 using NineByteGames.TowerDefense.General;
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Random = UnityEngine.Random;
 
 namespace NineByteGames.TowerDefense.Equipment
 {
@@ -40,67 +37,18 @@ namespace NineByteGames.TowerDefense.Equipment
     {
       var locationAndRotation = player.AttachmentPoints[AttachmentPoint.Weapon];
 
-      var clonedWeapon = WeaponObject.Clone();
-      // make sure it's placed under the owner object a little bit to the right
       // TODO should we allow left/right placement
-      clonedWeapon.SetParent(player.Owner);
-      clonedWeapon.transform.localPosition = locationAndRotation.Location;
-      clonedWeapon.transform.localRotation = locationAndRotation.Rotation;
-
+      var clonedWeapon = WeaponObject.Clone(player.Owner, locationAndRotation);
       var weapon = clonedWeapon.GetComponent<WeaponBehavior>();
-      weapon.Initialize(this.Quality);
-      return new FireableWeaponInstance(player, clonedWeapon, weapon);
+
+      weapon.Initialize(this, player);
+      return weapon;
     }
 
     /// <inheritdoc />
     string IInventoryItemBlueprint.Name
     {
       get { return this.Name; }
-    }
-
-    #endregion
-  }
-
-  internal class FireableWeaponInstance : IInventoryInstance
-  {
-    private readonly IPlayer _player;
-    public readonly GameObject Owner;
-    public readonly WeaponBehavior Weapon;
-
-    public FireableWeaponInstance(IPlayer player, GameObject owner, WeaponBehavior weapon)
-    {
-      _player = player;
-      Owner = owner;
-      Weapon = weapon;
-    }
-
-    #region Implementation of ITriggerableItem
-
-    /// <inheritdoc />
-    string IInventoryInstance.Name
-    {
-      get { return Weapon.name; }
-    }
-
-    /// <inheritdoc />
-    bool IInventoryInstance.Trigger()
-    {
-      var currentTransform = Owner.GetComponent<Transform>();
-
-      // we want the projectile to move towards the current target (as opposed to directly straight
-      // out of the muzzle).  While this is less "correct" it should lead to a better player
-      // experience. 
-      var direction = _player.Cursor.PositionAbsolute - currentTransform.position;
-      var positionAndDirection = new Ray(currentTransform.position, direction.normalized);
-
-      // TODO layer
-      return Weapon.AttemptFire(positionAndDirection, Layer.FromName("Projectile (Player)"));
-    }
-
-    /// <inheritdoc />
-    void IInventoryInstance.MarkDone()
-    {
-      Owner.Kill();
     }
 
     #endregion

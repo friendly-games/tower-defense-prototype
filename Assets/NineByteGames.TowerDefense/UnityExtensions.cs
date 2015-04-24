@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Signals;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -83,7 +84,36 @@ namespace NineByteGames.TowerDefense
     public static T Clone<T>(this T instance)
       where T : Object
     {
-      return (T)Object.Instantiate(instance);
+      return Object.Instantiate(instance);
+    }
+
+    /// <summary> Create a copy of an object. </summary>
+    /// <param name="instance"> The object to clone. </param>
+    /// <param name="parent"> The object that should be set to the parent of the given object. </param>
+    /// <returns> The new copy of the object. </returns>
+    public static GameObject Clone(this GameObject instance, GameObject parent)
+    {
+      var clone = Object.Instantiate(instance);
+      clone.SetParent(parent);
+      return clone;
+    }
+
+    /// <summary> Create a copy of an object. </summary>
+    /// <param name="instance"> The object to clone. </param>
+    /// <param name="parent"> The object that should be set to the parent of the given object. </param>
+    /// <param name="locationAndRotation"> The location and rotation of the clone. </param>
+    /// <returns> The new copy of the object. </returns>
+    public static GameObject Clone(this GameObject instance,
+                                   GameObject parent,
+                                   LocationAndRotation locationAndRotation)
+    {
+      var clone = instance.Clone(parent);
+
+      var transform = clone.transform;
+      transform.localPosition = locationAndRotation.Location;
+      transform.localRotation = locationAndRotation.Rotation;
+
+      return clone;
     }
 
     /// <summary> Create a copy of an object. </summary>
@@ -101,7 +131,7 @@ namespace NineByteGames.TowerDefense
     public static T ReplicateGameObject<T>(this T self)
       where T : MonoBehaviour
     {
-      return ((GameObject)Object.Instantiate(self.gameObject)).GetComponent<T>();
+      return Object.Instantiate(self.gameObject).GetComponent<T>();
     }
 
     /// <summary> Get the signal broadcaster for a designated GameObject. </summary>
