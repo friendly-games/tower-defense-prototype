@@ -39,11 +39,13 @@ namespace NineByteGames.TowerDefense.Equipment
 
     #region Implementation of IInventoryInstance
 
+    /// <inheritdoc />
     public string Name
     {
       get { return _blueprint.Name; }
     }
 
+    /// <inheritdoc />
     public bool Trigger()
     {
       if (!_rechargeRate.CanTrigger)
@@ -68,6 +70,7 @@ namespace NineByteGames.TowerDefense.Equipment
       return true;
     }
 
+    /// <inheritdoc />
     public void MarkDone()
     {
       Owner.Kill();

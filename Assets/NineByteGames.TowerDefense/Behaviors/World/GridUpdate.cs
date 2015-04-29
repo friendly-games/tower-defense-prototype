@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.Common.Structures;
-using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using Pathfinding;
 using UnityEngine;
@@ -38,18 +37,16 @@ namespace NineByteGames.TowerDefense.Behaviors.World
       AstarPath.active.UpdateGraphs(graphUpdateObject);
     }
 
+    /// <summary> Set the cost of the nodes in the given region. </summary>
+    /// <param name="lowerLeft"> The lower left of the area which should have its nodes' penality set. </param>
+    /// <param name="size"> The size of the area to be modified. </param>
+    /// <param name="penality"> The penality to give each node. </param>
     public static void MarkCost(GridCoordinate lowerLeft, Size size, int penality)
     {
       if (AstarPath.active == null)
         return;
 
-      AstarPath.active.UpdateGraphs(new GraphUpdateObject
-                                    {
-                                      setWalkability = true,
-                                      modifyWalkability = true,
-                                      bounds = CalculateBounds(lowerLeft, size),
-                                      addPenalty = 1000 * penality,
-                                    });
+      AstarPath.active.UpdateGraphs(new SetAbsolutePenalityUpdateObject(lowerLeft, size, 1000 * penality));
     }
 
     /// <summary>
@@ -89,6 +86,30 @@ namespace NineByteGames.TowerDefense.Behaviors.World
 
       var bounds = new Bounds(vectorCenter, vectorSize);
       return bounds;
+    }
+
+    /// <summary> Sets the penality for all nodes in the designated area to the given value. </summary>
+    private class SetAbsolutePenalityUpdateObject : GraphUpdateObject
+    {
+      /// <summary> The penality to set for each node. </summary>
+      private readonly int _penalty;
+
+      /// <summary> Constructor. </summary>
+      /// <param name="lowerLeft"> The lower left position region to set. </param>
+      /// <param name="size"> The size of the area to set. </param>
+      /// <param name="penalty"> The penality to set for each node. </param>
+      public SetAbsolutePenalityUpdateObject(GridCoordinate lowerLeft, Size size, int penalty)
+      {
+        _penalty = penalty;
+
+        bounds = CalculateBounds(lowerLeft, size);
+      }
+
+      /// <inheritdoc />
+      public override void Apply(GraphNode node)
+      {
+        node.Penalty = (uint)_penalty;
+      }
     }
   }
 }
