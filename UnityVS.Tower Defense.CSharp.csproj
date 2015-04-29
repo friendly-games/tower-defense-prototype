@@ -202,6 +202,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Tracking\RotateTowardsTargetBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\DrawPlayerInfoBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\DrawPropertyBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\UI\UiPanelsBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\GridUpdate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TerrainManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\World\TileTemplate.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerCursor.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerDeathBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />

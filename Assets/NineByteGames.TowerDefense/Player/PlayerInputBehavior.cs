@@ -33,7 +33,7 @@ namespace NineByteGames.TowerDefense.Player
     {
       _transform = Owner.GetComponent<Transform>();
       _inventory = Owner.GetComponent<InventoryBehavior>();
-      _cameraTransform = FindObjectOfType<Camera>().GetComponent<Transform>();
+      _cameraTransform = Camera.main.GetComponent<Transform>();
       _playerCursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
 
       Cursor.visible = false;
@@ -42,11 +42,42 @@ namespace NineByteGames.TowerDefense.Player
 
     public void Update()
     {
+      CheckGameInput();
+
+      // bail out if we're paused
+      if (IsPaused)
+        return;
+
       TrackMouse();
       CheckMovement();
       DetectCurrentObject();
       CheckInventory();
       RecenterCamera();
+    }
+
+    /// <summary> True if the game is currently paused. </summary>
+    private static bool IsPaused
+    {
+      get { return Time.timeScale == 0; }
+    }
+
+    private void CheckGameInput()
+    {
+      if (Input.GetKey(KeyCode.F1))
+      {
+        Time.timeScale = 0;
+      }
+
+      if (Input.GetKey(KeyCode.F2))
+      {
+        Time.timeScale = 1;
+      }
+
+      if (Input.GetKey(KeyCode.F5))
+      {
+        Time.timeScale = 1;
+        Application.LoadLevel(0);
+      }
     }
 
     private void RecenterCamera()
