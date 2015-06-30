@@ -263,6 +263,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalListenerResult.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalTestCode.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UI\IInventoryDisplayView.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UI\InventoryDisplayBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\LayerMaskExtensions.cs" />
