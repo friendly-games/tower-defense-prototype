@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NineByteGames.TowerDefense.Messages;
+using NineByteGames.TowerDefense.Signals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Messages;
-using NineByteGames.TowerDefense.Signals;
 
 namespace NineByteGames.TowerDefense.Behaviors
 {
@@ -16,6 +16,12 @@ namespace NineByteGames.TowerDefense.Behaviors
     public float Health = 200;
     public float MaxHealth = 500;
 
+    void IReadable.AddText(ReadableText builder)
+    {
+      builder.AddProperty("Health", Health);
+      builder.AddProperty("Maximum Health", MaxHealth);
+    }
+
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
     public SignalListenerResult Handle(Damage damage)
@@ -24,7 +30,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
       if (Health <= 0)
       {
-        RootBehavior.Broadcaster.Send(SignalIndicators.Death);
+        Broadcaster.Send(SignalIndicators.Death);
       }
 
       return SignalListenerResult.StopProcessing;
@@ -48,12 +54,6 @@ namespace NineByteGames.TowerDefense.Behaviors
       Health += amountToHeal;
 
       return SignalListenerResult.Continue;
-    }
-
-    void IReadable.AddText(ReadableText builder)
-    {
-      builder.AddProperty("Health", Health);
-      builder.AddProperty("Maximum Health", MaxHealth);
     }
   }
 }

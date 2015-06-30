@@ -20,10 +20,5 @@ namespace NineByteGames.TowerDefense.Signals
     {
       get { return _signalBroadcaster; }
     }
-
-    RootBehavior IChildBehavior.RootBehavior
-    {
-      get { return this; }
-    }
   }
 }

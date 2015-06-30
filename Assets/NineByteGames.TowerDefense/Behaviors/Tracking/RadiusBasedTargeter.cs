@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using NineByteGames.Common.Extensions;
+﻿using NineByteGames.Common.Extensions;
 using NineByteGames.TowerDefense.Messages;
 using NineByteGames.TowerDefense.Signals;
+using NineByteGames.TowerDefense.Unity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
@@ -16,12 +17,23 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     private LinkedList<GameObject> _currentTargets;
     private GameObject _lastTarget;
+    private GameObject _rootParent;
 
+    [UnityMethod]
     public void Awake()
     {
       _currentTargets = new LinkedList<GameObject>();
     }
 
+    [UnityMethod]
+    public override void Start()
+    {
+      base.Start();
+
+      _rootParent = FindRootParent();
+    }
+
+    [UnityMethod]
     public void OnTriggerEnter2D(Collider2D other)
     {
       if (!Layer.FromLayerId(other.gameObject.layer).IsIn(CollisionLayer))
@@ -30,6 +42,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       _currentTargets.AddLast(other.gameObject);
     }
 
+    [UnityMethod]
     public void OnTriggerExit2D(Collider2D other)
     {
       if (!Layer.FromLayerId(other.gameObject.layer).IsIn(CollisionLayer))
@@ -38,6 +51,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       _currentTargets.Remove(other.gameObject);
     }
 
+    [UnityMethod]
     public void Update()
     {
       // remove nodes that have died
@@ -66,7 +80,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
         return;
       }
 
-      var myPosition = RootBehavior.transform.position;
+      var myPosition = _rootParent.transform.position;
 
       var currentCloset = _currentTargets
         .MinBy(other => (myPosition - other.transform.position).sqrMagnitude);

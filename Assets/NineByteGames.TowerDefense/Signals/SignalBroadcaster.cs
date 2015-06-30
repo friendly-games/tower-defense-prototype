@@ -67,7 +67,7 @@ namespace NineByteGames.TowerDefense.Signals
 
       foreach (SignalListenerAndPriority child in list)
       {
-        var result = ((ISignalListener<T>) child.SignalListener).Handle(data);
+        var result = ((ISignalListener<T>)child.SignalListener).Handle(data);
 
         if (result == SignalListenerResult.StopProcessing)
         {

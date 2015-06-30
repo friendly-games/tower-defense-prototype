@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Signals;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -145,7 +145,7 @@ namespace NineByteGames.TowerDefense
       var childBehavior = gameObject.RetrieveInHierarchy<IChildBehavior>();
       if (childBehavior != null)
       {
-        return childBehavior.RootBehavior.Broadcaster;
+        return childBehavior.Broadcaster;
       }
 
       return EmptySignalBroadcaster.Instance;
