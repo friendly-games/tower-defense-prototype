@@ -11,10 +11,11 @@ namespace NineByteGames.TowerDefense.Behaviors
   {
     private int _amount;
 
-    public SignalListenerResult Handle(MoneyTransfer message)
+    public void Handle(MoneyTransfer message)
     {
       _amount += message.Amount;
-      return SignalListenerResult.StopProcessing;
+
+      SignalOptions.Current.StopProcessing();
     }
 
     public void AddText(ReadableText builder)

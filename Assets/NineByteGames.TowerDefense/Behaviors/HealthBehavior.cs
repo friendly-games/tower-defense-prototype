@@ -11,7 +11,7 @@ namespace NineByteGames.TowerDefense.Behaviors
                                   IReadable,
                                   ISignalListener<Damage>,
                                   ISignalListener<Healing>,
-                                  ISignalListener<SignalIndicators.DeathIndicator>
+                                  ISignalListener<DeathIndicator>
   {
     public float Health = 200;
     public float MaxHealth = 500;
@@ -24,36 +24,33 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
-    public SignalListenerResult Handle(Damage damage)
+    public void Handle(Damage damage)
     {
       Health -= damage.DamageAmount;
 
       if (Health <= 0)
       {
-        Broadcaster.Send(SignalIndicators.Death);
+        Broadcaster.Send(DeathIndicator.Signal);
       }
 
-      return SignalListenerResult.StopProcessing;
+      SignalOptions.Current.StopProcessing();
     }
 
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
-    public SignalListenerResult Handle(SignalIndicators.DeathIndicator health)
+    public void Handle(DeathIndicator health)
     {
       DestroyOwner();
-      return SignalListenerResult.Continue;
     }
 
     /// <inheritdoc/>
     [SignalPriority(SignalPriorities.VeryLow)]
-    public SignalListenerResult Handle(Healing health)
+    public void Handle(Healing health)
     {
       float amountToHeal = Math.Min(health.Remaining, MaxHealth - Health);
       health.Take(amountToHeal);
 
       Health += amountToHeal;
-
-      return SignalListenerResult.Continue;
     }
   }
 }

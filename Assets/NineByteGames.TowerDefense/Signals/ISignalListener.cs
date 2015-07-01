@@ -19,6 +19,6 @@ namespace NineByteGames.TowerDefense.Signals
     ///  HandleResult.Handled if the message was consumed, HandleResult.Unhandled if it should be
     ///  handled by the next listener.
     /// </returns>
-    SignalListenerResult Handle(T message);
+    void Handle(T message);
   }
 }

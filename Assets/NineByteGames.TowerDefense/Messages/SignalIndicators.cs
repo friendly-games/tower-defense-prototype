@@ -4,10 +4,9 @@ using System.Linq;
 
 namespace NineByteGames.TowerDefense.Messages
 {
-  public static class SignalIndicators
+  /// <summary> Indicates that an object has died or been destroyed. </summary>
+  public struct DeathIndicator
   {
-    public static readonly DeathIndicator Death;
-
-    public struct DeathIndicator {}
+    public static readonly DeathIndicator Signal = new DeathIndicator();
   }
 }

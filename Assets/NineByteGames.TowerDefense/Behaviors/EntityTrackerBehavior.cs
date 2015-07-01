@@ -1,8 +1,8 @@
-﻿using System;
+﻿using NineByteGames.TowerDefense.Messages;
+using NineByteGames.TowerDefense.Signals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Messages;
-using NineByteGames.TowerDefense.Signals;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors
@@ -13,10 +13,9 @@ namespace NineByteGames.TowerDefense.Behaviors
     /// <summary> The object that will be tracked. </summary>
     public GameObject Target;
 
-    SignalListenerResult ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
+    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
     {
       Target = message.Target;
-      return SignalListenerResult.Continue;
     }
   }
 }

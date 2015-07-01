@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using NineByteGames.TowerDefense.AI;
+﻿using NineByteGames.TowerDefense.AI;
+using NineByteGames.TowerDefense.Behaviors.Tracking;
 using NineByteGames.TowerDefense.ScriptableObjects;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Utils;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors
 {
   /// <summary> Spawns items at a designed rate. </summary>
-  public class SpawnerBehavior : AttachedBehavior
+  public class SpawnerBehavior : AttachedBehavior, IMovingTarget
   {
     private Transform _transform;
 
@@ -31,9 +32,12 @@ namespace NineByteGames.TowerDefense.Behaviors
     {
       _transform = transform;
       _instanceManager = GameObject.Find("Enemies").GetComponent<EnemyManagerBehavior>().InstanceManager;
+      CurrentTarget = GameObject.Find("Player").GetComponent<Transform>();
 
       CreateCoroutine(Trigger());
     }
+
+    public Transform CurrentTarget { get; private set; }
 
     /// <summary> Spawns a new entities. </summary>
     private IEnumerator Trigger()
@@ -44,12 +48,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
         var cloned = _instanceManager.Create(Template, _transform.position, randomDirection);
 
-        var tracker = cloned.GetComponentInChildren<EntityTrackerBehavior>();
-        if (tracker != null)
-        {
-          // TODO
-          tracker.Target = GameObject.Find("Player");
-        }
+        cloned.GetComponent<MoveTowardsTargetBehavior>().Initialize(this);
 
         yield return AdvancedCoroutine.Wait(TimeSpan.FromSeconds(Period));
       }

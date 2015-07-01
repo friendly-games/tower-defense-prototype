@@ -8,21 +8,18 @@ using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Player
 {
-  internal class PlayerDeathBehavior : ChildBehavior, ISignalListener<SignalIndicators.DeathIndicator>
+  internal class PlayerDeathBehavior : ChildBehavior, ISignalListener<DeathIndicator>
   {
-    #region Implementation of ISignalListener<DeathIndicator>
-
     [SignalPriority(SignalPriorities.VeryHigh)]
-    public SignalListenerResult Handle(SignalIndicators.DeathIndicator message)
+    public void Handle(DeathIndicator message)
     {
       var screens = GameObject.Find("Global UI").GetComponent<UiPanelsBehavior>();
       screens.Mode = UiPanelsBehavior.UiMode.Dead;
 
+      // pause the game
       Time.timeScale = 0;
 
-      return SignalListenerResult.StopProcessing;
+      SignalOptions.Current.StopProcessing();
     }
-
-    #endregion
   }
 }

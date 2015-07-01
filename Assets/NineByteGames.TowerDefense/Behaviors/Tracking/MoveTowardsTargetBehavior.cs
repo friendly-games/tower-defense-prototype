@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using NineByteGames.TowerDefense.AI;
 using NineByteGames.TowerDefense.Messages;
 using NineByteGames.TowerDefense.Signals;
 using Pathfinding;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
@@ -14,19 +15,24 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     [Tooltip("The speed at which the object moves towards its target")]
     public float Speed = 1.0f;
 
-    private EntityTrackerBehavior _tracker;
     private Path _path;
     private Vector2 _lastPosition;
     private int _numTimesStuck;
+    private IMovingTarget _target;
 
     public override void Start()
     {
       base.Start();
 
-      _tracker = GetComponent<EntityTrackerBehavior>();
       _seeker = GetComponent<Seeker>();
 
       _seeker.pathCallback += HandlePathUpdate;
+    }
+
+    /// <summary> Initializes this object with the required data. </summary>
+    public void Initialize(IMovingTarget target)
+    {
+      _target = target;
     }
 
     private int _currentPathCount = 0;
@@ -97,13 +103,16 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     private void UpdatePath()
     {
-      var target = _tracker.Target;
+      if (_target == null || _target.CurrentTarget == null)
+        return;
+
+      var target = _target.CurrentTarget;
       if (target == null || _pathPending)
         return;
 
       var seeker = GetComponent<Seeker>();
       var location = GetComponent<Transform>();
-      seeker.StartPath(location.position, target.GetComponent<Transform>().position);
+      seeker.StartPath(location.position, target.position);
       _pathPending = true;
     }
 

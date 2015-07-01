@@ -1,10 +1,10 @@
-﻿using System;
+﻿using NineByteGames.TowerDefense.Messages;
+using NineByteGames.TowerDefense.Signals;
+using NineByteGames.TowerDefense.Utils;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NineByteGames.TowerDefense.Messages;
-using NineByteGames.TowerDefense.Signals;
-using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
@@ -22,6 +22,10 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     private AdvancedCoroutine _coroutine;
     private TimeSpan _period;
+
+    static ProjectileCreatorBehavior()
+    {
+    }
 
     public override void Start()
     {
@@ -44,7 +48,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       }
     }
 
-    SignalListenerResult ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal targetAquired)
+    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal targetAquired)
     {
       var shouldFire = !targetAquired.TargetWasLost;
 
@@ -63,8 +67,6 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
           _coroutine = AdvancedCoroutine.Empty;
         }
       }
-
-      return SignalListenerResult.Continue;
     }
   }
 }

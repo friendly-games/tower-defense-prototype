@@ -7,14 +7,16 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{58E121D6-F50C-010B-5579-601AE8A9E798}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <AssemblyName>Assembly-CSharp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.1f1</UnityVersion>
@@ -191,6 +193,7 @@
     <Compile Include="Assets\NineByteGames.Common\Structures\Size.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManagerBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\AI\IGroupGuider.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\IInstanceManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\InstanceManagerBase.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DamageOnTriggerBehavior.cs" />
@@ -260,7 +263,8 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\RootBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\Signal.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalBroadcaster.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalListenerResult.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalListenerContext.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalOptions.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalPriorityAttribute.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\SignalTestCode.cs" />

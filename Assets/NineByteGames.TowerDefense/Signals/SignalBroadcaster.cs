@@ -65,14 +65,14 @@ namespace NineByteGames.TowerDefense.Signals
       if (!_listeners.TryGetValue(typeof(T), out list))
         return false;
 
-      foreach (SignalListenerAndPriority child in list)
+      using (var options = SignalListenerContext.Push())
       {
-        var result = ((ISignalListener<T>)child.SignalListener).Handle(data);
-
-        if (result == SignalListenerResult.StopProcessing)
+        for (int index = 0;
+             index < list.Count && options.ShouldContinue;
+             index++)
         {
-          // stop processing then
-          return true;
+          SignalListenerAndPriority child = list[index];
+          ((ISignalListener<T>)child.SignalListener).Handle(data);
         }
       }
 

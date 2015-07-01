@@ -752,7 +752,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3a11d49a42c93db46b84e80539808296, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &531652496
+--- !u!4 &531652496 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: dcd705db3af702542aa9a7e77da5101e, type: 2}
   m_PrefabInternal: {fileID: 916727159}
@@ -797,11 +797,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b606dd099f417134cb3349df78e31350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &800068739
+--- !u!1 &800068739 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 130298, guid: f98b519ad2aaf924bb55562cbad1f43a, type: 2}
   m_PrefabInternal: {fileID: 1038723602}
---- !u!224 &800068744
+--- !u!224 &800068744 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22425744, guid: f98b519ad2aaf924bb55562cbad1f43a,
     type: 2}
@@ -941,7 +941,7 @@ MonoBehaviour:
   Prefabs:
   - GroupName: Towers
     GameObject: {fileID: 100000, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
---- !u!1 &894066326
+--- !u!1 &894066326 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 160740, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
   m_PrefabInternal: {fileID: 329726556}
@@ -1033,7 +1033,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1027652580
+--- !u!4 &1027652580 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: cd670f9289d71f842948cc09d234d8b5, type: 2}
   m_PrefabInternal: {fileID: 1819238097}
@@ -1169,7 +1169,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5918ee26cd48ee04f932dadb5fd605ad, type: 2}
   m_IsPrefabParent: 0
---- !u!4 &1174965279
+--- !u!4 &1174965279 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 5918ee26cd48ee04f932dadb5fd605ad, type: 2}
   m_PrefabInternal: {fileID: 1067896023}
@@ -1256,15 +1256,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Type: 1
---- !u!4 &1338907087
+--- !u!4 &1338907087 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
   m_PrefabInternal: {fileID: 42860702}
---- !u!4 &1365073574
+--- !u!4 &1365073574 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
   m_PrefabInternal: {fileID: 958158408}
---- !u!4 &1382185373
+--- !u!4 &1382185373 stripped
 Transform:
   m_PrefabParentObject: {fileID: 495414, guid: 6c59d84174f598d4a893c1e1ac563759, type: 2}
   m_PrefabInternal: {fileID: 280601297}
@@ -1366,6 +1366,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1439951074
 Transform:
   m_ObjectHideFlags: 0
@@ -1499,6 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!50 &1444686651
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1507,11 +1509,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!114 &1444686652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,6 +1698,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!4 &1585886262
 Transform:
   m_ObjectHideFlags: 0
@@ -1719,7 +1722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b139b58a607bd94aa87906ac349fc68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &1637771705
+--- !u!4 &1637771705 stripped
 Transform:
   m_PrefabParentObject: {fileID: 413954, guid: 82fb3c4401deb4343ad96ce8c71f3b50, type: 2}
   m_PrefabInternal: {fileID: 187602555}
@@ -1765,15 +1768,15 @@ MonoBehaviour:
   Template: {fileID: 11400000, guid: 6479c91dcb5d95241aedfd32b672039c, type: 2}
   Parent: {fileID: 670391996}
   Period: .5
---- !u!4 &1722301600
+--- !u!4 &1722301600 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 3a11d49a42c93db46b84e80539808296, type: 2}
   m_PrefabInternal: {fileID: 524697611}
---- !u!4 &1754117587
+--- !u!4 &1754117587 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: e1058774aa8f5ae45a9211c85f20e661, type: 2}
   m_PrefabInternal: {fileID: 261483888}
---- !u!224 &1766437097
+--- !u!224 &1766437097 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22445584, guid: 834d95ecc20b52140a7847b378cad49d,
     type: 2}
@@ -1914,7 +1917,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 18b1ced78a9fb164395f9f15b22fd0fd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!4 &1974382718
+--- !u!4 &1974382718 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 582b2d7418bcd5e4ea8caadedf447d8b, type: 2}
   m_PrefabInternal: {fileID: 97132674}
@@ -1991,6 +1994,7 @@ MonoBehaviour:
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
+  m_RepeatDelay: .5
   m_AllowActivationOnMobileDevice: 0
 --- !u!114 &2003679968
 MonoBehaviour:
