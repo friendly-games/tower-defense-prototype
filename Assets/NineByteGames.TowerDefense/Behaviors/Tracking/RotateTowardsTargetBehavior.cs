@@ -10,12 +10,8 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
   [RequireComponent(typeof(EntityTrackerBehavior))]
   internal class RotateTowardsTargetBehavior : AttachedBehavior
   {
-    private EntityTrackerBehavior _tracking;
-
-    public void Start()
-    {
-      _tracking = GetComponent<EntityTrackerBehavior>();
-    }
+    [Tooltip("The target to move towards")]
+    public GameObject Target;
 
     /// <summary> The speed at which the object should move towards its target. </summary>
     public float Speed = 1.0f;
@@ -23,10 +19,10 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     /// <inheritdoc />
     public void FixedUpdate()
     {
-      if (_tracking.Target == null)
+      if (Target == null)
         return;
 
-      MathUtils.RotateTowards(Owner, _tracking.Target, Time.deltaTime * Speed);
+      MathUtils.RotateTowards(Owner, Target, Time.deltaTime * Speed);
     }
   }
 }

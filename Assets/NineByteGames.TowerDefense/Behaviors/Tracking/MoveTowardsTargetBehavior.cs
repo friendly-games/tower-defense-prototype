@@ -15,10 +15,12 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     [Tooltip("The speed at which the object moves towards its target")]
     public float Speed = 1.0f;
 
+    [Tooltip("The target to move towards")]
+    public GameObject Target;
+
     private Path _path;
     private Vector2 _lastPosition;
     private int _numTimesStuck;
-    private IMovingTarget _target;
 
     public override void Start()
     {
@@ -27,12 +29,6 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       _seeker = GetComponent<Seeker>();
 
       _seeker.pathCallback += HandlePathUpdate;
-    }
-
-    /// <summary> Initializes this object with the required data. </summary>
-    public void Initialize(IMovingTarget target)
-    {
-      _target = target;
     }
 
     private int _currentPathCount = 0;
@@ -103,11 +99,11 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     private void UpdatePath()
     {
-      if (_target == null || _target.CurrentTarget == null)
+      if (Target == null)
         return;
 
-      var target = _target.CurrentTarget;
-      if (target == null || _pathPending)
+      var target = Target.transform;
+      if (_pathPending)
         return;
 
       var seeker = GetComponent<Seeker>();

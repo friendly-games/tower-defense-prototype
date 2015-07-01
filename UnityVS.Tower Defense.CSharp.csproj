@@ -193,10 +193,12 @@
     <Compile Include="Assets\NineByteGames.Common\Structures\Size.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManagerBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\AI\GroupChildBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\IGroupGuider.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\IInstanceManager.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\InstanceManagerBase.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DamageOnTriggerBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Data\SharedValue.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\DropItemOnDealthBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\EntityTrackerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\GlobalsBehavior.cs" />

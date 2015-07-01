@@ -23,10 +23,6 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     private AdvancedCoroutine _coroutine;
     private TimeSpan _period;
 
-    static ProjectileCreatorBehavior()
-    {
-    }
-
     public override void Start()
     {
       base.Start();

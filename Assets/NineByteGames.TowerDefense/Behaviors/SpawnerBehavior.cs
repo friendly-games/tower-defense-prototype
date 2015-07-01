@@ -12,7 +12,7 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors
 {
   /// <summary> Spawns items at a designed rate. </summary>
-  public class SpawnerBehavior : AttachedBehavior, IMovingTarget
+  public class SpawnerBehavior : AttachedBehavior, IGroupGuider
   {
     private Transform _transform;
 
@@ -32,23 +32,40 @@ namespace NineByteGames.TowerDefense.Behaviors
     {
       _transform = transform;
       _instanceManager = GameObject.Find("Enemies").GetComponent<EnemyManagerBehavior>().InstanceManager;
-      CurrentTarget = GameObject.Find("Player").GetComponent<Transform>();
+      CurrentTarget = GameObject.Find("Player");
 
       CreateCoroutine(Trigger());
     }
 
-    public Transform CurrentTarget { get; private set; }
+    private int count = 0;
+
+    public void Attach(GameObject instance)
+    {
+      count++;
+    }
+
+    public void Remove(GameObject instance)
+    {
+      count--;
+    }
+
+    public event EventHandler CurrentTargetChanged;
+
+    public GameObject CurrentTarget { get; private set; }
 
     /// <summary> Spawns a new entities. </summary>
     private IEnumerator Trigger()
     {
       while (true)
       {
-        var randomDirection = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360));
+        if (count < 10)
+        {
+          var randomDirection = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0, 360));
 
-        var cloned = _instanceManager.Create(Template, _transform.position, randomDirection);
+          var cloned = _instanceManager.Create(Template, _transform.position, randomDirection);
 
-        cloned.GetComponent<MoveTowardsTargetBehavior>().Initialize(this);
+          cloned.AddComponent<GroupChildBehavior>().Initialize(this);
+        }
 
         yield return AdvancedCoroutine.Wait(TimeSpan.FromSeconds(Period));
       }

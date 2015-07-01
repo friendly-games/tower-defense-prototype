@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NineByteGames.TowerDefense.Signals
 {
-  /// <summary> A child listener registry. </summary>
+  /// <summary> Manages the types of signals that a given type listens to. </summary>
   public class ChildListenerRegistry
   {
     private static readonly Dictionary<Type, RegisteryInfo> Lookup = new Dictionary<Type, RegisteryInfo>();

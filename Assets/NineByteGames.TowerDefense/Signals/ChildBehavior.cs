@@ -18,7 +18,7 @@ namespace NineByteGames.TowerDefense.Signals
     }
 
     [UnityMethod]
-    public void OnDestroy()
+    public virtual void OnDestroy()
     {
       if (Broadcaster != null)
       {

@@ -15,6 +15,10 @@ namespace NineByteGames.TowerDefense.AI
     /// <summary> Removes an object from this group </summary>
     /// <param name="instance"> The instance to remove. </param>
     void Remove(GameObject instance);
+
+    GameObject CurrentTarget { get; }
+
+    event EventHandler CurrentTargetChanged;
   }
 
   /// <summary> Represents a target that an object should follow. </summary>
@@ -24,30 +28,30 @@ namespace NineByteGames.TowerDefense.AI
     Transform CurrentTarget { get; }
   }
 
-  /// <summary> A group of enemies that has a common target. </summary>
-  public class CommonTargeter : IGroupGuider
-  {
-    private readonly LinkedList<GameObject> _followers;
+  ///// <summary> A group of enemies that has a common target. </summary>
+  //public class CommonTargeter : IGroupGuider
+  //{
+  //  private readonly LinkedList<GameObject> _followers;
 
-    /// <summary> The target that all child object should follow. </summary>
-    public Transform CurrentTarget { get; set; }
+  //  /// <summary> The target that all child object should follow. </summary>
+  //  public Transform CurrentTarget { get; set; }
 
-    /// <summary> Default constructor. </summary>
-    public CommonTargeter()
-    {
-      _followers = new LinkedList<GameObject>();
-    }
+  //  /// <summary> Default constructor. </summary>
+  //  public CommonTargeter()
+  //  {
+  //    _followers = new LinkedList<GameObject>();
+  //  }
 
-    /// <inheritdoc />
-    public void Attach(GameObject instance)
-    {
-      _followers.AddLast(instance);
-    }
+  //  /// <inheritdoc />
+  //  public void Attach(GameObject instance)
+  //  {
+  //    _followers.AddLast(instance);
+  //  }
 
-    /// <inheritdoc />
-    public void Remove(GameObject instance)
-    {
-      _followers.Remove(instance);
-    }
-  }
+  //  /// <inheritdoc />
+  //  public void Remove(GameObject instance)
+  //  {
+  //    _followers.Remove(instance);
+  //  }
+  //}
 }
