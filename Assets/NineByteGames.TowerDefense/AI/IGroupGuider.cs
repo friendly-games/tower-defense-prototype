@@ -15,10 +15,6 @@ namespace NineByteGames.TowerDefense.AI
     /// <summary> Removes an object from this group </summary>
     /// <param name="instance"> The instance to remove. </param>
     void Remove(GameObject instance);
-
-    GameObject CurrentTarget { get; }
-
-    event EventHandler CurrentTargetChanged;
   }
 
   /// <summary> Represents a target that an object should follow. </summary>

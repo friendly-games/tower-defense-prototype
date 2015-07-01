@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Messages;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors
@@ -49,8 +50,6 @@ namespace NineByteGames.TowerDefense.Behaviors
       count--;
     }
 
-    public event EventHandler CurrentTargetChanged;
-
     public GameObject CurrentTarget { get; private set; }
 
     /// <summary> Spawns a new entities. </summary>
@@ -65,6 +64,7 @@ namespace NineByteGames.TowerDefense.Behaviors
           var cloned = _instanceManager.Create(Template, _transform.position, randomDirection);
 
           cloned.AddComponent<GroupChildBehavior>().Initialize(this);
+          cloned.SendSignal(new TargetAquiredSignal(CurrentTarget));
         }
 
         yield return AdvancedCoroutine.Wait(TimeSpan.FromSeconds(Period));

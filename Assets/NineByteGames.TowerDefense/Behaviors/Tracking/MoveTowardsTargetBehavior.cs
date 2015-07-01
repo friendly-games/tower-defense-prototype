@@ -10,7 +10,7 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
   /// <summary> Move towards the current object. </summary>
-  internal class MoveTowardsTargetBehavior : ChildBehavior
+  internal class MoveTowardsTargetBehavior : ChildBehavior, ISignalListener<TargetAquiredSignal>
   {
     [Tooltip("The speed at which the object moves towards its target")]
     public float Speed = 1.0f;
@@ -21,6 +21,13 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     private Path _path;
     private Vector2 _lastPosition;
     private int _numTimesStuck;
+    private int _currentPathCount = 0;
+
+    //The waypoint we are currently moving towards
+    private int currentWaypoint = 0;
+
+    private Seeker _seeker;
+    private bool _pathPending;
 
     public override void Start()
     {
@@ -31,13 +38,11 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       _seeker.pathCallback += HandlePathUpdate;
     }
 
-    private int _currentPathCount = 0;
-
-    //The waypoint we are currently moving towards
-    private int currentWaypoint = 0;
-
-    private Seeker _seeker;
-    private bool _pathPending;
+    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
+    {
+      Target = message.Target;
+      enabled = message.Target != null;
+    }
 
     public void FixedUpdate()
     {

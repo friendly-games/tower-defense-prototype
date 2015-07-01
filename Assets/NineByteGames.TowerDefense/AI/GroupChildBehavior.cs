@@ -4,6 +4,7 @@ using System.Linq;
 using NineByteGames.TowerDefense.Behaviors.Tracking;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Unity;
+using UnityEngine;
 
 namespace NineByteGames.TowerDefense.AI
 {
@@ -14,33 +15,39 @@ namespace NineByteGames.TowerDefense.AI
   {
     private IGroupGuider _parent;
 
+    public void Start()
+    {
+      Debug.Log("Started");
+    }
+
     public void Initialize(IGroupGuider parent)
     {
+      Debug.Log("Initialized");
+
       _parent = parent;
       _parent.Attach(this.gameObject);
-      _parent.CurrentTargetChanged += HandleTargetChanged;
 
       HandleTargetChanged(null, null);
     }
 
     private void HandleTargetChanged(object sender, EventArgs e)
     {
-      var moveTowards = GetComponent<MoveTowardsTargetBehavior>();
-      var rotateTowards = GetComponent<RotateTowardsTargetBehavior>();
+      //var moveTowards = GetComponent<MoveTowardsTargetBehavior>();
+      //var rotateTowards = GetComponent<RotateTowardsTargetBehavior>();
 
-      if (_parent.CurrentTarget == null)
-      {
-        moveTowards.enabled = false;
-        rotateTowards.enabled = false;
-      }
-      else
-      {
-        moveTowards.enabled = true;
-        rotateTowards.enabled = true;
+      //if (_parent.CurrentTarget == null)
+      //{
+      //  moveTowards.enabled = false;
+      //  rotateTowards.enabled = false;
+      //}
+      //else
+      //{
+      //  moveTowards.enabled = true;
+      //  rotateTowards.enabled = true;
 
-        moveTowards.Target = _parent.CurrentTarget;
-        rotateTowards.Target = _parent.CurrentTarget;
-      }
+      //  moveTowards.Target = _parent.CurrentTarget;
+      //  rotateTowards.Target = _parent.CurrentTarget;
+      //}
     }
 
     [UnityMethod]

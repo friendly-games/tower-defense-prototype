@@ -2,14 +2,16 @@
 //using System;
 //using System.Collections.Generic;
 //using System.Linq;
+//using UnityEngine;
 
 //namespace NineByteGames.TowerDefense.Signals
 //{
-
 //  public class AllSignals
 //  {
 //    public static readonly SignalType<Damage> Damage = new SignalType<Damage>();
 //    public static readonly SignalType<Healing> Health = new SignalType<Healing>();
+//    public static readonly SignalType<GameObject> TargetChanged = new SignalType<GameObject>();
+
 //    public static readonly SignalType Death = new SignalType();
 //  }
 
@@ -43,58 +45,14 @@
 //    void Register(Registry context);
 //  }
 
-//  public class Context
-//  {
-//    private readonly Dictionary<Type, SignalListenerRegistery.Registry> _lookup = new Dictionary<Type, SignalListenerRegistery.Registry>();
-
-//    public Registry<T> For<T>()
-//    {
-//      var registery = new Registry<T>();
-//      _lookup[typeof(T)] = registery;
-//      return registery;
-//    }
-//  }
-
-//  public class Registry : SignalListenerRegistery.Registry
+//  public class Registry
 //  {
 //    public void Register(SignalType signalType, SignalCallback callback)
 //    {
-
 //    }
 
-//    public void Register<TData>(SignalType signalType, SignalCallback<TData> callback)
+//    public void Register<TData>(SignalType<TData> signalType, SignalCallback<TData> callback)
 //    {
-
-//    }
-//  }
-
-//  public class SignalListenerRegistery
-//  {
-//    private static readonly Dictionary<Type, Registry> _lookup = new Dictionary<Type, Registry>();
-
-//    public static Registry<T> For<T>()
-//    {
-//      var registery = new Registry<T>();
-//      _lookup[typeof(T)] = registery;
-//      return registery;
-//    }
-
-//    public delegate void CallbackDelegateWithOptions<TInstance, TData>(
-//      TInstance instance,
-//      TData data,
-//      SignalCallbackOptions options);
-
-//    public class Registry
-//    {
-//      protected void RegisterSimple<TData>(SignalType<TData> signalType,
-//                                           Action<object, TData, SignalCallbackOptions> callback)
-//      {
-//      }
-
-//      protected void RegisterSimple(SignalType signalType,
-//                                    Action<object, SignalCallbackOptions> callback)
-//      {
-//      }
 //    }
 //  }
 
@@ -126,4 +84,3 @@
 //    //}
 //  }
 //}
-

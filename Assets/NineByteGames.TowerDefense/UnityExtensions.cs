@@ -2,6 +2,7 @@
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Signals;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -158,7 +159,31 @@ namespace NineByteGames.TowerDefense
     /// <returns> True if the message was handled, false if it was not. </returns>
     public static bool SendSignal<T>(this GameObject gameObject, T signal)
     {
-      return gameObject.GetSignalSender().Send(signal);
+      var childBehavior = gameObject.RetrieveInHierarchy<IChildBehavior>();
+
+      // doesn't accept signals
+      if (childBehavior == null)
+        return false;
+
+      var sender = childBehavior.Broadcaster;
+
+      if (sender == null)
+      {
+        // not initialized yet, so do it in the future
+        Debug.Log("Sending message in the future");
+        ((MonoBehaviour)childBehavior).StartCoroutine(SendInFuture(childBehavior, signal));
+        return false;
+      }
+      else
+      {
+        return sender.Send(signal);
+      }
+    }
+
+    private static IEnumerator SendInFuture<T>(IChildBehavior sender, T signal)
+    {
+      yield return null;
+      sender.Broadcaster.Send(signal);
     }
 
     /// <summary>
