@@ -7,17 +7,17 @@ namespace NineByteGames.TowerDefense.Signals
   /// <summary> A child listener registry. </summary>
   public class ChildListenerRegistry
   {
-    private static readonly Dictionary<Type, RegisteryInfo> _lookup = new Dictionary<Type, RegisteryInfo>();
+    private static readonly Dictionary<Type, RegisteryInfo> Lookup = new Dictionary<Type, RegisteryInfo>();
 
     /// <summary> Gets the signals that a type is interested in. </summary>
     public static RegisteryInfo GetFor(Type type)
     {
       RegisteryInfo info;
-      if (_lookup.TryGetValue(type, out info))
+      if (Lookup.TryGetValue(type, out info))
         return info;
 
       info = CreateInfo(type);
-      _lookup[type] = info;
+      Lookup[type] = info;
 
       return info;
     }
@@ -42,7 +42,7 @@ namespace NineByteGames.TowerDefense.Signals
 
         var method = type.GetInterfaceMap(interfaceType).TargetMethods.First();
         var priorityAtt =
-          ((SignalPriorityAttribute[]) method.GetCustomAttributes(typeof(SignalPriorityAttribute), false))
+          ((SignalPriorityAttribute[])method.GetCustomAttributes(typeof(SignalPriorityAttribute), false))
             .FirstOrDefault();
 
         if (priorityAtt != null)

@@ -7,12 +7,12 @@ namespace NineByteGames.TowerDefense.Signals
   /// <summary> A concrete implementation of ISignalBroadcaster. </summary>
   public class SignalBroadcaster : ISignalBroadcaster, IDisposable
   {
-    private Dictionary<Type, List<SignalListenerAndPriority>> _listeners;
+    private Dictionary<Type, LinkedList<SignalListenerAndPriority>> _listeners;
 
     /// <summary> Default constructor. </summary>
     public SignalBroadcaster()
     {
-      _listeners = new Dictionary<Type, List<SignalListenerAndPriority>>();
+      _listeners = new Dictionary<Type, LinkedList<SignalListenerAndPriority>>();
     }
 
     /// <inheritdoc />
@@ -22,11 +22,11 @@ namespace NineByteGames.TowerDefense.Signals
 
       foreach (var entry in info.Entries)
       {
-        List<SignalListenerAndPriority> list;
+        LinkedList<SignalListenerAndPriority> list;
         // if a list does not already exist
         if (!_listeners.TryGetValue(entry.Key, out list))
         {
-          list = new List<SignalListenerAndPriority>();
+          list = new LinkedList<SignalListenerAndPriority>();
           _listeners[entry.Key] = list;
         }
 
@@ -45,11 +45,21 @@ namespace NineByteGames.TowerDefense.Signals
 
       foreach (var entry in info.Entries)
       {
-        List<SignalListenerAndPriority> list;
+        LinkedList<SignalListenerAndPriority> list;
         if (!_listeners.TryGetValue(entry.Key, out list))
           continue;
 
-        list.RemoveAll(slap => slap.SignalListener == childBehavior);
+        var node = list.First;
+
+        while (node != null)
+        {
+          var next = node.Next;
+          if (node.Value.SignalListener == childBehavior)
+          {
+            list.Remove(node);
+          }
+          node = next;
+        }
 
         if (list.Count == 0)
         {
@@ -61,17 +71,17 @@ namespace NineByteGames.TowerDefense.Signals
     /// <inheritdoc />
     public bool Send<T>(T data)
     {
-      List<SignalListenerAndPriority> list;
+      LinkedList<SignalListenerAndPriority> list;
       if (!_listeners.TryGetValue(typeof(T), out list))
         return false;
 
       using (var options = SignalListenerContext.Push())
       {
-        for (int index = 0;
-             index < list.Count && options.ShouldContinue;
-             index++)
+        for (var node = list.First;
+             node != null && options.ShouldContinue;
+             node = node.Next)
         {
-          SignalListenerAndPriority child = list[index];
+          SignalListenerAndPriority child = node.Value;
           ((ISignalListener<T>)child.SignalListener).Handle(data);
         }
       }
@@ -89,17 +99,26 @@ namespace NineByteGames.TowerDefense.Signals
     }
 
     /// <summary> Inserts a new signal into the priority list (that is already sorted). </summary>
-    private static void InsertIntoSortedList(List<SignalListenerAndPriority> list, SignalListenerAndPriority newEntry)
+    private static void InsertIntoSortedList(LinkedList<SignalListenerAndPriority> list,
+                                             SignalListenerAndPriority newEntry)
     {
-      int insertIndex = 0;
       int currentPriority = newEntry.Priority;
 
-      while (insertIndex < list.Count && list[insertIndex].Priority > currentPriority)
+      var head = list.First;
+
+      while (head != null && head.Value.Priority >= currentPriority)
       {
-        insertIndex++;
+        head = head.Next;
       }
 
-      list.Insert(insertIndex, newEntry);
+      if (head == null)
+      {
+        list.AddLast(newEntry);
+      }
+      else
+      {
+        list.AddBefore(head, newEntry);
+      }
     }
 
     private struct SignalListenerAndPriority
