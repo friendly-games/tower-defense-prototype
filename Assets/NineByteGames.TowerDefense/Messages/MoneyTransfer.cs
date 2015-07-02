@@ -20,5 +20,6 @@ namespace NineByteGames.TowerDefense.Messages
     {
       get { return _amount; }
     }
+  
   }
 }

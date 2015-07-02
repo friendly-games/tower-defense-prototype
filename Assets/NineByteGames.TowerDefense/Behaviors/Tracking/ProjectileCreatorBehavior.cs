@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
-  internal class ProjectileCreatorBehavior : ChildBehavior, ISignalListener<TargetAquiredSignal>
+  internal class ProjectileCreatorBehavior : SignalReceiverBehavior<ProjectileCreatorBehavior>
   {
     /// <summary> The layer that the projectile will be a part of. </summary>
     public Layer ProjectileLayer;
@@ -19,6 +19,12 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     /// <summary> The object to create when a target has been acquired. </summary>
     public GameObject ProjectileTemplate;
+
+    static ProjectileCreatorBehavior()
+    {
+      SignalEntryPoint.For<ProjectileCreatorBehavior>()
+                      .Register(AllSignals.TargetChanged, (i, d) => i.HandleTargetChanged(d));
+    }
 
     private AdvancedCoroutine _coroutine;
     private TimeSpan _period;
@@ -44,7 +50,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       }
     }
 
-    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal targetAquired)
+    void HandleTargetChanged(TargetAquiredSignal targetAquired)
     {
       var shouldFire = !targetAquired.TargetWasLost;
 

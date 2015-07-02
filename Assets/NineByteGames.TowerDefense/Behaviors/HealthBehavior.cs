@@ -7,14 +7,19 @@ using System.Linq;
 namespace NineByteGames.TowerDefense.Behaviors
 {
   /// <summary> An object that contains health. </summary>
-  internal class HealthBehavior : ChildBehavior,
-                                  IReadable,
-                                  ISignalListener<Damage>,
-                                  ISignalListener<Healing>,
-                                  ISignalListener<DeathIndicator>
+  internal class HealthBehavior : SignalReceiverBehavior<HealthBehavior>, IReadable
   {
-    public float Health = 200;
-    public float MaxHealth = 500;
+    public int Health = 200;
+    public int MaxHealth = 500;
+
+    static HealthBehavior()
+    {
+      SignalEntryPoint.For<HealthBehavior>()
+                      .Register(AllSignals.Health, (i, d) => i.Handle(d))
+                      .Register(AllSignals.Damage, (i, d) => i.Handle(d))
+                      .Register(AllSignals.Death, i => i.HandleDeath());
+
+    }
 
     void IReadable.AddText(ReadableText builder)
     {
@@ -23,34 +28,28 @@ namespace NineByteGames.TowerDefense.Behaviors
     }
 
     /// <inheritdoc/>
-    [SignalPriority(SignalPriorities.VeryLow)]
     public void Handle(Damage damage)
     {
       Health -= damage.DamageAmount;
 
       if (Health <= 0)
       {
-        Broadcaster.Send(DeathIndicator.Signal);
+        Broadcaster.Send(AllSignals.Death);
       }
 
       SignalOptions.Current.StopProcessing();
     }
 
     /// <inheritdoc/>
-    [SignalPriority(SignalPriorities.VeryLow)]
-    public void Handle(DeathIndicator health)
+    public void HandleDeath()
     {
       DestroyOwner();
     }
 
     /// <inheritdoc/>
-    [SignalPriority(SignalPriorities.VeryLow)]
     public void Handle(Healing health)
     {
-      float amountToHeal = Math.Min(health.Remaining, MaxHealth - Health);
-      health.Take(amountToHeal);
-
-      Health += amountToHeal;
+      Health += health.Take(MaxHealth - Health);
     }
   }
 }

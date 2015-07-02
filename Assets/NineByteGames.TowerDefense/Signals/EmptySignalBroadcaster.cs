@@ -13,17 +13,27 @@ namespace NineByteGames.TowerDefense.Signals
     {
     }
 
-    public bool Send<T>(T data)
+    public bool Supports<TData>(SignalType<TData> signalType)
     {
       return false;
     }
 
-    public void Register(ISignalListener childBehavior)
+    bool ISignalSender.Send<TData>(SignalType<TData> signalType, TData data)
+    {
+      return false;
+    }
+
+    bool ISignalSender.Send(SignalType signalType)
+    {
+      return false;
+    }
+
+    void ISignalBroadcaster.Register(ISignalReceiver listener)
     {
       throw new NotImplementedException();
     }
 
-    public void Deregister(ISignalListener childBehavior)
+    void ISignalBroadcaster.Deregister(ISignalReceiver listener)
     {
       throw new NotImplementedException();
     }

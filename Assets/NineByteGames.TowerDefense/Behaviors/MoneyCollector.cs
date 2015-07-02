@@ -7,9 +7,15 @@ using NineByteGames.TowerDefense.Signals;
 namespace NineByteGames.TowerDefense.Behaviors
 {
   /// <summary> Handles money being collected. </summary>
-  internal class MoneyCollector : ChildBehavior, IReadable, ISignalListener<MoneyTransfer>
+  internal class MoneyCollector : SignalReceiverBehavior<MoneyCollector>, IReadable
   {
     private int _amount;
+
+    static MoneyCollector()
+    {
+      SignalEntryPoint.For<MoneyCollector>()
+                      .Register(AllSignals.MoneyTransfer, (i, d) => i.Handle(d));
+    }
 
     public void Handle(MoneyTransfer message)
     {

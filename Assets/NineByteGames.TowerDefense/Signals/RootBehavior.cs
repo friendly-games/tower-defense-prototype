@@ -10,13 +10,13 @@ namespace NineByteGames.TowerDefense.Signals
   [SelectionBase]
   public class RootBehavior : AttachedBehavior, IChildBehavior
   {
-    private SignalBroadcaster _signalBroadcaster;
+    private ISignalBroadcaster _signalBroadcaster;
     private Dictionary<object, SharedValue> _sharedValues;
 
     public void Awake()
     {
       _sharedValues = new Dictionary<object, SharedValue>();
-      _signalBroadcaster = new SignalBroadcaster();
+      _signalBroadcaster = SignalEntryPoint.CreateBroadcaster();
     }
 
     public ISignalBroadcaster Broadcaster

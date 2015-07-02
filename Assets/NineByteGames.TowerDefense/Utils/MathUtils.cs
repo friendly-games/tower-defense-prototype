@@ -88,5 +88,25 @@ namespace NineByteGames.TowerDefense.Utils
 
       return GridCoordinate.FromVector3(position);
     }
+
+    /// <summary>
+    ///  Return the value of <paramref name="value"/> clamped to be between <paramref name="minimum"/>
+    ///  and <paramref name="maximum"/>
+    /// </summary>
+    public static int Clamp(int value, int minimum, int maximum)
+    {
+      if (value <= minimum)
+      {
+        return minimum;
+      }
+      else if (value >= maximum)
+      {
+        return maximum;
+      }
+      else
+      {
+        return value;
+      }
+    }
   }
 }

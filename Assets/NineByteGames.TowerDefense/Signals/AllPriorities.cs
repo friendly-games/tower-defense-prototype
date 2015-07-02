@@ -5,7 +5,7 @@ using System.Linq;
 namespace NineByteGames.TowerDefense.Signals
 {
   /// <summary> A list of pre-defined priorities. </summary>
-  public static class SignalPriorities
+  public static class AllPriorities
   {
     public const int VeryLow = -10000;
     public const int Low = -100;

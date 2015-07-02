@@ -5,6 +5,7 @@ using NineByteGames.TowerDefense.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Utils;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
@@ -26,10 +27,8 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     }
 
     [UnityMethod]
-    public override void Start()
+    public void Start()
     {
-      base.Start();
-
       _rootParent = FindRootParent();
     }
 
@@ -74,7 +73,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
         if (!_lastTarget.IsNull())
         {
           _lastTarget = null;
-          Send(TargetAquiredSignal.TargetLost);
+          _rootParent.SendSignal(AllSignals.TargetChanged, TargetAquiredSignal.TargetLost);
         }
 
         return;
@@ -88,7 +87,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       if (currentCloset != _lastTarget)
       {
         _lastTarget = currentCloset;
-        Send(new TargetAquiredSignal(currentCloset));
+        _rootParent.SendSignal(AllSignals.TargetChanged, new TargetAquiredSignal(currentCloset));
       }
     }
   }

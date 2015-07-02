@@ -17,7 +17,7 @@ namespace NineByteGames.TowerDefense.Behaviors
     public LayerMask layerMask;
 
     [Tooltip("The amount of damage to do to touched entities")]
-    public float damage;
+    public int damage;
 
     [Tooltip("How fast damage occurs on a given target")]
     public RateLimiter rateOfAttack;
@@ -31,7 +31,7 @@ namespace NineByteGames.TowerDefense.Behaviors
       if (!layerMask.Contains(target))
         return;
 
-      target.SendSignal(new Damage(this.damage));
+      target.SendSignal(AllSignals.Damage, new Damage(this.damage));
       rateOfAttack.Restart();
     }
   }

@@ -8,14 +8,21 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors
 {
   /// <summary> Turns the object until it is facing the given target. </summary>
-  internal class EntityTrackerBehavior : ChildBehavior, ISignalListener<TargetAquiredSignal>
+  internal class EntityTrackerBehavior : SignalReceiverBehavior<EntityTrackerBehavior>
   {
     /// <summary> The object that will be tracked. </summary>
     public GameObject Target;
 
-    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
+    static EntityTrackerBehavior()
+    {
+      SignalEntryPoint.For<EntityTrackerBehavior>()
+                     .Register(AllSignals.TargetChanged, (i, d) => i.HandleTargetChanged(d));
+    }
+
+    private void HandleTargetChanged(TargetAquiredSignal message)
     {
       Target = message.Target;
     }
+
   }
 }

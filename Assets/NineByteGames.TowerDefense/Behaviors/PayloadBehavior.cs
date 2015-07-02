@@ -11,7 +11,7 @@ namespace NineByteGames.TowerDefense.Behaviors
   internal class PayloadBehavior : AttachedBehavior, IReadable
   {
     public PayloadType Type;
-    public float Amount;
+    public int Amount;
 
     public enum PayloadType
     {
@@ -39,13 +39,13 @@ namespace NineByteGames.TowerDefense.Behaviors
       switch (Type)
       {
         case PayloadType.GeneralDamage:
-          otherObject.SendSignal(new Damage(Amount));
+          otherObject.SendSignal(AllSignals.Damage, new Damage(Amount));
           DestroyOwner();
           break;
 
         case PayloadType.Health:
           var healing = new Healing(Amount);
-          otherObject.SendSignal(healing);
+          otherObject.SendSignal(AllSignals.Health, healing);
 
           if (healing.Remaining <= 0)
           {
@@ -54,7 +54,7 @@ namespace NineByteGames.TowerDefense.Behaviors
           break;
 
         case PayloadType.Money:
-          bool wasHandled = otherObject.SendSignal(new MoneyTransfer((int)Amount));
+          bool wasHandled = otherObject.SendSignal(AllSignals.MoneyTransfer, new MoneyTransfer(Amount));
           if (wasHandled)
           {
             DestroyOwner();

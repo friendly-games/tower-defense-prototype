@@ -9,7 +9,7 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
   [RequireComponent(typeof(EntityTrackerBehavior))]
-  internal class RotateTowardsTargetBehavior : AttachedBehavior, ISignalListener<TargetAquiredSignal>
+  internal class RotateTowardsTargetBehavior : SignalReceiverBehavior<RotateTowardsTargetBehavior>
   {
     [Tooltip("The target to move towards")]
     public GameObject Target;
@@ -17,10 +17,16 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     /// <summary> The speed at which the object should move towards its target. </summary>
     public float Speed = 1.0f;
 
-    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
+    static RotateTowardsTargetBehavior()
     {
-      Target = message.Target;
-      enabled = message.Target != null;
+      SignalEntryPoint.For<RotateTowardsTargetBehavior>()
+                      .Register(AllSignals.TargetChanged, (i, d) => i.HandleTargetChanged(d));
+    }
+
+    private void HandleTargetChanged(TargetAquiredSignal newTarget)
+    {
+      Target = newTarget.Target;
+      enabled = Target != null;
     }
 
     /// <inheritdoc />

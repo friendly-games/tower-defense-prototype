@@ -10,8 +10,14 @@ using UnityEngine;
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
   /// <summary> Move towards the current object. </summary>
-  internal class MoveTowardsTargetBehavior : ChildBehavior, ISignalListener<TargetAquiredSignal>
+  internal class MoveTowardsTargetBehavior : SignalReceiverBehavior<MoveTowardsTargetBehavior>
   {
+    static MoveTowardsTargetBehavior()
+    {
+      SignalEntryPoint.For<MoveTowardsTargetBehavior>()
+                      .Register(AllSignals.TargetChanged, (i, d) => i.HandleTargetChanged(d));
+    }
+
     [Tooltip("The speed at which the object moves towards its target")]
     public float Speed = 1.0f;
 
@@ -38,7 +44,7 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
       _seeker.pathCallback += HandlePathUpdate;
     }
 
-    void ISignalListener<TargetAquiredSignal>.Handle(TargetAquiredSignal message)
+    void HandleTargetChanged(TargetAquiredSignal message)
     {
       Target = message.Target;
       enabled = message.Target != null;
@@ -77,7 +83,8 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
           if (ray.collider != null)
           {
             Debug.Log("Hit:" + ray.collider.gameObject);
-            ray.collider.gameObject.SendSignal(new Damage(10));
+            // TODO
+            ray.collider.gameObject.SendSignal(AllSignals.Damage, new Damage(10));
           }
         }
         else

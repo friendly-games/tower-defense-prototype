@@ -64,7 +64,7 @@ namespace NineByteGames.TowerDefense.Behaviors
           var cloned = _instanceManager.Create(Template, _transform.position, randomDirection);
 
           cloned.AddComponent<GroupChildBehavior>().Initialize(this);
-          cloned.SendSignal(new TargetAquiredSignal(CurrentTarget));
+          cloned.SendSignal(AllSignals.TargetChanged, new TargetAquiredSignal(CurrentTarget));
         }
 
         yield return AdvancedCoroutine.Wait(TimeSpan.FromSeconds(Period));

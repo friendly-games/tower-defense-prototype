@@ -11,49 +11,19 @@ namespace NineByteGames.TowerDefense.AI
   /// <summary>
   ///  A child that is part of a larger group that acts together towards a common goal.
   /// </summary>
-  public class GroupChildBehavior : ChildBehavior
+  public class GroupChildBehavior : AttachedBehavior
   {
     private IGroupGuider _parent;
 
-    public void Start()
-    {
-      Debug.Log("Started");
-    }
-
     public void Initialize(IGroupGuider parent)
     {
-      Debug.Log("Initialized");
-
       _parent = parent;
       _parent.Attach(this.gameObject);
-
-      HandleTargetChanged(null, null);
-    }
-
-    private void HandleTargetChanged(object sender, EventArgs e)
-    {
-      //var moveTowards = GetComponent<MoveTowardsTargetBehavior>();
-      //var rotateTowards = GetComponent<RotateTowardsTargetBehavior>();
-
-      //if (_parent.CurrentTarget == null)
-      //{
-      //  moveTowards.enabled = false;
-      //  rotateTowards.enabled = false;
-      //}
-      //else
-      //{
-      //  moveTowards.enabled = true;
-      //  rotateTowards.enabled = true;
-
-      //  moveTowards.Target = _parent.CurrentTarget;
-      //  rotateTowards.Target = _parent.CurrentTarget;
-      //}
     }
 
     [UnityMethod]
-    public override void OnDestroy()
+    public void OnDestroy()
     {
-      base.OnDestroy();
       _parent.Remove(this.gameObject);
     }
   }

@@ -8,13 +8,18 @@ using Random = UnityEngine.Random;
 
 namespace NineByteGames.TowerDefense.Behaviors
 {
-  public class DropItemOnDealthBehavior : ChildBehavior, ISignalListener<DeathIndicator>
+  public class DropItemOnDealthBehavior : SignalReceiverBehavior<DropItemOnDealthBehavior>
   {
     public GameObject ItemToDropOnDeath;
 
+    static DropItemOnDealthBehavior()
+    {
+      SignalEntryPoint.For<DropItemOnDealthBehavior>()
+                      .Register(AllSignals.Death, i => i.HandleDeath());
+    }
+
     /// <inheritdoc />
-    [SignalPriority(SignalPriorities.High)]
-    void ISignalListener<DeathIndicator>.Handle(DeathIndicator health)
+    void HandleDeath()
     {
       const float range = 0.5f;
       var offset = new Vector3(Random.Range(-range, range), Random.Range(-range, range), Random.Range(-range, range));

@@ -66,7 +66,7 @@ namespace NineByteGames.TowerDefense
       return ReferenceEquals(gameObject, null);
     }
 
-    /// <summary> Check fi two game objects point to the same root. </summary>
+    /// <summary> Check if two game objects point to the same root. </summary>
     public static bool Is(this GameObject lhs, GameObject rhs)
     {
       if (rhs == null)
@@ -157,7 +157,7 @@ namespace NineByteGames.TowerDefense
     /// <param name="gameObject"> The gameObject to act on. </param>
     /// <param name="signal"> The signal to send to the game object. </param>
     /// <returns> True if the message was handled, false if it was not. </returns>
-    public static bool SendSignal<T>(this GameObject gameObject, T signal)
+    public static bool SendSignal<TData>(this GameObject gameObject, SignalType<TData> signalType, TData data)
     {
       var childBehavior = gameObject.RetrieveInHierarchy<IChildBehavior>();
 
@@ -165,25 +165,25 @@ namespace NineByteGames.TowerDefense
       if (childBehavior == null)
         return false;
 
+      // TODO remove the future part from this
       var sender = childBehavior.Broadcaster;
 
       if (sender == null)
       {
         // not initialized yet, so do it in the future
-        Debug.Log("Sending message in the future");
-        ((MonoBehaviour)childBehavior).StartCoroutine(SendInFuture(childBehavior, signal));
+        ((MonoBehaviour)childBehavior).StartCoroutine(SendInFuture(childBehavior, signalType, data));
         return false;
       }
       else
       {
-        return sender.Send(signal);
+        return sender.Send(signalType, data);
       }
     }
 
-    private static IEnumerator SendInFuture<T>(IChildBehavior sender, T signal)
+    private static IEnumerator SendInFuture<TData>(IChildBehavior childBehavior, SignalType<TData> signalType, TData data)
     {
       yield return null;
-      sender.Broadcaster.Send(signal);
+      ((ISignalBroadcaster)childBehavior.Broadcaster).Send(signalType, data);
     }
 
     /// <summary>

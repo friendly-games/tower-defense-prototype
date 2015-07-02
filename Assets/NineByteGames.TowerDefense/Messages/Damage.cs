@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Utils;
 
 namespace NineByteGames.TowerDefense.Messages
 {
   /// <summary> Represents the amount of damage something inflicts. </summary>
   public struct Damage
   {
-    private readonly float _damageAmount;
+    private readonly int _remaining;
 
     /// <summary> Constructor. </summary>
-    /// <param name="damageAmount"> The amount of damage done. </param>
-    public Damage(float damageAmount)
+    /// <param name="remaining"> The amount of damage done. </param>
+    public Damage(int remaining)
     {
-      _damageAmount = damageAmount;
+      _remaining = remaining;
     }
 
     /// <summary> The amount of damage done. </summary> 
-    public float DamageAmount
+    public int DamageAmount
     {
-      get { return _damageAmount; }
+      get { return _remaining; }
     }
   }
 }
