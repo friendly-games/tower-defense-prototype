@@ -13,6 +13,8 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11485004}
   - 50: {fileID: 5000150}
+  - 114: {fileID: 11401542}
+  - 114: {fileID: 11421582}
   m_Layer: 31
   m_Name: Money
   m_TagString: Untagged
@@ -34,6 +36,7 @@ Transform:
   m_RootOrder: 0
 --- !u!50 &5000150
 Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -42,11 +45,11 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
-  m_FixedAngle: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &5800000
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -73,6 +76,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 2
   Amount: 400
+--- !u!114 &11401542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd7bce14b418464d89e3a665a958940, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11421582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054fbe36ad66e414d98300614963ed29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Divider: 100
 --- !u!114 &11485004
 MonoBehaviour:
   m_ObjectHideFlags: 1

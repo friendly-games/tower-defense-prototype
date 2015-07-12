@@ -40,7 +40,7 @@ namespace NineByteGames.TowerDefense.Items
       }
     }
 
-    /// <summary> Move twoards the target using diff as the direction. </summary>
+    /// <summary> Move towards the target using diff as the direction. </summary>
     private void MoveTowards(Vector3 diff, Transform myTransform)
     {
       _trackingTime++;
@@ -52,10 +52,9 @@ namespace NineByteGames.TowerDefense.Items
     /// <summary> Take the payload of the target and transfer into my payload. </summary>
     private void MergeWithTarget()
     {
-      var myPayload = GetComponent<PayloadBehavior>();
       var hisPayload = _target.GetComponent<PayloadBehavior>();
 
-      myPayload.Amount += hisPayload.Amount;
+      gameObject.SendSignal(AllSignals.Merged, hisPayload);
       _target.Kill();
 
       this.RemoveComponent();

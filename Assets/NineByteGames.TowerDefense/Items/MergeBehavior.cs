@@ -13,14 +13,20 @@ namespace NineByteGames.TowerDefense.Items
 {
   /// <summary>
   ///  Finds similar objects to this object and adds a <seealso cref="MergeTowardsOtherBehavior"/>
-  ///  to move this object towards the other object.
+  ///  to move this object towards the other object. 
   /// </summary>
   [RequireComponent(typeof(Rigidbody2D))]
   [RequireComponent(typeof(PayloadBehavior))]
-  internal class MergeBehavior : AttachedBehavior, INotifyOnDestruction
+  internal class MergeBehavior : SignalReceiverBehavior<MergeBehavior>, INotifyOnDestruction
   {
     private ObjectTracker<MergeBehavior> _tracker;
     private PayloadBehavior.PayloadType _type;
+
+    static MergeBehavior()
+    {
+      SignalEntryPoint.For<MergeBehavior>()
+                      .Register(AllSignals.Merged, (i,d) => i.HandleMerge(d));
+    }
 
     [UnityMethod]
     public void Awake()
@@ -29,8 +35,9 @@ namespace NineByteGames.TowerDefense.Items
     }
 
     [UnityMethod]
-    public void Start()
+    public override void Start()
     {
+      base.Start();
       _type = GetComponent<PayloadBehavior>().Type;
     }
 
@@ -58,6 +65,12 @@ namespace NineByteGames.TowerDefense.Items
       _tracker.StopTracking(other);
     }
 
+    private void HandleMerge(PayloadBehavior payloadBehavior)
+    {
+      var self = GetComponent<PayloadBehavior>();
+      self.Amount += payloadBehavior.Amount;
+    }
+
     private void OnChanged()
     {
       if (_tracker.Count > 0)
@@ -82,8 +95,10 @@ namespace NineByteGames.TowerDefense.Items
     }
 
     [UnityMethod]
-    public void OnDestroy()
+    public override void OnDestroy()
     {
+      base.OnDestroy();
+
       if (Destroyed != null)
       {
         Destroyed.Invoke(this);

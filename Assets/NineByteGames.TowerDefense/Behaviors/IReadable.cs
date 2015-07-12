@@ -28,7 +28,7 @@ namespace NineByteGames.TowerDefense.Behaviors
     /// <summary> Display a property using the format "{property}: {value} </summary>
     public ReadableText AddProperty<T>(string propertyName, T value)
     {
-      StringBuilder.AppendFormat("{0}: {1}\n", propertyName, value);
+      StringBuilder.AppendFormat("{0}: {1}\n", propertyName, value.ToString());
       return this;
     }
 

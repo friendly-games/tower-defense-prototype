@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Behaviors;
 using NineByteGames.TowerDefense.Messages;
 using NineByteGames.TowerDefense.Signals;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Behaviors
+namespace NineByteGames.TowerDefense.Items
 {
   /// <summary> Provides a payload for an item. </summary>
   internal class PayloadBehavior : AttachedBehavior, IReadable
@@ -54,6 +55,7 @@ namespace NineByteGames.TowerDefense.Behaviors
           break;
 
         case PayloadType.Money:
+          // TODO move towards target
           bool wasHandled = otherObject.SendSignal(AllSignals.MoneyTransfer, new MoneyTransfer(Amount));
           if (wasHandled)
           {

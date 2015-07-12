@@ -153,9 +153,10 @@ namespace NineByteGames.TowerDefense
     }
 
     /// <summary> Sends a signal to a designated game object. </summary>
-    /// <typeparam name="T"> Generic type parameter. </typeparam>
+    /// <typeparam name="TData"> The type of data that the signal accepts. </typeparam>
     /// <param name="gameObject"> The gameObject to act on. </param>
-    /// <param name="signal"> The signal to send to the game object. </param>
+    /// <param name="signalType"> The signal to send to the game object. </param>
+    /// <param name="data"> The data associated with the signal. </param>
     /// <returns> True if the message was handled, false if it was not. </returns>
     public static bool SendSignal<TData>(this GameObject gameObject, SignalType<TData> signalType, TData data)
     {
@@ -165,25 +166,30 @@ namespace NineByteGames.TowerDefense
       if (childBehavior == null)
         return false;
 
-      // TODO remove the future part from this
       var sender = childBehavior.Broadcaster;
 
       if (sender == null)
-      {
-        // not initialized yet, so do it in the future
-        ((MonoBehaviour)childBehavior).StartCoroutine(SendInFuture(childBehavior, signalType, data));
-        return false;
-      }
-      else
-      {
-        return sender.Send(signalType, data);
-      }
+        throw new Exception("Uninitialized Broadcaster in " + childBehavior.GetType());
+
+      return sender.Send(signalType, data);
     }
 
+    /// <summary> Sends a signal to the game object on the next tick </summary>
+    /// <typeparam name="TData"> The type of data that the signal accepts. </typeparam>
+    /// <param name="gameObject"> The gameObject to act on. </param>
+    /// <param name="signalType"> The signal to send to the game object. </param>
+    /// <param name="data"> The data associated with the signal. </param>
+    public static void SendFutureSignal<TData>(this GameObject gameObject, SignalType<TData> signalType, TData data)
+    {
+      var childBehavior = gameObject.RetrieveInHierarchy<IChildBehavior>();
+      ((MonoBehaviour)childBehavior).StartCoroutine(SendInFuture(childBehavior, signalType, data));
+    }
+
+    /// <summary> Coroutine implementation of SendFutureSignal. </summary>
     private static IEnumerator SendInFuture<TData>(IChildBehavior childBehavior, SignalType<TData> signalType, TData data)
     {
       yield return null;
-      ((ISignalBroadcaster)childBehavior.Broadcaster).Send(signalType, data);
+      childBehavior.Broadcaster.Send(signalType, data);
     }
 
     /// <summary>

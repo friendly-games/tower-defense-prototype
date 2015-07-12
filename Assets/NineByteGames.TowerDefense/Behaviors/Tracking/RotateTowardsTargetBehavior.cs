@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Behaviors.Tracking
 {
-  [RequireComponent(typeof(EntityTrackerBehavior))]
   internal class RotateTowardsTargetBehavior : SignalReceiverBehavior<RotateTowardsTargetBehavior>
   {
     [Tooltip("The target to move towards")]
