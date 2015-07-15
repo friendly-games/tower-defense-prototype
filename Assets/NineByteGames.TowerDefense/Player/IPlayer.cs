@@ -19,5 +19,8 @@ namespace NineByteGames.TowerDefense.Player
 
     /// <summary> Indicates where the player is currently aiming. </summary>
     IPlayerCursor Cursor { get; }
+
+    /// <summary> Represents the amount of money that the player has. </summary>
+    IMoneyBank Bank { get; }
   }
 }

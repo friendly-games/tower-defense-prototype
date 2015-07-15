@@ -43,9 +43,13 @@ namespace NineByteGames.TowerDefense.Player
     private PlayerCursor _cursor;
     private IInventoryDisplayView _display;
 
+    private IMoneyBank _bank;
+
     [UnityMethod]
     public void Start()
     {
+      _bank = new MoneyBank();
+
       _cursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
       AttachmentPoints = AttachmentPointsBehavior.RetrieveFor(Owner);
 
@@ -123,6 +127,11 @@ namespace NineByteGames.TowerDefense.Player
     public IPlayerCursor Cursor
     {
       get { return _cursor; }
+    }
+
+    public IMoneyBank Bank
+    {
+      get { return _bank; }
     }
 
     /// <inheritdoc />

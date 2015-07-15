@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
 using NineByteGames.TowerDefense.General;
+using NineByteGames.TowerDefense.Items;
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
@@ -31,6 +32,9 @@ namespace NineByteGames.TowerDefense.Buildings
     [Tooltip("The number of grid units the object takes up")]
     public BuildingShape ShapeSize;
 
+    [Tooltip("The price of the item")]
+    public Money Money;
+
     #endregion
 
     /// <summary> The strategy associated with the given object. </summary>
@@ -47,7 +51,7 @@ namespace NineByteGames.TowerDefense.Buildings
     public IInventoryInstance CreateInstance(IPlayer player)
     {
       // TODO can we cache this somehow TODO set the parent to be the player (currently we don't do
-      // this because then the preview turns with the player) 
+      // this because then the preview turns with the player)
       var previewItem = PreviewItem.Clone();
       previewItem.name = "<Preview Item>";
       var instance = previewItem.AddComponent<PlacableObjectInstanceBehavior>();

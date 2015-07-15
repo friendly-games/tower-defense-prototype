@@ -201,6 +201,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\LifetimeManagementBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\MoneyCollector.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\NoMessagesBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\Player\MoneyBankerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\ProjectileBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\SpawnerBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Behaviors\TestBehavior.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\General\IInventoryItemBlueprint.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\General\INamedObject.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Items\Money.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\MergeTowardsOtherBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Items\PayloadBehavior.cs" />
@@ -241,9 +243,11 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentToPositionLookup.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentTypeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\CursorBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\IMoneyBank.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\InventoryBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\MoneyBank.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerDeathBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />

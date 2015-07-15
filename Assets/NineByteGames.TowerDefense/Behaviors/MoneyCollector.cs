@@ -17,7 +17,7 @@ namespace NineByteGames.TowerDefense.Behaviors
                       .Register(AllSignals.MoneyTransfer, (i, d) => i.Handle(d));
     }
 
-    public void Handle(MoneyTransfer message)
+    private void Handle(MoneyTransfer message)
     {
       _amount += message.Amount;
 
@@ -26,7 +26,7 @@ namespace NineByteGames.TowerDefense.Behaviors
 
     public void AddText(ReadableText builder)
     {
-      builder.AddProperty("Money", _amount);
+      builder.AddProperty("Collected Money", _amount);
     }
   }
 }
