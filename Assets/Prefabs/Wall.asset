@@ -14,4 +14,6 @@ MonoBehaviour:
   Name: Wall
   Template: {fileID: 100000, guid: 5918ee26cd48ee04f932dadb5fd605ad, type: 2}
   PreviewItem: {fileID: 100000, guid: cd670f9289d71f842948cc09d234d8b5, type: 2}
-  Size: 0
+  ShapeSize: 0
+  Cost:
+    _amount: 400

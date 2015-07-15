@@ -15,5 +15,5 @@ MonoBehaviour:
   Template: {fileID: 100000, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
   PreviewItem: {fileID: 100000, guid: 582b2d7418bcd5e4ea8caadedf447d8b, type: 2}
   ShapeSize: 1
-  Price:
-    BuyPrice: 5000
+  Cost:
+    _amount: 1000

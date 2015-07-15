@@ -33,7 +33,7 @@ namespace NineByteGames.TowerDefense.Buildings
     public BuildingShape ShapeSize;
 
     [Tooltip("The price of the item")]
-    public Money Money;
+    public Money Cost;
 
     #endregion
 
@@ -55,7 +55,7 @@ namespace NineByteGames.TowerDefense.Buildings
       var previewItem = PreviewItem.Clone();
       previewItem.name = "<Preview Item>";
       var instance = previewItem.AddComponent<PlacableObjectInstanceBehavior>();
-      instance.Initialize(this, player.Cursor);
+      instance.Initialize(this, player.Cursor, player.Bank);
       return instance;
     }
 
@@ -70,9 +70,11 @@ namespace NineByteGames.TowerDefense.Buildings
     {
       private IPlayerCursor _cursor;
       private PlaceableObject _owner;
+      private IMoneyBank _bank;
 
-      public void Initialize(PlaceableObject owner, IPlayerCursor cursor)
+      public void Initialize(PlaceableObject owner, IPlayerCursor cursor, IMoneyBank bank)
       {
+        _bank = bank;
         _owner = owner;
         _cursor = cursor;
       }
@@ -93,15 +95,19 @@ namespace NineByteGames.TowerDefense.Buildings
       /// <inheritdoc />
       public bool Trigger()
       {
+        // TODO we should let the player know somehow
+        if (!_bank.CanAfford(_owner.Cost))
+          return false;
+
         var lowerLeft = GridCoordinate.FromVector3(_cursor.PositionAbsolute);
 
-        if (Managers.Placer.CanCreate(lowerLeft, _owner))
-        {
-          Managers.Placer.PlaceAt(lowerLeft, _owner);
-          return true;
-        }
+        if (!Managers.Placer.CanCreate(lowerLeft, _owner))
+          return false;
 
-        return false;
+        Managers.Placer.PlaceAt(lowerLeft, _owner);
+        _bank.Deduct(_owner.Cost);
+
+        return true;
       }
 
       /// <inheritdoc />
