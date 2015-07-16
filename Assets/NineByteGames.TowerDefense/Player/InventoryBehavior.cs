@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.Common.Data;
 using NineByteGames.TowerDefense.Buildings;
 using NineByteGames.TowerDefense.Equipment;
 using NineByteGames.TowerDefense.General;
+using NineByteGames.TowerDefense.Items;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.UI;
 using NineByteGames.TowerDefense.Unity;
@@ -16,7 +18,7 @@ namespace NineByteGames.TowerDefense.Player
   /// <summary>
   ///  Contains all functionality related to the player and its current inventory.
   /// </summary>
-  internal class InventoryBehavior : AttachedBehavior, IPlayer
+  internal class InventoryBehavior : AttachedBehavior, IPlayer, INotifee
   {
     #region Unity Properties
 
@@ -48,7 +50,10 @@ namespace NineByteGames.TowerDefense.Player
     [UnityMethod]
     public void Start()
     {
-      _bank = new MoneyBank();
+      _bank = new MoneyBank
+      {
+        AmountChanged = new Notifee(this, NotificationIds.Money)
+      };
 
       _cursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
       AttachmentPoints = AttachmentPointsBehavior.RetrieveFor(Owner);
@@ -113,6 +118,17 @@ namespace NineByteGames.TowerDefense.Player
       _currentItem = _inventoryList.Selected.CreateInstance(this);
 
       weaponSwapRate.Restart();
+    }
+
+    /// <inheritdoc />
+    void INotifee.NotifyChange(int id)
+    {
+      switch (id)
+      {
+        case NotificationIds.Money:
+          _display.UpdateMoney(_bank.CurrentAmount);
+          break;
+      }
     }
 
     #region Implementation of IPlayer

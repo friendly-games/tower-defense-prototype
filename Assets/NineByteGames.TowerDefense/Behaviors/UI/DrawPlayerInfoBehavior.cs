@@ -30,9 +30,8 @@ namespace NineByteGames.TowerDefense.Behaviors.UI
     {
       while (true)
       {
-        DrawText();
-
         yield return new WaitForSeconds(.5f);
+        DrawText();
       }
     }
 

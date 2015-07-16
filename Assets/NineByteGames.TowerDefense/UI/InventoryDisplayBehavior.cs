@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Items;
 using NineByteGames.TowerDefense.Signals;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,9 +19,11 @@ namespace NineByteGames.TowerDefense.UI
     [Tooltip("The item that provides the background color for the currently selected item")]
     public GameObject SelectedBack;
 
-    /// <summary> The selected item. </summary>
+    [Tooltip("The item that provides the text for the current amount of money")]
+    public GameObject MoneyText;
 
     #endregion
+
     private int _selectedSlot;
 
     /// <inheritdoc />
@@ -44,6 +47,12 @@ namespace NineByteGames.TowerDefense.UI
 
         _selectedSlot = value;
       }
+    }
+
+    /// <inheritdoc />
+    void IInventoryDisplayView.UpdateMoney(Money amount)
+    {
+      MoneyText.GetComponent<Text>().text = "Money:" + amount.ToString();
     }
   }
 }

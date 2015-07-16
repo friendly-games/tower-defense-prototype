@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NineByteGames.TowerDefense.Items;
 
 namespace NineByteGames.TowerDefense.UI
 {
@@ -14,5 +15,9 @@ namespace NineByteGames.TowerDefense.UI
 
     /// <summary> The currently selected slot. </summary>
     int SelectedSlot { get; set; }
+
+    /// <summary> Updates the UI to display the latest amount </summary>
+    /// <param name="amount"> The amount to display. </param>
+    void UpdateMoney(Money amount);
   }
 }

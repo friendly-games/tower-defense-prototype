@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using NineByteGames.Common.Data;
 using NineByteGames.TowerDefense.Items;
 
 namespace NineByteGames.TowerDefense.Player
@@ -30,12 +31,18 @@ namespace NineByteGames.TowerDefense.Player
       {
         CurrentAmount -= money;
       }
+
+      AmountChanged.Notify();
     }
 
     /// <inheritdoc />
     void IMoneyBank.Add(Money money)
     {
       CurrentAmount += money;
+      AmountChanged.Notify();
     }
+
+    /// <inheritdoc />
+    public Notifee AmountChanged { get; set; }
   }
 }

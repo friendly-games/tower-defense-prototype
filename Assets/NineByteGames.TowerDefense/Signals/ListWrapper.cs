@@ -45,9 +45,6 @@ namespace NineByteGames.TowerDefense.Signals
     /// <inheritdoc />
     public override void Insert(object signalCallback, int priority, int instanceIndex)
     {
-      Debug.Log("Actual:" + signalCallback.GetType());
-      Debug.Log("Expected:" + typeof(BehaviorCallback<TData>));
-
       if (signalCallback.GetType() != typeof(BehaviorCallback<TData>))
       {
         Debug.Log("Invalid");
@@ -58,7 +55,7 @@ namespace NineByteGames.TowerDefense.Signals
       int index = 0;
 
       // find the first instance where an item has a lower priority than the one that we want to
-      // insert. 
+      // insert.
       while (index < RegisteredListeners.Count && RegisteredListeners[index].Priority >= priority)
       {
         index++;

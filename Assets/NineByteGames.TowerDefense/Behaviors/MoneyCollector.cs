@@ -14,14 +14,12 @@ namespace NineByteGames.TowerDefense.Behaviors
     static MoneyCollector()
     {
       SignalEntryPoint.For<MoneyCollector>()
-                      .Register(AllSignals.MoneyTransfer, (i, d) => i.Handle(d));
+                      .Register(AllSignals.MoneyTransfer, (i, d) => i.Handle(d), AllPriorities.VeryHigh);
     }
 
     private void Handle(MoneyTransfer message)
     {
       _amount += message.Amount;
-
-      SignalOptions.Current.StopProcessing();
     }
 
     public void AddText(ReadableText builder)

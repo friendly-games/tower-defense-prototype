@@ -511,6 +511,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11456682, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 1444686644}
     - target: {fileID: 11441368, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
       propertyPath: Player
       value: 
@@ -519,54 +523,6 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1439951073}
-    - target: {fileID: 11487116, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 1444686644}
-    - target: {fileID: 11402284, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_FontData.m_Alignment
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11402284, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_Text
-      value: Item 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11445558, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_Text
-      value: Item 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 11495514, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_Text
-      value: Item 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 11440376, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_Text
-      value: Item 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 22343630, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 11481622, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_UiScaleMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22445584, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22445584, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 22445584, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 160740, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}
   m_IsPrefabParent: 0
