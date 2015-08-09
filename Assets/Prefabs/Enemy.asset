@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Enemy
   m_EditorClassIdentifier: 
   Template: {fileID: 100000, guid: dcd705db3af702542aa9a7e77da5101e, type: 2}
-  MaximumNumber: 0
+  MaximumNumber: 5
   Cost: 0

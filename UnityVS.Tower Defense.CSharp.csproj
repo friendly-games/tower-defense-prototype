@@ -13,11 +13,13 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.2f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -193,6 +195,7 @@
     <Compile Include="Assets\NineByteGames.Common\Extensions\EnumerableExtensions.cs" />
     <Compile Include="Assets\NineByteGames.Common\Extensions\ObjectExtensions.cs" />
     <Compile Include="Assets\NineByteGames.Common\ResourcePool.cs" />
+    <Compile Include="Assets\NineByteGames.Common\Scripts\EnableOnStartupScript.cs" />
     <Compile Include="Assets\NineByteGames.Common\Structures\Array2D.cs" />
     <Compile Include="Assets\NineByteGames.Common\Structures\Size.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\AI\EnemyManager.cs" />
