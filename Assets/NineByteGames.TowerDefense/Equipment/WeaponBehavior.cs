@@ -15,14 +15,6 @@ namespace NineByteGames.TowerDefense.Equipment
   /// <summary> Controls how a weapon is fired. </summary>
   internal class WeaponBehavior : AttachedBehavior, IInventoryInstance
   {
-    #region Unity Properties
-
-    [Tooltip("The object to generate when a bullet is fired")]
-    [FormerlySerializedAs("bulletProjectile")]
-    public GameObject BulletProjectile;
-
-    #endregion
-
     private FirableWeaponQualities _qualities;
     private RateLimiter _rechargeRate;
     private FirableWeapon _blueprint;
@@ -35,6 +27,26 @@ namespace NineByteGames.TowerDefense.Equipment
       _qualities = blueprint.Quality;
       _player = player;
       _rechargeRate = _qualities.WeaponRechargeRate.ToRateLimiter();
+    }
+
+    /// <summary> Fire a single projectile in the direction indicated. </summary>
+    /// <param name="positionAndDirection"> The position and direction at which the projectile should be fired. </param>
+    private void FireProjectile(Ray positionAndDirection)
+    {
+      GameObject projectileClone = _blueprint.BulletProjectile.Clone();
+      Layer layer = _player.ProjectileLayer;
+      // TODO should we attach to something else
+      var projectileBehavior = projectileClone.GetComponent<ProjectileBehavior>();
+      var cloneTransform = projectileClone.GetComponent<Transform>();
+      var bodyTransform = projectileClone.GetComponent<Rigidbody2D>();
+
+      // we want to tilt it based on the Variability
+      var randomness = Random.Range(-_qualities.Variability, _qualities.Variability);
+      var velocity = Quaternion.AngleAxis(randomness, Vector3.forward) * positionAndDirection.direction;
+
+      bodyTransform.velocity = velocity * projectileBehavior.InitialSpeed;
+      cloneTransform.position = positionAndDirection.origin + positionAndDirection.direction;
+      projectileClone.layer = layer.LayerId;
     }
 
     #region Implementation of IInventoryInstance
@@ -64,7 +76,7 @@ namespace NineByteGames.TowerDefense.Equipment
 
       for (int i = 0; i < _qualities.NumberOfProjectiles; i++)
       {
-        InitializeProjectile(BulletProjectile.Clone(), _qualities, _player.ProjectileLayer, positionAndDirection);
+        FireProjectile(positionAndDirection);
       }
 
       return true;
@@ -77,29 +89,5 @@ namespace NineByteGames.TowerDefense.Equipment
     }
 
     #endregion
-
-    /// <summary>
-    ///  Initialize the projectile to begin moving forward from the given <paramref name="transform"/>,
-    ///  on the given <paramref name="layer"/>.  Add variability in the direction based on the
-    ///  <paramref name="qualities"/> passed in.
-    /// </summary>
-    private static void InitializeProjectile(GameObject projectileClone,
-                                             FirableWeaponQualities qualities,
-                                             Layer layer,
-                                             Ray positionAndDirection)
-    {
-      // TODO should we attach to something else
-      var projectileBehavior = projectileClone.GetComponent<ProjectileBehavior>();
-      var cloneTransform = projectileClone.GetComponent<Transform>();
-      var bodyTransform = projectileClone.GetComponent<Rigidbody2D>();
-
-      // we want to tilt it based on the Variability
-      var randomness = Random.Range(-qualities.Variability, qualities.Variability);
-      var velocity = Quaternion.AngleAxis(randomness, Vector3.forward) * positionAndDirection.direction;
-
-      bodyTransform.velocity = velocity * projectileBehavior.InitialSpeed;
-      cloneTransform.position = positionAndDirection.origin + positionAndDirection.direction;
-      projectileClone.layer = layer.LayerId;
-    }
   }
 }
