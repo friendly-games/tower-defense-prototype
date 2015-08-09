@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3061e9d1ecb0d6046baa07a022275980, type: 3}
+  m_Name: MachineGun
+  m_EditorClassIdentifier: 
+  Name: Machine Gun
+  Description: A weapon that fires bullets at a rapid rate.
+  WeaponObject: {fileID: 157738, guid: 8b6f747c7b27cd241a28153021c604cb, type: 2}
+  BulletProjectile: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
+  Quality:
+    WeaponRechargeRate:
+      _timeValue: 10
+    NumberOfProjectiles: 1
+    Variability: 3.5999999
