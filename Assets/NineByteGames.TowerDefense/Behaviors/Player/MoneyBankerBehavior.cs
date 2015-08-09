@@ -30,7 +30,6 @@ namespace NineByteGames.TowerDefense.Behaviors.Player
 
     private void HandleMoney(MoneyTransfer transfer)
     {
-      Debug.Log("Here");
       _player.Bank.Add(new Money(transfer.Amount));
     }
 

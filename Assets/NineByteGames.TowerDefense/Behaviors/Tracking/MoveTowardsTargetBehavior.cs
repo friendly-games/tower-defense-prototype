@@ -52,20 +52,14 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
 
     public void FixedUpdate()
     {
-      if (_path == null)
+      // if we've travelled on this path for too long or if we're past the last waypoint, reset. 
+      if (_path == null
+          || _currentPathCount >= 60
+          || currentWaypoint >= _path.vectorPath.Count)
       {
         UpdatePath();
         return;
       }
-
-      if (_currentPathCount >= 60)
-      {
-        UpdatePath();
-        return;
-      }
-
-      if (currentWaypoint >= _path.vectorPath.Count)
-        return;
 
       //Direction to the next waypoint
       Vector3 dir = (_path.vectorPath[currentWaypoint] - transform.position).normalized;
@@ -113,10 +107,10 @@ namespace NineByteGames.TowerDefense.Behaviors.Tracking
     {
       if (Target == null)
         return;
-
-      var target = Target.transform;
       if (_pathPending)
         return;
+
+      var target = Target.transform;
 
       var seeker = GetComponent<Seeker>();
       var location = GetComponent<Transform>();
