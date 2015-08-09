@@ -15,6 +15,9 @@ namespace NineByteGames.TowerDefense.Equipment
   /// <summary> Controls how a weapon is fired. </summary>
   internal class WeaponBehavior : AttachedBehavior, IInventoryInstance
   {
+    [Tooltip("The relative position at which a bullet should be fired")]
+    public GameObject m_BulletStartPoint;
+
     private FirableWeaponQualities _qualities;
     private RateLimiter _rechargeRate;
     private FirableWeapon _blueprint;
@@ -35,6 +38,7 @@ namespace NineByteGames.TowerDefense.Equipment
     {
       GameObject projectileClone = _blueprint.BulletProjectile.Clone();
       Layer layer = _player.ProjectileLayer;
+
       // TODO should we attach to something else
       var projectileBehavior = projectileClone.GetComponent<ProjectileBehavior>();
       var cloneTransform = projectileClone.GetComponent<Transform>();
@@ -45,7 +49,7 @@ namespace NineByteGames.TowerDefense.Equipment
       var velocity = Quaternion.AngleAxis(randomness, Vector3.forward) * positionAndDirection.direction;
 
       bodyTransform.velocity = velocity * projectileBehavior.InitialSpeed;
-      cloneTransform.position = positionAndDirection.origin + positionAndDirection.direction;
+      cloneTransform.position = m_BulletStartPoint.transform.position;
       projectileClone.layer = layer.LayerId;
     }
 
