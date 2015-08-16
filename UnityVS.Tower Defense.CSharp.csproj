@@ -235,6 +235,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\BuildingType.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\BuildingWorldPlacement.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\InitializeBuildingInWorldBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\PhysicsDetector.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\PlaceableObject.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\FirableWeapon.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
@@ -257,6 +258,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentToPositionLookup.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\AttachmentTypeBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\CursorBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\GivePlayerMoneyScript.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IMoneyBank.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayerCursor.cs" />

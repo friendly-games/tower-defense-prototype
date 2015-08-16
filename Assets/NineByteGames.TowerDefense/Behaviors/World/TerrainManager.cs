@@ -12,12 +12,15 @@ using UnityEngine.Serialization;
 namespace NineByteGames.TowerDefense.Behaviors.World
 {
   /// <summary> Manages all of the terrain tiles. </summary>
-  public class TerrainManager : MonoBehaviour
+  internal class TerrainManager : MonoBehaviour
   {
     /// <summary> All of the types of tiles present in the system. </summary>
     [FormerlySerializedAs("Tiles")]
     [Tooltip("All of the tiles that can be generated in the world")]
     public TileTemplate[] Templates;
+
+    [Tooltip("Determines if objects are in the way of placable objects")]
+    public PhysicsDetector m_PlaceableObjectChecker;
 
     private GameObject _terrainParent;
 
@@ -31,7 +34,7 @@ namespace NineByteGames.TowerDefense.Behaviors.World
       GridUpdate.ResetGraph();
 
       Managers.Terrain = this;
-      Managers.Placer = new BuildingWorldPlacement(_grid);
+      Managers.Placer = new BuildingWorldPlacement(_grid, m_PlaceableObjectChecker);
     }
 
     /// <summary> Creates a tile. </summary>

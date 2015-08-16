@@ -13,12 +13,15 @@ namespace NineByteGames.TowerDefense.Buildings
   internal class BuildingWorldPlacement : IInstanceManager
   {
     private readonly WorldGrid _worldGrid;
+    private readonly PhysicsDetector _detector;
 
     /// <summary> Constructor. </summary>
     /// <param name="worldGrid"> The world grid. </param>
-    public BuildingWorldPlacement(WorldGrid worldGrid)
+    /// <param name="detector"></param>
+    public BuildingWorldPlacement(WorldGrid worldGrid, PhysicsDetector detector)
     {
       _worldGrid = worldGrid;
+      _detector = detector;
     }
 
     /// <summary> True if the given object can be placed at the given location. </summary>
@@ -27,7 +30,8 @@ namespace NineByteGames.TowerDefense.Buildings
     /// <returns> True if the object can be placed at the location, false otherwise. </returns>
     public bool CanCreate(GridCoordinate lowerLeft, PlaceableObject placeable)
     {
-      return _worldGrid.IsEmpty(lowerLeft, placeable.Strategy.Size);
+      return _detector.IsEmpty(lowerLeft, placeable)
+             && _worldGrid.IsEmpty(lowerLeft, placeable.Strategy.Size);
     }
 
     /// <summary> Place an instance of <paramref name="placeable"/> at the given coordinate. </summary>
@@ -62,25 +66,25 @@ namespace NineByteGames.TowerDefense.Buildings
     public void NotifyAlive(GameObject instance)
     {
       var placeable = instance.GetComponent<LifetimeManagementBehavior>()
-                              .GetTag<PlaceableObject>();
+        .GetTag<PlaceableObject>();
 
       var strategy = placeable.Strategy;
       var position = instance.GetComponent<Transform>().position;
       var lowerLeft = strategy.ConvertFromGameObjectPosition(position);
 
-      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { Type = CellType.Wall });
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData {Type = CellType.Wall});
     }
 
     public void NotifyDestroy(GameObject instance)
     {
       var placeable = instance.GetComponent<LifetimeManagementBehavior>()
-                              .GetTag<PlaceableObject>();
+        .GetTag<PlaceableObject>();
 
       var strategy = placeable.Strategy;
       var position = instance.GetComponent<Transform>().position;
       var lowerLeft = strategy.ConvertFromGameObjectPosition(position);
 
-      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData { RawType = 0 });
+      _worldGrid.Set(lowerLeft, placeable.Strategy.Size, new CellData {RawType = 0});
     }
   }
 }

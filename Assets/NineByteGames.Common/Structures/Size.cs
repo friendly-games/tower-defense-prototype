@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace NineByteGames.Common.Structures
 {
@@ -20,6 +21,12 @@ namespace NineByteGames.Common.Structures
     {
       Width = width;
       Height = height;
+    }
+
+    /// <summary> Converts the size into a Vector2. </summary>
+    public Vector2 ToVector2()
+    {
+      return new Vector2(Width, Height);
     }
 
     public bool Equals(Size other)
