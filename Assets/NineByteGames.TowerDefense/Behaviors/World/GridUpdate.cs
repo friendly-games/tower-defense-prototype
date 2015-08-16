@@ -59,6 +59,12 @@ namespace NineByteGames.TowerDefense.Behaviors.World
     /// <param name="isWalkable"> True if the position should be walkable, false otherwise. </param>
     public static void MarkWalkable(GridCoordinate lowerLeft, Size size, bool isWalkable)
     {
+      if (AstarPath.active == null)
+      {
+        Debug.LogError("A* graph is null.");
+        return;
+      }
+
       AstarPath.active.UpdateGraphs(new GraphUpdateObject
                                     {
                                       bounds = CalculateBounds(lowerLeft, size),

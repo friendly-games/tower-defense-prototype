@@ -297,8 +297,6 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\UI\IInventoryDisplayView.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\UI\InventoryDisplayBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\LayerMaskExtensions.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Unity\Prefabs.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Unity\PrefabsBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\Singleton.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\SingletonBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Unity\TimeDuration.cs" />
