@@ -4,6 +4,7 @@ using System.Linq;
 using NineByteGames.TowerDefense.General;
 using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Utils;
+using NineByteGames.TowerDefense.World;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.Equipment
@@ -33,7 +34,7 @@ namespace NineByteGames.TowerDefense.Equipment
 
     #region Implementation of IInventoryItemBlueprint
 
-    IInventoryInstance IInventoryItemBlueprint.CreateInstance(IPlayer player)
+    IInventoryInstance IInventoryItemBlueprint.CreateInstance(IWorld world, IPlayer player)
     {
       var locationAndRotation = player.AttachmentPoints[AttachmentPoint.Weapon];
 

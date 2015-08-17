@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.TowerDefense.Player;
+using NineByteGames.TowerDefense.World;
 using UnityEngine;
 
 namespace NineByteGames.TowerDefense.General
@@ -31,8 +32,10 @@ namespace NineByteGames.TowerDefense.General
   internal interface IInventoryItemBlueprint
   {
     /// <summary> Creates the instance. </summary>
+    /// <param name="world"> The world in which the instance should be created. </param>
+    /// <param name="player"> The player. </param>
     /// <returns> The player specific instance of the inventory item. </returns>
-    IInventoryInstance CreateInstance(IPlayer player);
+    IInventoryInstance CreateInstance(IWorld world, IPlayer player);
 
     /// <summary> The name of the item </summary>
     string Name { get; }

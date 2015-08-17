@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using NineByteGames.Common.Data;
+using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Buildings;
 using NineByteGames.TowerDefense.Equipment;
 using NineByteGames.TowerDefense.General;
@@ -10,6 +11,7 @@ using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.UI;
 using NineByteGames.TowerDefense.Unity;
 using NineByteGames.TowerDefense.Utils;
+using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
@@ -46,10 +48,13 @@ namespace NineByteGames.TowerDefense.Player
     private IInventoryDisplayView _display;
 
     private IMoneyBank _bank;
+    private IWorld _world;
 
     [UnityMethod]
     public void Start()
     {
+      _world = WorldScript.World;
+
       _bank = new MoneyBank
       {
         AmountChanged = new Notifee(this, NotificationIds.Money)
@@ -61,7 +66,7 @@ namespace NineByteGames.TowerDefense.Player
       _inventoryList = new DataCollection<IInventoryItemBlueprint>(
         Enumerable.Concat<IInventoryItemBlueprint>(weaponList, inventoryList).ToArray()
         );
-      _currentItem = _inventoryList.Selected.CreateInstance(this);
+      _currentItem = _inventoryList.Selected.CreateInstance(WorldScript.World, this);
 
       SetupDisplay();
     }
@@ -115,7 +120,7 @@ namespace NineByteGames.TowerDefense.Player
         return;
 
       _currentItem.MarkDone();
-      _currentItem = _inventoryList.Selected.CreateInstance(this);
+      _currentItem = _inventoryList.Selected.CreateInstance(_world, this);
 
       weaponSwapRate.Restart();
     }

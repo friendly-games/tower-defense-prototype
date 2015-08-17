@@ -401,6 +401,7 @@ GameObject:
   - 4: {fileID: 317272520}
   - 114: {fileID: 317272519}
   - 114: {fileID: 317272521}
+  - 114: {fileID: 317272522}
   m_Layer: 0
   m_Name: Globals
   m_TagString: Untagged
@@ -446,6 +447,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Objects:
   - {fileID: 475792144}
+--- !u!114 &317272522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 317272518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4160f1e0248042a4c9d1fd96b4581bf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlaceableObjectChecker:
+    m_Layers:
+      serializedVersion: 2
+      m_Bits: 28672
 --- !u!1001 &329726556
 Prefab:
   m_ObjectHideFlags: 0
@@ -581,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b907ca811a5ea434791732816fadec7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Templates:
+  m_Templates:
   - Name: Grass
     GameObject: {fileID: 100000, guid: 957bfc38d046d8642a6079e6c8d58760, type: 2}
     DoesBlockPath: 0
@@ -913,10 +929,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892573ad17bea544aa8c09471f12ebdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefabs:
-  - GroupName: 546f77657273
-    GameObject: {fileID: 100000, guid: 6adc9fbfe8847e940afc5fdf530ec93c, type: 2}
-    _parent: {fileID: 0}
 --- !u!1 &894066326 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 160740, guid: 834d95ecc20b52140a7847b378cad49d, type: 2}

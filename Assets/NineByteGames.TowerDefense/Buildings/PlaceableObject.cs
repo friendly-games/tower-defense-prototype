@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
+using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.General;
 using NineByteGames.TowerDefense.Items;
 using NineByteGames.TowerDefense.Player;
-using NineByteGames.TowerDefense.Services;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Unity;
+using NineByteGames.TowerDefense.World;
 using NineByteGames.TowerDefense.World.Grid;
 using UnityEngine;
 
@@ -48,14 +49,15 @@ namespace NineByteGames.TowerDefense.Buildings
     }
 
     /// <inheritdoc />
-    public IInventoryInstance CreateInstance(IPlayer player)
+    public IInventoryInstance CreateInstance(IWorld world, IPlayer player)
     {
       // TODO can we cache this somehow TODO set the parent to be the player (currently we don't do
       // this because then the preview turns with the player)
       var previewItem = PreviewItem.Clone();
       previewItem.name = "<Preview Item>";
       var instance = previewItem.AddComponent<PlacableObjectInstanceBehavior>();
-      instance.Initialize(this, player.Cursor, player.Bank);
+      instance.Initialize(this, player.Cursor, player.Bank, world.Placer);
+
       return instance;
     }
 
@@ -71,12 +73,14 @@ namespace NineByteGames.TowerDefense.Buildings
       private IPlayerCursor _cursor;
       private PlaceableObject _owner;
       private IMoneyBank _bank;
+      private BuildingWorldPlacement _placer;
 
-      public void Initialize(PlaceableObject owner, IPlayerCursor cursor, IMoneyBank bank)
+      public void Initialize(PlaceableObject owner, IPlayerCursor cursor, IMoneyBank bank, BuildingWorldPlacement placer)
       {
         _bank = bank;
         _owner = owner;
         _cursor = cursor;
+        _placer = placer;
       }
 
       [UnityMethod]
@@ -101,10 +105,10 @@ namespace NineByteGames.TowerDefense.Buildings
 
         var lowerLeft = GridCoordinate.FromVector3(_cursor.PositionAbsolute);
 
-        if (!Managers.Placer.CanCreate(lowerLeft, _owner))
+        if (!_placer.CanCreate(lowerLeft, _owner))
           return false;
 
-        Managers.Placer.PlaceAt(lowerLeft, _owner);
+        _placer.PlaceAt(lowerLeft, _owner);
         _bank.Deduct(_owner.Cost);
 
         return true;

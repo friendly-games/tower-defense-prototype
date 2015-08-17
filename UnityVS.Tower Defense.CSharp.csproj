@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.1.2f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,12 +62,6 @@
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>Library\UnityAssemblies\UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
@@ -268,7 +260,6 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerDeathBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
-    <Compile Include="Assets\NineByteGames.TowerDefense\Services\Managers.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AllPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AllSignals.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AttachedBehavior.cs" />
@@ -320,7 +311,9 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridChunk.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridCoordinate.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\GridTargetFlow.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\IWorld.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\World\WorldGrid.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\World\WorldScript.cs" />
     <Compile Include="Assets\ValidateEditFunctionality.cs" />
   </ItemGroup>
   <ItemGroup>
