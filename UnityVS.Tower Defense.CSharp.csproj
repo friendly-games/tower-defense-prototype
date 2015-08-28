@@ -230,6 +230,7 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\PhysicsDetector.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Buildings\PlaceableObject.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\FirableWeapon.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\Projectile.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Equipment\WeaponBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\General\IInventoryItemBlueprint.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\General\INamedObject.cs" />
@@ -254,11 +255,13 @@
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IMoneyBank.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayer.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayerCursor.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\IPlayerInventory.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\InventoryBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\MoneyBank.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerCursor.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerDeathBehavior.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInputBehavior.cs" />
+    <Compile Include="Assets\NineByteGames.TowerDefense\Player\PlayerInventory.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\ScriptableObjects\EnemyPrefab.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AllPriorities.cs" />
     <Compile Include="Assets\NineByteGames.TowerDefense\Signals\AllSignals.cs" />

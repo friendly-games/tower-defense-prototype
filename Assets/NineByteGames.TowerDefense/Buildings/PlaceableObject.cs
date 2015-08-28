@@ -36,6 +36,9 @@ namespace NineByteGames.TowerDefense.Buildings
     [Tooltip("The price of the item")]
     public Money Cost;
 
+    [Tooltip("The number of buildings that stack in inventory")]
+    public int m_StackAmount;
+
     #endregion
 
     /// <summary> The strategy associated with the given object. </summary>
@@ -65,6 +68,12 @@ namespace NineByteGames.TowerDefense.Buildings
     string IInventoryItemBlueprint.Name
     {
       get { return this.Name; }
+    }
+
+    /// <inheritdoc/>
+    int IInventoryItemBlueprint.MaximumStackAmount
+    {
+      get { return 1; }
     }
 
     [UsedImplicitly]

@@ -22,5 +22,8 @@ namespace NineByteGames.TowerDefense.Player
 
     /// <summary> Represents the amount of money that the player has. </summary>
     IMoneyBank Bank { get; }
+
+    /// <summary> The players inventory at any given moment. </summary>
+    IPlayerInventory Inventory { get; }
   }
 }

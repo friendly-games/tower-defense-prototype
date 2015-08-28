@@ -19,11 +19,19 @@ namespace NineByteGames.TowerDefense.Signals
       _uniqueId = id;
     }
 
+    /// <summary> Gets a value indicating whether this object is valid. </summary>
+    public bool IsValid
+    {
+      get { return Type != null; }
+    }
+
+    /// <summary> Gets the globally unique id for the type. </summary>
     public int UniqueId
     {
       get { return _uniqueId; }
     }
 
+    /// <summary> Gets the type associated with the TypeId. </summary>
     public Type Type
     {
       get { return _type; }

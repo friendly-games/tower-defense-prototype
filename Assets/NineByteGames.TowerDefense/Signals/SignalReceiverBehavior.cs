@@ -12,13 +12,23 @@ namespace NineByteGames.TowerDefense.Signals
   public abstract class SignalReceiverBehavior<T> : ChildBehavior, ISignalReceiver, IChildBehavior
     where T : SignalReceiverBehavior<T>
   {
+    private static TypeId ThisTypeId;
+
     /// <inheritdoc />
     public ISignalBroadcaster Broadcaster { get; private set; }
 
     /// <inheritdoc />
     TypeId ISignalReceiver.RegisteredTypeId
     {
-      get { return SignalEntryPoint.GetIdFor(GetType()); }
+      get
+      {
+        if (ThisTypeId.Type == null)
+        {
+          ThisTypeId = SignalEntryPoint.GetIdFor(GetType());
+        }
+
+        return ThisTypeId;
+      }
     }
 
     /// <inheritdoc />

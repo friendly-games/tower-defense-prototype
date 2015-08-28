@@ -49,11 +49,15 @@ namespace NineByteGames.TowerDefense.Player
 
     private IMoneyBank _bank;
     private IWorld _world;
+    private IPlayerInventory _inventory;
 
     [UnityMethod]
     public void Start()
     {
+      // TODO get the world through some other means (do we really need to?)
       _world = WorldScript.World;
+
+      _inventory = new PlayerInventory();
 
       _bank = new MoneyBank
       {
@@ -153,6 +157,11 @@ namespace NineByteGames.TowerDefense.Player
     public IMoneyBank Bank
     {
       get { return _bank; }
+    }
+
+    IPlayerInventory IPlayer.Inventory
+    {
+      get { return _inventory; }
     }
 
     /// <inheritdoc />

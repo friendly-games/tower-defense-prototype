@@ -9,7 +9,5 @@ namespace NineByteGames.TowerDefense.World
   {
     /// <summary> The building placer for the world. </summary>
     BuildingWorldPlacement Placer { get; }
-
-
   }
 }

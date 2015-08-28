@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using NineByteGames.TowerDefense.Behaviors.World;
 using NineByteGames.TowerDefense.Buildings;
 using NineByteGames.TowerDefense.Signals;
 using NineByteGames.TowerDefense.Unity;
-using NineByteGames.TowerDefense.World;
 using UnityEngine;
 
-namespace NineByteGames.TowerDefense.Behaviors.World
+namespace NineByteGames.TowerDefense.World
 {
   /// <summary> Contains world-wide data. </summary>
   internal class WorldScript : AttachedBehavior, IWorld

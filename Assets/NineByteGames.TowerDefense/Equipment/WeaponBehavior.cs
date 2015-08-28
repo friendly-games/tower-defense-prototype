@@ -36,7 +36,7 @@ namespace NineByteGames.TowerDefense.Equipment
     /// <param name="positionAndDirection"> The position and direction at which the projectile should be fired. </param>
     private void FireProjectile(Ray positionAndDirection)
     {
-      GameObject projectileClone = _blueprint.BulletProjectile.Clone();
+      GameObject projectileClone = _blueprint.m_Projectile.m_Prefab.Clone();
       Layer layer = _player.ProjectileLayer;
 
       // TODO should we attach to something else
@@ -67,6 +67,10 @@ namespace NineByteGames.TowerDefense.Equipment
       if (!_rechargeRate.CanTrigger)
         return false;
 
+      int count = _player.Inventory.GetCountOf(_blueprint.m_Projectile);
+      if (count <= 0)
+        return false;
+
       var currentTransform = Owner.GetComponent<Transform>();
 
       // we want the projectile to move towards the current target (as opposed to directly straight
@@ -82,6 +86,8 @@ namespace NineByteGames.TowerDefense.Equipment
       {
         FireProjectile(positionAndDirection);
       }
+
+      _player.Inventory.Remove(_blueprint.m_Projectile, 1);
 
       return true;
     }

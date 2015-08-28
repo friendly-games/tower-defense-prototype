@@ -72,7 +72,7 @@ namespace NineByteGames.TowerDefense.World.Grid
       return new GridCoordinate(lhs.X + rhs.X, lhs.Z + rhs.Z);
     }
 
-    /// <summary> Subtract two world positions </summary>
+    /// <summary> Remove two world positions </summary>
     public static GridCoordinate operator -(GridCoordinate lhs, GridCoordinate rhs)
     {
       return new GridCoordinate(lhs.X - rhs.X, lhs.Z - rhs.Z);

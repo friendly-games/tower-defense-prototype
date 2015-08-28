@@ -6,6 +6,7 @@ using NineByteGames.TowerDefense.Player;
 using NineByteGames.TowerDefense.Utils;
 using NineByteGames.TowerDefense.World;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace NineByteGames.TowerDefense.Equipment
 {
@@ -24,11 +25,11 @@ namespace NineByteGames.TowerDefense.Equipment
     [Tooltip("The game object that serves as the weapon.  Requires it to have a WeaponBehavior")]
     public GameObject WeaponObject;
 
-    [Tooltip("The object to generate when a bullet is fired")]
-    public GameObject BulletProjectile;
-
     [Tooltip("The qualities associated with the weapon")]
     public FirableWeaponQualities Quality;
+
+    [Tooltip("The projectile for the weapon")]
+    public Projectile m_Projectile;
 
     #endregion
 
@@ -36,6 +37,8 @@ namespace NineByteGames.TowerDefense.Equipment
 
     IInventoryInstance IInventoryItemBlueprint.CreateInstance(IWorld world, IPlayer player)
     {
+      player.Inventory.Add(m_Projectile, 10);
+
       var locationAndRotation = player.AttachmentPoints[AttachmentPoint.Weapon];
 
       // TODO should we allow left/right placement
@@ -50,6 +53,12 @@ namespace NineByteGames.TowerDefense.Equipment
     string IInventoryItemBlueprint.Name
     {
       get { return this.Name; }
+    }
+
+    /// <inheritdoc/>
+    public int MaximumStackAmount
+    {
+      get { return 1; }
     }
 
     #endregion

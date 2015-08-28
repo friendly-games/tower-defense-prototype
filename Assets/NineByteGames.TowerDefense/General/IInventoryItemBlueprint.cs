@@ -39,5 +39,8 @@ namespace NineByteGames.TowerDefense.General
 
     /// <summary> The name of the item </summary>
     string Name { get; }
+
+    /// <summary> The maximum number of items that can be stored in the inventory. </summary>
+    int MaximumStackAmount { get; }
   }
 }
