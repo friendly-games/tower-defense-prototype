@@ -19,9 +19,10 @@ namespace NineByteGames.TowerDefense.Equipment
     public GameObject m_BulletStartPoint;
 
     private FirableWeaponQualities _qualities;
-    private RateLimiter _rechargeRate;
     private FirableWeapon _blueprint;
     private IPlayer _player;
+    private RateLimiter _rechargeRate;
+    private RateLimiter _reloadRate;
 
     /// <summary> Initialize the object with required fields. </summary>
     public void Initialize(FirableWeapon blueprint, IPlayer player)
@@ -30,6 +31,7 @@ namespace NineByteGames.TowerDefense.Equipment
       _qualities = blueprint.Quality;
       _player = player;
       _rechargeRate = _qualities.WeaponRechargeRate.ToRateLimiter();
+      _reloadRate = _qualities.WeaponRechargeRate.ToRateLimiter();
     }
 
     /// <summary> Fire a single projectile in the direction indicated. </summary>
@@ -88,6 +90,24 @@ namespace NineByteGames.TowerDefense.Equipment
       }
 
       _player.Inventory.Remove(_blueprint.m_Projectile, 1);
+
+      return true;
+    }
+
+    /// <summary> Reloads the ammunition for this weapon (currently just gives us maximum ammo again). </summary>
+    public bool Reload()
+    {
+      if (!_reloadRate.CanTrigger)
+        return false;
+
+      int existing = _player.Inventory.GetCountOf(_blueprint.m_Projectile);
+      int amountToAdd = Math.Max(_blueprint.m_Projectile.m_StackAmount - existing, 0);
+
+      if (amountToAdd > 0)
+      {
+        _player.Inventory.Add(_blueprint.m_Projectile, amountToAdd);
+        _reloadRate.Restart();
+      }
 
       return true;
     }

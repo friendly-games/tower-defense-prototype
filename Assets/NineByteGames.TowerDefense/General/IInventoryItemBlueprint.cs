@@ -25,6 +25,9 @@ namespace NineByteGames.TowerDefense.General
 
     /// <summary> Mark the object as no longer used by the player. </summary>
     void MarkDone();
+
+    /// <summary> Reloads the ammunition for this weapon (currently just gives us maximum ammo again). </summary>
+    bool Reload();
   }
 
   /// <summary> An blueprint for an item that can be stored in inventory. </summary>

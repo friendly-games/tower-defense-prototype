@@ -111,6 +111,12 @@ namespace NineByteGames.TowerDefense.Player
       }
     }
 
+    public void TryReload()
+    {
+      // TODO should this really be reload?
+      _currentItem.Reload();
+    }
+
     /// <summary> Try to switch to the given inventory item. </summary>
     /// <param name="inventoryId"> The inventory item to switch to. </param>
     public void TrySwitchTo(int inventoryId)

@@ -37,6 +37,7 @@ namespace NineByteGames.TowerDefense.Equipment
 
     IInventoryInstance IInventoryItemBlueprint.CreateInstance(IWorld world, IPlayer player)
     {
+      // TODO remove - this currently gives them 10 projectiles
       player.Inventory.Add(m_Projectile, 10);
 
       var locationAndRotation = player.AttachmentPoints[AttachmentPoint.Weapon];

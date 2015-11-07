@@ -128,6 +128,12 @@ namespace NineByteGames.TowerDefense.Buildings
       {
         Owner.Kill();
       }
+
+      /// <inheritdoc />
+      public bool Reload()
+      {
+        return true;
+      }
     }
   }
 }

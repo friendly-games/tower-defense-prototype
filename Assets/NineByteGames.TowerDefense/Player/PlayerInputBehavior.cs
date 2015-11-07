@@ -36,8 +36,21 @@ namespace NineByteGames.TowerDefense.Player
       _cameraTransform = Camera.main.GetComponent<Transform>();
       _playerCursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
 
-      Cursor.visible = false;
-      Cursor.lockState = CursorLockMode.Confined;
+      SetMouseLock(true);
+    }
+
+    private static void SetMouseLock(bool isMouseLocked)
+    {
+      if (isMouseLocked)
+      {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+      }
+      else
+      {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+      }
     }
 
     public void Update()
@@ -66,11 +79,13 @@ namespace NineByteGames.TowerDefense.Player
       if (Input.GetKey(KeyCode.F1))
       {
         Time.timeScale = 0;
+        SetMouseLock(false);
       }
 
       if (Input.GetKey(KeyCode.F2))
       {
         Time.timeScale = 1;
+        SetMouseLock(false);
       }
 
       if (Input.GetKey(KeyCode.F5))
@@ -111,7 +126,6 @@ namespace NineByteGames.TowerDefense.Player
         desiredVelocity.x += 1;
       }
 
-
       if (desiredVelocity.sqrMagnitude > 0.001f)
       {
         desiredVelocity = desiredVelocity.normalized;
@@ -141,6 +155,10 @@ namespace NineByteGames.TowerDefense.Player
       {
         _inventory.TrySwitchTo(3);
       }
+      else if (Input.GetKey(KeyCode.Alpha5))
+      {
+        _inventory.TrySwitchTo(4);
+      }
 
       if (Input.GetMouseButton(0))
       {
@@ -150,6 +168,11 @@ namespace NineByteGames.TowerDefense.Player
       if (Input.GetMouseButton(1))
       {
         _inventory.TryTrigger2();
+      }
+
+      if (Input.GetKey(KeyCode.R))
+      {
+        _inventory.TryReload();
       }
     }
 

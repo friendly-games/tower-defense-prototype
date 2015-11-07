@@ -5,7 +5,7 @@ using NineByteGames.TowerDefense.General;
 
 namespace NineByteGames.TowerDefense.Player
 {
-  /// <summary> Concreate implementation of the player's inventory. </summary>
+  /// <summary> Concrete implementation of the player's inventory. </summary>
   internal class PlayerInventory : IPlayerInventory
   {
     private readonly Dictionary<IInventoryItemBlueprint, int> _storage

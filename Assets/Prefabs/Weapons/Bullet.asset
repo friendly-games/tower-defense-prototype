@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f14b40b03beb49e41862e50f66b7184c, type: 3}
   m_Name: Bullet
   m_EditorClassIdentifier: 
-  m_Name: Pistol Buggon
-  m_ProjectilePrefab: {fileID: 0}
-  m_StackAmount: 0
+  m_DisplayName: Pistol Bullet
+  m_Prefab: {fileID: 100000, guid: 770e19162be633e4eb5d01a94424a276, type: 2}
+  m_StackAmount: 100
