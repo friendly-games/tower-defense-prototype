@@ -17,15 +17,13 @@ namespace NineByteGames.TowerDefense.Player
     /// <summary> All of the layers that should be displayed. </summary>
     public LayerMask InfoLayerMask;
 
-    private const KeyCode KeyUp = KeyCode.W;
-    private const KeyCode KeyDown = KeyCode.S;
-    private const KeyCode KeyLeft = KeyCode.A;
-    private const KeyCode KeyRight = KeyCode.D;
-
     private Transform _transform;
     private InventoryBehavior _inventory;
     private Transform _cameraTransform;
     private PlayerCursor _playerCursor;
+    private InputActionCollection _inputAction;
+    private InputActionCollection _gameControls;
+    private DesiredVelocity _desiredVelocity;
 
     public GameObject CurrentObject { get; set; }
 
@@ -35,8 +33,37 @@ namespace NineByteGames.TowerDefense.Player
       _inventory = Owner.GetComponent<InventoryBehavior>();
       _cameraTransform = Camera.main.GetComponent<Transform>();
       _playerCursor = GetComponentInChildren<CursorBehavior>().PlayerCursor;
+      _desiredVelocity = new DesiredVelocity();
 
       SetMouseLock(true);
+
+      _gameControls = new InputActionCollection()
+      {
+        { KeyboardEventType.ToggleDown, KeyCode.F5, ReloadLevel },
+        { KeyboardEventType.ToggleDown, KeyCode.F1, PauseGame },
+        { KeyboardEventType.ToggleDown, KeyCode.F2, UnpauseGame },
+      };
+
+      _inputAction = new InputActionCollection()
+      {
+        { KeyboardEventType.Down, KeyCode.W, () => _desiredVelocity.Forward() },
+        { KeyboardEventType.Down, KeyCode.S, () => _desiredVelocity.Backward() },
+        { KeyboardEventType.Down, KeyCode.A, () => _desiredVelocity.Left() },
+        { KeyboardEventType.Down, KeyCode.D, () => _desiredVelocity.Right() },
+        { KeyboardEventType.Down, KeyCode.Alpha1, () => _inventory.TrySwitchTo(0) },
+        { KeyboardEventType.Down, KeyCode.Alpha2, () => _inventory.TrySwitchTo(1) },
+        { KeyboardEventType.Down, KeyCode.Alpha3, () => _inventory.TrySwitchTo(2) },
+        { KeyboardEventType.Down, KeyCode.Alpha4, () => _inventory.TrySwitchTo(3) },
+        { KeyboardEventType.Down, KeyCode.Alpha5, () => _inventory.TrySwitchTo(4) },
+        { KeyboardEventType.Down, KeyCode.Alpha6, () => _inventory.TrySwitchTo(5) },
+        { KeyboardEventType.Down, KeyCode.Alpha7, () => _inventory.TrySwitchTo(6) },
+        { KeyboardEventType.Down, KeyCode.Alpha8, () => _inventory.TrySwitchTo(7) },
+        { KeyboardEventType.Down, KeyCode.Alpha9, () => _inventory.TrySwitchTo(8) },
+        { KeyboardEventType.Down, KeyCode.Alpha0, () => _inventory.TrySwitchTo(9) },
+        { KeyboardEventType.Down, KeyCode.R, () => _inventory.TryReload() },
+        { MouseEventType.ButtonDown, MouseButton.LeftButton, () => _inventory.TryTrigger1() },
+        { MouseEventType.ButtonDown, MouseButton.RightButton, () => _inventory.TryTrigger2() },
+      };
     }
 
     private static void SetMouseLock(bool isMouseLocked)
@@ -55,14 +82,18 @@ namespace NineByteGames.TowerDefense.Player
 
     public void Update()
     {
-      CheckGameInput();
+      _gameControls.CheckInput();
 
       // bail out if we're paused
       if (IsPaused)
         return;
 
       TrackMouse();
-      CheckMovement();
+
+      _desiredVelocity.Reset();
+      _inputAction.CheckInput();
+
+      CheckMovement(_desiredVelocity.Velocity);
       DetectCurrentObject();
       CheckInventory();
       RecenterCamera();
@@ -74,25 +105,22 @@ namespace NineByteGames.TowerDefense.Player
       get { return Time.timeScale == 0; }
     }
 
-    private void CheckGameInput()
+    private static void ReloadLevel()
     {
-      if (Input.GetKey(KeyCode.F1))
-      {
-        Time.timeScale = 0;
-        SetMouseLock(false);
-      }
+      Time.timeScale = 1;
+      Application.LoadLevel(0);
+    }
 
-      if (Input.GetKey(KeyCode.F2))
-      {
-        Time.timeScale = 1;
-        SetMouseLock(false);
-      }
+    private static void UnpauseGame()
+    {
+      Time.timeScale = 1;
+      SetMouseLock(false);
+    }
 
-      if (Input.GetKey(KeyCode.F5))
-      {
-        Time.timeScale = 1;
-        Application.LoadLevel(0);
-      }
+    private static void PauseGame()
+    {
+      Time.timeScale = 0;
+      SetMouseLock(false);
     }
 
     private void RecenterCamera()
@@ -102,30 +130,8 @@ namespace NineByteGames.TowerDefense.Player
     }
 
     /// <summary> Check all input related to movement and move the player accordingly. </summary>
-    private void CheckMovement()
+    private void CheckMovement(Vector3 desiredVelocity)
     {
-      var desiredVelocity = new Vector3();
-
-      if (Input.GetKey(KeyUp))
-      {
-        desiredVelocity.y += 1;
-      }
-
-      if (Input.GetKey(KeyDown))
-      {
-        desiredVelocity.y -= 1;
-      }
-
-      if (Input.GetKey(KeyLeft))
-      {
-        desiredVelocity.x -= 1;
-      }
-
-      if (Input.GetKey(KeyRight))
-      {
-        desiredVelocity.x += 1;
-      }
-
       if (desiredVelocity.sqrMagnitude > 0.001f)
       {
         desiredVelocity = desiredVelocity.normalized;
@@ -139,41 +145,7 @@ namespace NineByteGames.TowerDefense.Player
     {
       _playerCursor.UpdateMouseLocation(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
-      if (Input.GetKey(KeyCode.Alpha1))
-      {
-        _inventory.TrySwitchTo(0);
-      }
-      else if (Input.GetKey(KeyCode.Alpha2))
-      {
-        _inventory.TrySwitchTo(1);
-      }
-      else if (Input.GetKey(KeyCode.Alpha3))
-      {
-        _inventory.TrySwitchTo(2);
-      }
-      else if (Input.GetKey(KeyCode.Alpha4))
-      {
-        _inventory.TrySwitchTo(3);
-      }
-      else if (Input.GetKey(KeyCode.Alpha5))
-      {
-        _inventory.TrySwitchTo(4);
-      }
-
-      if (Input.GetMouseButton(0))
-      {
-        _inventory.TryTrigger1();
-      }
-
-      if (Input.GetMouseButton(1))
-      {
-        _inventory.TryTrigger2();
-      }
-
-      if (Input.GetKey(KeyCode.R))
-      {
-        _inventory.TryReload();
-      }
+      _inputAction.CheckInput();
     }
 
     private void TrackMouse()
@@ -203,6 +175,42 @@ namespace NineByteGames.TowerDefense.Player
       CurrentObject = hit.collider != null
         ? hit.collider.gameObject
         : null;
+    }
+
+    /// <summary> Holds the velocity that the user would like to move in. </summary>
+    private struct DesiredVelocity
+    {
+      private Vector3 _desiredVelocity;
+
+      public void Reset()
+      {
+        _desiredVelocity = new Vector3();
+      }
+
+      public void Forward()
+      {
+        _desiredVelocity.y += 1;
+      }
+
+      public void Backward()
+      {
+        _desiredVelocity.y -= 1;
+      }
+
+      public void Left()
+      {
+        _desiredVelocity.x -= 1;
+      }
+
+      public void Right()
+      {
+        _desiredVelocity.x += 1;
+      }
+
+      public Vector3 Velocity
+      {
+        get { return _desiredVelocity; }
+      }
     }
   }
 }
